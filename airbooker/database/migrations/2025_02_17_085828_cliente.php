@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellidos');
             $table->string('telefono', '15');
-            $table->string('dni', '9');
+            $table->string('dni', '9') -> primary();
             $table->string('pasaporte');
             $table->string('email');
         });
