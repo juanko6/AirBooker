@@ -27,19 +27,26 @@ mysql -u root -p
 
 # poner contrasena de root y luego
 
-CREATE USER 'airbooker-db'@'localhost' IDENTIFIED BY 'ssd-24-25';
+CREATE USER 'alumno'@'localhost' IDENTIFIED BY 'alumno';
 
 # Asigna permisos al usuario
 
-GRANT ALL PRIVILEGES ON airbooker_db.* TO 'airbooker-db'@'localhost';
+GRANT ALL PRIVILEGES ON dss.* TO 'alumno'@'localhost';
 
 # crear base de datos
 
-CREATE DATABASE airbooker_db;
-GRANT ALL PRIVILEGES ON airbooker_db.* TO 'airbooker-db'@'localhost';
+CREATE DATABASE dss;
+GRANT ALL PRIVILEGES ON dss.* TO 'alumno'@'localhost';
 
 
 # Refresca los privilegios
 FLUSH PRIVILEGES;
 
 EXIT;
+
+
+# estructura de migration para que se guarden los nombres de las relaciones
+# muchos a muchos con la nomenclatura <tabla1>_<tabla2>
+
+
+# se crean migraciones
