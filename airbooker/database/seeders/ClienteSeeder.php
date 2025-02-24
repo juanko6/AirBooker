@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ClienteSeeder extends Seeder
 {
@@ -12,13 +13,13 @@ class ClienteSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('cliente')->delete();
+        DB::table('clientes')->delete();
 
-        DB::table('cliente')->insert([
+        DB::table('clientes')->insert([
             'nombre' => 'Paco',
             'apellidos' => 'Garcia Martinez',
             'telefono' => '8362746762',
-            'dni' => '7268472387S',
+            'dni' => '727S',
             'pasaporte' => '732g32gy3yg3',
             'email' => 'paco@gmail.com'
         ]);
