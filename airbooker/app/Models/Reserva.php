@@ -18,6 +18,7 @@ class Reserva extends Model
     }
 
     public function vuelo(){
-        return $this->hasMany(Vuelo::class);
+        return $this->belongsTo(Vuelo::class);
     }
+    
 }

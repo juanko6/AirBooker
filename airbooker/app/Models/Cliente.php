@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'nombre',
-        'apellido',
+        'apellidos', 
+        'telefono',  
         'dni',
         'pasaporte',
         'email'
@@ -17,4 +21,6 @@ class Cliente extends Model
     public function reservas(){
         return $this->hasMany(Reserva::class);
     }
+
+    public $timestamps = false; // ✅ Esto evita el error de `updated_at`
 }

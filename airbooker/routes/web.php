@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ReservaController;
+use App\Http\Controllers\VueloController;
 
 //Para poder ir viendo las vistas
 Route::get('/', function () {
@@ -20,6 +24,13 @@ Route::get('login', [SignUpController::class, 'showLogin'])->name('login');
 
 // Ruta para procesar el inicio de sesión
 Route::post('login', [SignUpController::class, 'login']);
-Route::get('/admin', function () {
-    return view('admin', ['name' => 'Airbooker']);
+
+// Agrupar las rutas bajo /admin
+Route::prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/dashboard', [AdminController::class, 'dashboard']);
+    Route::get('/clientes', [ClienteController::class, 'index']);
+    Route::get('/reservas', [ReservaController::class, 'index']);
+    Route::get('/vuelos', [VueloController::class, 'index']);
+    
 });
