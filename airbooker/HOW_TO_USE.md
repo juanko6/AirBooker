@@ -41,8 +41,10 @@ GRANT ALL PRIVILEGES ON dss.* TO 'alumno'@'localhost';
 
 # Refresca los privilegios
 FLUSH PRIVILEGES;
-
 EXIT;
+
+#Para insertar los datos de los seeders a la BD
+php artisan db:seed
 
 
 # estructura de migration para que se guarden los nombres de las relaciones
