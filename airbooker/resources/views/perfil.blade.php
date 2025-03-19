@@ -17,6 +17,74 @@
 
 {{--@section('content')--}}
     <h1>Perfil de usuario</h1>
-    Nombre: {{ $cliente->nombre }}
+    <div >
+        <div style="display:grid;grid-template-columns: 20% 20%;">
+        Nombre: {{ $cliente->nombre }}
+            <div style="display:inline-block;text-align:right">
+                <form>
+                    @csrf
+                    <input id=nombre type=text name=nombre>
+                    <button type=submit>Actualizar</button>
+                </form>
+            </div>           
+        </div>
+
+        <div style="display:grid;grid-template-columns: 20% 20%;">
+        Apellidos: {{ $cliente->apellidos }}
+            <div style="display:inline-block;text-align:right">
+                <form>
+                    @csrf
+                    <input id=apellidos type=text name=apellidos></input>
+                    <button type=submit>Actualizar</button>
+                </form>
+            </div>           
+        </div>
+
+        <div style="display:grid;grid-template-columns: 20% 20%;">
+        Tef.: {{ $cliente->telefono }}
+            <div style="display:inline-block;text-align:right">
+                <form>
+                    @csrf
+                    <input id=telefono type=tel name=telefono></input>
+                    <button type=submit>Actualizar</button>
+                </form>
+            </div>           
+        </div>
+
+        <div style="display:grid;grid-template-columns: 20% 20%;">
+        DNI: {{ $cliente->dni}}
+            <div style="display:inline-block;text-align:right">
+                <form>
+                    @csrf
+                    <input id=dni type=text name=dni></input>
+                    <button type=submit>Actualizar</button>
+                </form>
+            </div>           
+        </div>
+
+        <div style="display:grid;grid-template-columns: 20% 20%;">
+        Núm. Pasaporte: {{ $cliente->pasaporte }}
+            <div style="display:inline-block;text-align:right">
+                <form>
+                    @csrf
+                    <input id=pasaporte type=text name=pasaporte></input>
+                    <button type=submit>Actualizar</button>
+                </form>
+            </div>           
+        </div>
+
+        <div style="display:grid;grid-template-columns: 20% 20%;">
+        Email: {{ $cliente->email }}
+            <div style="display:inline-block;text-align:right">
+                <form>
+                    @csrf
+                    <input id=email type=email name=email></input>
+                    <button type=submit>Actualizar</button>
+                </form>
+            </div>           
+        </div>
+
+    </div>
     
     {{--@endsection--}}
+

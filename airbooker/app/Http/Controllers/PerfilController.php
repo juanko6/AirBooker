@@ -13,7 +13,8 @@ class PerfilController extends Controller
     public function index()
     {
         try {    
-            return view('perfil');
+            $cliente = Cliente::all()[0]; //Código de prueba para pillar el primer cliente en BD
+            return view('perfil', ['cliente' => $cliente]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
