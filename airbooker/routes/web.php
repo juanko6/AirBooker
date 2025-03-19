@@ -5,6 +5,7 @@ use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\VueloController;
 
@@ -34,3 +35,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/vuelos', [VueloController::class, 'index']);
     
 });
+
+// Ruta para mostrar el perfil
+Route::get('perfil', [PerfilController::class, 'index'])->name('perfil');
