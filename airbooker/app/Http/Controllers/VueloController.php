@@ -11,8 +11,13 @@ class VueloController extends Controller
      */
     public function index()
     {
-        $vuelos = Vuelo::with('reservas')->paginate(10);
-        return view('admin.vuelos', compact('vuelos'));
+        try {
+            $vuelos = Vuelo::paginate(10); // ✅ Usar paginate() en lugar de all()
+    
+            return view('admin.vuelos', compact('vuelos'));
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**
