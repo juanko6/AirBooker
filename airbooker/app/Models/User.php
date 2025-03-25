@@ -21,8 +21,7 @@ class User extends Authenticatable
      * Esto protege contra la asignación masiva no deseada.
      */
     protected $fillable = [
-        'name',
-        'apellidos', 
+        'name', 
         'dni',
         'pasaporte',
         'email',
