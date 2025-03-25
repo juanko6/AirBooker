@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reserva;
 use Illuminate\Http\Request;
 
 class ReservaController extends Controller
@@ -11,8 +12,7 @@ class ReservaController extends Controller
      */
     public function index()
     {
-        $reservas = Reserva::with(['cliente', 'vuelo'])->paginate(10);
-        return view('admin.reservas', compact('reservas'));
+        //
     }
 
     /**
@@ -34,7 +34,7 @@ class ReservaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Reserva $reserva)
     {
         //
     }
@@ -42,7 +42,7 @@ class ReservaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Reserva $reserva)
     {
         //
     }
@@ -50,7 +50,7 @@ class ReservaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Reserva $reserva)
     {
         //
     }
@@ -58,7 +58,7 @@ class ReservaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Reserva $reserva)
     {
         //
     }
