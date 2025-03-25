@@ -2,17 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Vuelo extends Model
 {
-<<<<<<< HEAD
-    use HasFactory;
-
-=======
     // Defino los campos que pueden ser rellenados masivamente
->>>>>>> develop
     protected $fillable = [
         'fecha',
         'hora',
@@ -32,15 +26,10 @@ class Vuelo extends Model
     {
         return $this->hasMany(Reserva::class);
     }
-<<<<<<< HEAD
-    public $timestamps = false; // ✅ Esto evita el error de `updated_at`
-    
-=======
       
     // Defino la relación con Oferta - Un vuelo puede estar asociado a una oferta
     public function oferta()
     {
         return $this->belongsTo(Oferta::class);
     }
->>>>>>> develop
 }

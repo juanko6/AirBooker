@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\VueloController;
 
@@ -29,7 +28,7 @@ Route::post('login', [SignUpController::class, 'login']);
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
-    Route::get('/clientes', [ClienteController::class, 'index']);
+    Route::get('/users', [UserController::class, 'index']);
     Route::get('/reservas', [ReservaController::class, 'index']);
     Route::get('/vuelos', [VueloController::class, 'index']);
     

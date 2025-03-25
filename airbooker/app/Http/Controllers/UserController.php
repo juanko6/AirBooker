@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Cliente;
+use App\Models\User;
 
-class ClienteController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +13,9 @@ class ClienteController extends Controller
     public function index()
     {
         try {
-            $clientes = Cliente::paginate(10); // ✅ Usar paginate() en lugar de all()
+            $users = User::paginate(10); // ✅ Usar paginate() en lugar de all()
     
-            return view('admin.clientes', compact('clientes'));
+            return view('admin.users', compact('users'));
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
