@@ -1,8 +1,8 @@
 @extends('admin.layout')
 
 @section('content')
-    <h1>👥 Clientes</h1>
-    <a href="#" class="btn btn-success mb-3">➕ Nuevo Cliente</a>
+    <h1>👥 Usuarios</h1>
+    <a href="#" class="btn btn-success mb-3">➕ Nuevouser</a>
 
     <table class="table table-striped">
         <thead>
@@ -17,14 +17,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($clientes as $cliente)
+            @foreach($users as $user)
             <tr>
-                <td>{{ $cliente->nombre }}</td>
-                <td>{{ $cliente->apellidos }}</td>
-                <td>{{ $cliente->telefono }}</td>
-                <td>{{ $cliente->dni }}</td>
-                <td>{{ $cliente->pasaporte }}</td>
-                <td>{{ $cliente->email }}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->apellidos }}</td>
+                <td>{{ $user->dni }}</td>
+                <td>{{ $user->pasaporte }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->telefono }}</td>
+                <td>{{ $user->rol }}</td>
                 <td>
                     <button class="btn btn-sm btn-info">✏️ Editar</button>
                     <button class="btn btn-sm btn-danger">🗑️ Eliminar</button>
@@ -34,5 +35,5 @@
         </tbody>
     </table>
 
-    {{ $clientes->links() }}
+    {{ $users->links() }}
 @endsection

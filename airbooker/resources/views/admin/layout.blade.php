@@ -38,7 +38,7 @@
         <nav class="sidebar bg-light p-3 vh-100">
             <ul class="nav flex-column">
                 <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('dashboard'); return false;">📊 Dashboard</a></li>
-                <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('clientes'); return false;">👥 Clientes</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('users'); return false;">👥 Clientes</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('reservas'); return false;">📅 Reservas</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('vuelos'); return false;">✈️ Vuelos</a></li>
             </ul>
