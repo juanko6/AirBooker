@@ -14,6 +14,7 @@ class ReservaSeeder extends Seeder
      */
     public function run(): void
     {
+        /*
         DB::table('reservas')->delete();
 
         DB::table('reservas')->insert([
@@ -22,5 +23,6 @@ class ReservaSeeder extends Seeder
             'fecha' => '2-7-2025',
             'precio' => '86762'
         ]);
+        */
     }
 }
