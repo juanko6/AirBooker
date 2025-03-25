@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reserva extends Model
 {
+    // Defino los campos que se pueden asignar masivamente
     protected $fillable = [
         'id',
         'estado',
@@ -13,12 +14,17 @@ class Reserva extends Model
         'precio'
     ];
 
-    public function cliente(){
-        return $this->belongsTo(Cliente::class);
+    // Establezco la relación con el modelo User
+    // Una reserva pertenece a un usuario (N:1)
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
-    public function vuelo(){
+    // Establezco la relación con el modelo Vuelo
+    // Una reserva pertenece a un vuelo (N:1)
+    public function vuelo() 
+    {
         return $this->belongsTo(Vuelo::class);
     }
-    
 }

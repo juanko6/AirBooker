@@ -21,10 +21,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        $this->call(ClienteSeeder::class);
-
-        $this->call(ReservaSeeder::class);
-
-        $this->call(VueloSeeder::class);
+        $this->call(User::class);
+        $this->call(Oferta::class);
+        $this->call(aerolineas::class);        
+        $this->call(vuelo::class);
+        $this->call(ReservaSeeder::class); 
     }
 }

@@ -13,6 +13,7 @@ class VueloSeeder extends Seeder
      */
     public function run(): void
     {
+        /*
         DB::table('vuelos')->delete();
 
         DB::table('vuelos')->insert([
@@ -22,5 +23,6 @@ class VueloSeeder extends Seeder
             'origen' => 'alicante',
             'destino' => 'galicia'
         ]);
+        */
     }
 }

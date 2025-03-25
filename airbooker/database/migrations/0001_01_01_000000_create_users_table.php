@@ -7,26 +7,34 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Ejecuto las migraciones para crear las tablas necesarias.
      */
     public function up(): void
     {
+        // Creo la tabla de usuarios con sus campos
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->id();  // Elimino primary() ya que id() ya es primary key por defecto
             $table->string('name');
+            $table->string('apellidos'); 
+            $table->string('dni', 9)->unique();
+            $table->string('pasaporte', 9)->unique();            
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('telefono', 15);
+            $table->enum('rol', ['Administrador', 'Cliente']);
             $table->rememberToken();
             $table->timestamps();
         });
 
+        // Creo la tabla para restablecer contraseñas
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
 
+        // Creo la tabla para gestionar las sesiones
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();
@@ -38,7 +46,7 @@ return new class extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Revierto las migraciones eliminando las tablas.
      */
     public function down(): void
     {
@@ -47,3 +55,4 @@ return new class extends Migration
         Schema::dropIfExists('sessions');
     }
 };
+
