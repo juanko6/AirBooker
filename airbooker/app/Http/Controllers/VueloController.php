@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vuelo;
 use Illuminate\Http\Request;
 
 class VueloController extends Controller
@@ -11,8 +12,7 @@ class VueloController extends Controller
      */
     public function index()
     {
-        $vuelos = Vuelo::with('reservas')->paginate(10);
-        return view('admin.vuelos', compact('vuelos'));
+        //
     }
 
     /**
@@ -34,7 +34,7 @@ class VueloController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Vuelo $vuelo)
     {
         //
     }
@@ -42,7 +42,7 @@ class VueloController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Vuelo $vuelo)
     {
         //
     }
@@ -50,7 +50,7 @@ class VueloController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Vuelo $vuelo)
     {
         //
     }
@@ -58,7 +58,7 @@ class VueloController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Vuelo $vuelo)
     {
         //
     }

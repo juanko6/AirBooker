@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reserva;
+use App\Models\Oferta;
 use Illuminate\Http\Request;
 
-class ReservaController extends Controller
+class OfertaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class ReservaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Reserva $reserva)
+    public function show(Oferta $oferta)
     {
         //
     }
@@ -42,7 +42,7 @@ class ReservaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Reserva $reserva)
+    public function edit(Oferta $oferta)
     {
         //
     }
@@ -50,7 +50,7 @@ class ReservaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Reserva $reserva)
+    public function update(Request $request, Oferta $oferta)
     {
         //
     }
@@ -58,7 +58,7 @@ class ReservaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Reserva $reserva)
+    public function destroy(Oferta $oferta)
     {
         //
     }
