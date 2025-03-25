@@ -33,3 +33,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/vuelos', [VueloController::class, 'index']);
     
 });
+
+// Ruta para crear el usuario (método POST)
+Route::post('/admin/users', [UserController::class, 'store'])->name('users.store');
+Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
