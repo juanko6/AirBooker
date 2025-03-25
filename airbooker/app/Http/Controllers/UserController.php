@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -12,8 +12,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $users = User::paginate(10); // ✅ Usar paginate() en lugar de all()
+    
+            return view('admin.users', compact('users'));
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -34,7 +41,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +49,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +57,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +65,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(string $id)
     {
         //
     }
