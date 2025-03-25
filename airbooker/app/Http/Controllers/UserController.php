@@ -78,17 +78,51 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $user = User::findOrFail($id); // Buscar el usuario por su ID
+        return response()->json($user);    
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    // Método para actualizar el usuario
+    public function update(Request $request, $id)
     {
-        //
+        // Validar los datos del formulario
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'apellidos' => 'required|string|max:255',
+            'dni' => 'required|unique:users,dni,' . $id . ',id|max:9', 
+            'pasaporte' => 'required|unique:users,pasaporte,' . $id . ',id|max:9', 
+            'email' => 'required|email|unique:users,email,' . $id . ',id|max:255', 
+            'telefono' => 'required|string|max:25',
+            'rol' => 'required|in:Administrador,Cliente',
+            'password' => 'nullable|min:6|confirmed',
+        ]);
+
+        // Buscar el usuario en la base de datos
+        $user = User::findOrFail($id);
+
+        // Actualizar los datos del usuario
+        $user->name = $request->input('name');
+        $user->apellidos = $request->input('apellidos');
+        $user->dni = $request->input('dni');
+        $user->pasaporte = $request->input('pasaporte');
+        $user->email = $request->input('email');
+        $user->telefono = $request->input('telefono');
+        $user->rol = $request->input('rol');
+        
+        // Si se proporciona una nueva contraseña, encriptarla y actualizarla
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
+
+        $user->save(); // Guardar los cambios en la base de datos
+
+        // Redirigir de vuelta con un mensaje de éxito
+        return redirect()->route('users.index')->with('success', 'Usuario actualizado exitosamente');
     }
 
     /**

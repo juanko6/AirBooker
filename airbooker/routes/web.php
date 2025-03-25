@@ -37,3 +37,14 @@ Route::prefix('admin')->group(function () {
 // Ruta para crear el usuario (método POST)
 Route::post('/admin/users', [UserController::class, 'store'])->name('users.store');
 Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
+
+// Ruta para mostrar el formulario de edición
+Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+
+// Ruta para actualizar el usuario
+Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('users.update');
+
+Route::get('users/{id}/edit', [UserController::class, 'edit']);
+
+
+
