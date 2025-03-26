@@ -46,5 +46,7 @@ Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('user
 
 Route::get('users/{id}/edit', [UserController::class, 'edit']);
 
+Route::delete('admin/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
 
 

@@ -172,7 +172,12 @@
         <td>{{ $user->telefono }}</td>
         <td>
         <button class="btn btn-sm btn-info" onclick="openEditModal({{ $user->id }})">✏️ Editar</button>
-        <button class="btn btn-sm btn-danger">🗑️ Eliminar</button>
+        <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este usuario?')">🗑️ Eliminar</button>
+</form>
+
         </td>
         </tr>
         @endforeach
