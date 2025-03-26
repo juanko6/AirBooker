@@ -16,8 +16,8 @@ use App\Http\Controllers\{
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Rutas del buscador de vuelos
-Route::get('/buscar-vuelos', [BuscadorVueloController::class, 'index'])->name('buscador.vuelos');
-Route::post('/buscar-vuelos', [BuscadorVueloController::class, 'index']);
+Route::get('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos'])->name('buscador.vuelos');
+Route::post('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos']);
 
 
 // Rutas de autenticación

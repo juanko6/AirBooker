@@ -10,7 +10,7 @@ class buscadorVueloController extends Controller
     /**
      * Muestra el formulario de búsqueda y maneja la lógica de búsqueda.
      */
-    public function index(Request $request)
+    public function BuscarVuelos(Request $request)
     {
         // Validación de parámetros
         $request->validate([
@@ -31,14 +31,11 @@ class buscadorVueloController extends Controller
 
         // Calcular precios con descuento
         foreach ($vuelos as $vuelo) {
-            if ($vuelo->oferta && $vuelo->oferta->estado === 'ACTIVA') {
-                $descuento = $vuelo->oferta->ProcentajeDescuento;
-                $vuelo->precio_con_descuento = $vuelo->precio * (1 - $descuento / 100);
-            } else {
-                $vuelo->precio_con_descuento = null;
-            }
+            
+            $vuelo->precio_con_descuento = $vuelo->getPrecioConDescuento();
         }
 
         return view('buscadorVuelo', compact('vuelos'));
     }
 }
+

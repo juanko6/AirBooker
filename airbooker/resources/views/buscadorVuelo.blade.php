@@ -1,4 +1,4 @@
-@include('menu.header')
+
 <!-- Formulario de búsqueda -->
 <div class="container mt-4">
     <div class="card shadow">
@@ -37,9 +37,10 @@
 
     <!-- Resultados de búsqueda -->
     <div class="mt-4" id="resultadosContainer">
+        <!-- Esta seeccion se activa cuando controlador devuelve la vista con la variable vuelos -->
         @if(isset($vuelos))
-         
-            <div class="table-responsive">
+            @include('menu.header')
+            <div >
                 <table class="table table-striped table-hover">
                     <thead class="table-dark">
                         <tr>
@@ -47,7 +48,8 @@
                             <th>Aerolínea</th>
                             <th>Origen</th>
                             <th>Destino</th>
-                            <th>Fecha y Hora</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
                             <th>Precio</th>
                         </tr>
                     </thead>
@@ -58,26 +60,29 @@
                                 <td>{{ $vuelo->aerolinea->nombre }}</td>
                                 <td>{{ $vuelo->origen }}</td>
                                 <td>{{ $vuelo->destino }}</td>
-                                <td>{{ $vuelo->fecha }} {{ $vuelo->hora }}</td>
+                                <td>{{ $vuelo->fecha }}</td>
+                                <td>{{ $vuelo->hora }}</td>
                                 <td>
-                                    @if($vuelo->oferta)
-                                        <del>${{ number_format($vuelo->precio, 2) }}</del>
-                                        <span class="text-success fw-bold">
-                                            ${{ number_format($vuelo->precio_con_descuento, 2) }}
-                                        </span>
-                                    @else
-                                        ${{ number_format($vuelo->precio, 2) }}
-                                    @endif
+                                @if($vuelo->oferta && $vuelo->oferta->estado === 'Activa')
+                                    <del>${{ number_format($vuelo->precio, 2) }}</del>
+                                    <span class="text-success fw-bold">
+                                        ${{ number_format($vuelo->precio_con_descuento, 2) }}
+                                    </span>
+                                @else
+                                    ${{ number_format($vuelo->precio, 2) }}
+                                @endif
                                 </td>
+                                
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
+        @include('menu.footer')
         @endif
     </div>
 </div>
-@include('menu.footer')
+
 <script>
     // Validación básica en tiempo real
     document.getElementById('buscadorForm').addEventListener('submit', function(e) {
