@@ -32,4 +32,6 @@ class Vuelo extends Model
     {
         return $this->belongsTo(Oferta::class);
     }
+
+    
 }

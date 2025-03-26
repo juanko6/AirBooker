@@ -65,9 +65,9 @@
                                 <ul>
                                     <li><a href="/">HOME</a></li>
                                     <li><a href="#ofertas">OFERTAS</a></li>
-                                    <li><a href="#faq">INICIAR SESIÓN</a></li>
-                                    <li><a href="#">CONTACTO</a></li>
-                                    <li><a href="/">ABOUT uS</a></li>
+                                    <li><a href="/auth/login">LOGIN</a></li>
+                                    <li><a href="/auth/signup">SIGNUP</a></li>
+                                    <li><a href="#">CONTACTO</a></li>                                    
                                     <li><a href="#faq">FAQ</a></li>
                                 </ul>
                             </div>
@@ -96,7 +96,7 @@
                     <div class="row">
                         <div class="text-center ">
                             <div class="copyright-text text-center">
-                                <p>Copyright &copy; 2024, <a href="http://localhost:8000/">AIRBOOKER</a></p>
+                                <p>Copyright &copy; 2025, <a href="http://localhost:8000/">AIRBOOKER</a></p>
                             </div>
                             </div>
                         </div>
