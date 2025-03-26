@@ -10,6 +10,7 @@ use App\Http\Controllers\{
     ReservaController,
     VueloController,
     BuscadorVueloController,
+    ContactanosController
 };
 
 // Rutas públicas
@@ -19,6 +20,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos'])->name('buscador.vuelos');
 Route::post('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos']);
 
+// Rutas de contactanos
+Route::get('/contactanos', [ContactanosController::class, 'showContactanos'])->name('contactanos');
 
 // Rutas de autenticación
 Route::prefix('auth')->group(function () {
