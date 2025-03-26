@@ -11,4 +11,30 @@ class LoginController extends Controller
     {
         return view('login'); // Retorna la vista de registro
     }
+
+    /*public function login(Request $request)
+    {
+        $this->validate($request, [
+            'email'=> 'required|email',
+            'password'=> 'required|min:6',
+            ]);
+            $user = User::where('email',$request->email)->first();
+            if ($user) {
+                $user->password = bcrypt($request->password);
+                $user->save();
+                return redirect()->route('home');
+
+            } else {
+                return back()->with('error', 'Usuario no encontrado');            
+            }
+    }
+
+    public function validate(Request $request)
+    {
+        return $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+    }
+    */
 }
