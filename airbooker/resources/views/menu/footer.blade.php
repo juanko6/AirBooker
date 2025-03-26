@@ -96,7 +96,7 @@
                     <div class="row">
                         <div class="text-center ">
                             <div class="copyright-text text-center">
-                                <p>Copyright &copy; 2024, <a href="http://localhost:8000/">AIRBOOKER</a></p>
+                                <p>Copyright &copy; 2025, <a href="http://localhost:8000/">AIRBOOKER</a></p>
                             </div>
                             </div>
                         </div>
