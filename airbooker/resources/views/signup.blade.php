@@ -7,23 +7,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         /* Estilos personalizados para ajustar el espacio */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Asegura que el cuerpo ocupe al menos el 100% de la altura de la ventana */
-            margin: 0;
-            padding: 20px; /* Espacio alrededor del contenido */
-            background-color: #f8f9fa; /* Fondo claro para mejor contraste */
-        }
         .card {
             width: 100%;
             max-width: 500px; /* Limita el ancho máximo del formulario */
-            margin: auto; /* Centra el formulario */
+            
+            margin: 150px auto; /* Añade margen vertical de 50px y centra horizontalmente */
+            padding: 25px 0; /* Añade padding arriba y abajo de 25px */
         }
     </style>
 </head>
 <body>
+    @include('menu.header')
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -76,5 +71,6 @@
             </div>
         </div>
     </div>
+    @include('menu.footer')
 </body>
 </html>

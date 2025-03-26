@@ -58,7 +58,7 @@
                         </li>
                     </ul>
                     <!-- Botón Acceder -->
-                    <a href="{{ url('/login') }}" class="btn btn-access ms-3">
+                    <a href="{{ url('auth/login') }}" class="btn btn-access ms-3">
                         <i class="fas fa-user me-2"></i> ACCEDER
                     </a>
                 </div>

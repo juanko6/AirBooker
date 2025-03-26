@@ -9,6 +9,6 @@ class LoginController extends Controller
     // Método para mostrar el formulario de inicio de sesión
     public function showLogin()
     {
-        return view('signup'); // Retorna la vista de registro
+        return view('login'); // Retorna la vista de registro
     }
 }
