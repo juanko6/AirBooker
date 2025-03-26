@@ -23,7 +23,7 @@ Route::prefix('auth')->group(function () {
 });
 
 // Rutas del panel de administración
-Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+Route::prefix('admin')->group(function () {
     // Dashboard
     Route::controller(AdminController::class)->group(function () {
         Route::get('/', 'dashboard')->name('admin.dashboard');
