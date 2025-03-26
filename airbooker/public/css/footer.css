@@ -1,4 +1,8 @@
 /* Estilos del Footer */
+.footer-section {
+    margin-top: 100px; /* Ajusta el valor según lo que necesites */
+}
+
 .footer-container ul {
     margin: 0px;
     padding: 0px;
