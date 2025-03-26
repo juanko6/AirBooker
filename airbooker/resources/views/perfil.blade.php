@@ -1,85 +1,74 @@
 <head>
-    .cuadroOpciones {
-        display:grid;
-        grid-template-columns: 20% 20%;
-    }
-    .elemDerecho {
-        display:inline-block;
-        text-align:right;
-    }
+    <style>
+        .column {
+            padding:10px;
+            float:left;
+            width: 30%;
+        }
+        .row:after{
+            content:"";
+            display:table;
+            clear:both;
+        }
+    </style>
 </head>
 
+@include('menu.header')
 
 {{--@section('content')--}}
-    <h1>Perfil de usuario</h1>
-    <div >
-        <div class="cuadroOpciones">
-        Nombre: {{ $cliente->nombre }}
-            <div class="elemDerecho">
-                <form>
-                    @csrf
-                    <input id=nombre type=text name=nombre>
-                    <button type=submit>Actualizar</button>
-                </form>
-            </div>           
-        </div>
+    <div style="padding:15px;">
+        <h1>📝 Perfil de usuario</h1>
+    
+        <div class="row">
 
-        <div class="cuadroOpciones">
-        Apellidos: {{ $cliente->apellidos }}
-            <div class="elemDerecho">
-                <form>
-                    @csrf
-                    <input id=apellidos type=text name=apellidos></input>
-                    <button type=submit>Actualizar</button>
-                </form>
-            </div>           
-        </div>
+        <form>
+            <div class="column">
+                <div class="mb-3">
+                    <label for="formNombre" class="form-label">Nombre</label>
+                    
+                    <input id="formNombre" class="form-control" type="text" name="name" value="{{ $usuario->name }}" required>
+                    
+                </div>
+                <div class="mb-3">
+                    <label for="formApellidos" class="form-label">Apellidos</label>
+                    
+                    <input id="formApellidos" class="form-control" type="text" name="apellidos" value="{{ $usuario->apellidos }}"required>
 
-        <div class="cuadroOpciones">
-        Tef.: {{ $cliente->telefono }}
-            <div class="elemDerecho">
-                <form>
-                    @csrf
-                    <input id=telefono type=tel name=telefono></input>
-                    <button type=submit>Actualizar</button>
-                </form>
-            </div>           
-        </div>
+                </div>
+                <div class="mb-3">
+                    <label for="formTelefono" class="form-label">Telefono</label>
 
-        <div class="cuadroOpciones">
-        DNI: {{ $cliente->dni}}
-            <div class="elemDerecho">
-                <form>
-                    @csrf
-                    <input id=dni type=text name=dni></input>
-                    <button type=submit>Actualizar</button>
-                </form>
-            </div>           
-        </div>
+                    <input id="formTelefono" class="form-control" type="tel" name="telefono" value="{{ $usuario->telefono }}" required>
 
-        <div class="cuadroOpciones">
-        Núm. Pasaporte: {{ $cliente->pasaporte }}
-            <div class="elemDerecho">
-                <form>
-                    @csrf
-                    <input id=pasaporte type=text name=pasaporte></input>
-                    <button type=submit>Actualizar</button>
-                </form>
-            </div>           
-        </div>
+                </div>
+                <button type="submit" class="btn btn-success">Actualizar Datos</button>
+            </div>
+            <div class="column">
+                <div class="mb-3">
+                    <label for="formDNI" class="form-label">DNI</label>
 
-        <div class="cuadroOpciones">
-        Email: {{ $cliente->email }}
-            <div class="elemDerecho">
-                <form>
-                    @csrf
-                    <input id=email type=email name=email></input>
-                    <button type=submit>Actualizar</button>
-                </form>
-            </div>           
-        </div>
+                    <input id="formDNI" class="form-control" type="text" name="dni" value="{{ $usuario->dni}}" required>
 
+                </div>
+                <div class="mb-3">
+                    <label for="formPasaporte" class="form-label">Núm. Pasaporte</label>
+
+                    <input id="formPasaporte" class="form-control" type="text" name="pasaporte" value="{{ $usuario->pasaporte }}"required>
+
+                </div>
+                <div class="mb-3">
+                    <label for="formCorreo" class="form-label">Email</label>
+
+                    <input id="formCorreo" class="form-control" type="email" name="email" value="{{ $usuario->email }}" required>
+
+                </div> 
+            </div>
+            
+        </form>
+        </div>
     </div>
+
     
     {{--@endsection--}}
 
+@include('menu.footer')

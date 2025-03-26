@@ -36,5 +36,6 @@ Route::prefix('admin')->group(function () {
     Route::resource('reservas', ReservaController::class)->only(['index']);
     Route::resource('vuelos', VueloController::class)->only(['index']);
 });
+
 // Ruta para mostrar el perfil
-Route::get('perfil', [PerfilController::class, 'index'])->name('perfil');
+Route::get('perfil/{id}', [UserController::class, 'show']);
