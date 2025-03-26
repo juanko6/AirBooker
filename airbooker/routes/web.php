@@ -9,10 +9,12 @@ use App\Http\Controllers\{
     AdminController,
     ReservaController,
     VueloController,
+    ContactanosController
 };
 
 // Rutas públicas
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/contactanos', [ContactanosController::class, 'showContactanos'])->name('contactanos');
 
 // Rutas de autenticación
 Route::prefix('auth')->group(function () {

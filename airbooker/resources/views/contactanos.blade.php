@@ -6,53 +6,73 @@
     <title>Contáctanos - AirBooker</title>
     <style>
         /* Estilos base */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
         body {
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
             color: #333;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
             background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         
-        /* Sección de contacto */
-        .contact-header {
-            display: flex;
-            align-items: center;
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+        
+        /* Estilo para la sección de contacto centrada */
+        .centered-contact-section {
+            text-align: center;
             margin-bottom: 30px;
         }
         
-        .contact-text {
-            flex: 1;
-            padding-right: 40px;
+        .centered-contact-text {
+            margin-bottom: 20px;
         }
         
-        .contact-image {
+        .centered-contact-image {
             width: 200px;
+            margin: 0 auto;
         }
         
-        .contact-image img {
+        .centered-contact-image img {
             width: 100%;
             height: auto;
+            display: block;
+            border-radius: 50%;
+            border: 3px solid #4CAF50;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
-        /* Formulario */
+        /* Formulario (mantenemos tus estilos originales) */
         .contact-form {
             background-color: white;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 100%;
         }
         
         .form-row {
             display: flex;
             margin-bottom: 20px;
             gap: 20px;
+            flex-wrap: wrap;
         }
         
         .form-group {
             flex: 1;
+            min-width: 250px;
         }
         
         .form-group label {
@@ -84,6 +104,10 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            width: 100%;
+            max-width: 200px;
+            display: block;
+            margin: 0 auto;
         }
         
         .submit-btn:hover {
@@ -93,12 +117,14 @@
         /* Sección FAQ */
         .faq-section {
             margin-top: 50px;
+            width: 100%;
         }
         
         .faq-title {
             font-size: 24px;
             margin-bottom: 20px;
             color: #2c3e50;
+            text-align: center;
         }
         
         .faq-item {
@@ -123,69 +149,150 @@
         /* Líneas divisorias */
         .divider {
             border-top: 1px dashed #ccc;
-            margin: 30px 0;
+            margin: 30px auto;
+            width: 80%;
+        }
+
+        /* Footer */
+        .footer {
+            width: 100%;
+            margin-top: auto;
+        }
+
+        /* Imagen de atención al cliente (se mantiene igual) */
+        .attention-container {
+            width: 100%;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .attention-image-wrapper {
+            position: relative;
+            width: 100%;
+            max-height: 220px;
+            overflow: hidden;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .attention-image {
+            display: block;
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .attention-overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-transform: uppercase;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .form-group {
+                min-width: 100%;
+            }
+            
+            .attention-overlay-text {
+                font-size: 1.4rem;
+                padding: 6px 12px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Sección de Contacto -->
-    <div class="contact-header">
-        <div class="contact-text">
-            <h2>Contacta con AirBooker</h2>
-            <p>Puedes enviarnos tus comentarios y propuestas, hacer consultas o reclamaciones y contarnos cualquier detalle.</p>
-        </div>
-        <div class="contact-image">
-            <!-- Reemplaza con tu imagen de la mujer -->
-            <img src="https://i.imgur.com/Jf6o3yK.png" alt="Asistente de AirBooker">
+    @include('menu.header')
+
+    <!-- Imagen de atención al cliente (se mantiene igual) -->
+    <div class="attention-container">
+        <div class="attention-image-wrapper">
+            <img src="{{ asset('images/paisaje.webp') }}" alt="Imagen de Contáctanos" class="attention-image">
+            <div class="attention-overlay-text">ATENCIÓN AL CLIENTE</div>
         </div>
     </div>
-    
-    <div class="contact-form">
-        <div class="form-row">
-            <div class="form-group">
-                <input type="text" placeholder="Nombre" required>
+
+    <div class="main-container">
+        <!-- Sección de Contacto -->
+        <div class="centered-contact-section">
+            <div class="centered-contact-text">
+                <h2>Contacta con AirBooker</h2>
+                <p>Puedes enviarnos tus comentarios y propuestas, hacer consultas o reclamaciones y contarnos cualquier detalle.</p>
             </div>
-            <div class="form-group">
-                <input type="text" placeholder="Apellidos" required>
-            </div>
+            
         </div>
         
-        <div class="form-row">
-            <div class="form-group">
-                <input type="email" placeholder="Email" required>
+        <!-- Formulario -->
+        <div class="contact-form">
+            <div class="centered-contact-image">
+                <img src="{{ asset('images/asistenta.png') }}" alt="Asistente de AirBooker">
             </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <input type="text" placeholder="Nombre" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Apellidos" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Número teléfono">
+                </div>
+            </div>
+            
             <div class="form-group">
-                <input type="tel" placeholder="Número teléfono">
+                <input type="text" placeholder="Asunto" required>
+            </div>
+            
+            <div class="form-group">
+                <textarea placeholder="Mensaje" required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Enviar</button>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <!-- Sección FAQ (se mantiene igual) -->
+        <div class="faq-section">
+            <h2 class="faq-title">FAQ</h2>
+            <p>Is this where I can include some frequently asked questions?</p>
+            <p>Yes, exactly. Here you can provide immediate answers to a few common and pressing questions.</p>
+            <p>This will not only reduce your support tickets, but it will also reassure users - and make them more likely to click your CTA.</p>
+            
+            <div class="faq-item">
+                <div class="faq-question">This is a frequently asked question. <a href="#">psum dolor sit amet?</a></div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">This is a frequently asked question. <a href="#">psum dolor sit amet?</a></div>
             </div>
         </div>
-        
-        <div class="form-group">
-            <input type="text" placeholder="Asunto" required>
-        </div>
-        
-        <div class="form-group">
-            <textarea placeholder="Mensaje" required></textarea>
-        </div>
-        
-        <button type="submit" class="submit-btn">Enviar</button>
     </div>
-    
-    <div class="divider"></div>
-    
-    <!-- Sección FAQ -->
-    <div class="faq-section">
-        <h2 class="faq-title">FAQ</h2>
-        <p>Is this where I can include some frequently asked questions?</p>
-        <p>Yes, exactly. Here you can provide immediate answers to a few common and pressing questions.</p>
-        <p>This will not only reduce your support tickets, but it will also reassure users - and make them more likely to click your CTA.</p>
-        
-        <div class="faq-item">
-            <div class="faq-question">This is a frequently asked question. <a href="#">psum dolor sit amet?</a></div>
-        </div>
-        
-        <div class="faq-item">
-            <div class="faq-question">This is a frequently asked question. <a href="#">psum dolor sit amet?</a></div>
-        </div>
-    </div>
+
+    @include('menu.footer')
 </body>
 </html>
