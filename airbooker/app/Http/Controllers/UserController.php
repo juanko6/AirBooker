@@ -72,8 +72,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
-        //$id = 13; //codigo de prueba para asignar el id
+        //Muestra la vista de perfil con los datos del usuario con el ID suministrado
         return view('perfil', ['usuario' => User::findorFail($id)]);
     }
 
