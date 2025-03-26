@@ -15,6 +15,8 @@ class Oferta extends Model
         'FechaFin',
         'ProcentajeDescuento',
         'estado',
+        'created_at',
+        'updated_at',
     ];
 
     // Si es necesario, define la tabla asociada (opcional si sigue la convención de nombres)

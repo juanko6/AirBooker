@@ -18,7 +18,9 @@ class Aerolinea extends Model
         "nombre",
         "paisOrigen",
         "contacto", 
-        "sitio_web"
+        "sitio_web",
+        "created_at",
+        "updated_at",
     ];
 
     /**

@@ -9,12 +9,16 @@ use App\Http\Controllers\{
     AdminController,
     ReservaController,
     VueloController,
-    ContactanosController
+    BuscadorVueloController,
 };
 
 // Rutas públicas
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/contactanos', [ContactanosController::class, 'showContactanos'])->name('contactanos');
+
+// Rutas del buscador de vuelos
+Route::get('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos'])->name('buscador.vuelos');
+Route::post('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos']);
+
 
 // Rutas de autenticación
 Route::prefix('auth')->group(function () {
