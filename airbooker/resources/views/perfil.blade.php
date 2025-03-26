@@ -1,26 +1,21 @@
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Panel de Administración')</title>
-    
-    <!-- CSS Bootstrap y estilos personalizados -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    @stack('styles')
+    .cuadroOpciones {
+        display:grid;
+        grid-template-columns: 20% 20%;
+    }
+    .elemDerecho {
+        display:inline-block;
+        text-align:right;
+    }
 </head>
+
 
 {{--@section('content')--}}
     <h1>Perfil de usuario</h1>
     <div >
-        <div style="display:grid;grid-template-columns: 20% 20%;">
+        <div class="cuadroOpciones">
         Nombre: {{ $cliente->nombre }}
-            <div style="display:inline-block;text-align:right">
+            <div class="elemDerecho">
                 <form>
                     @csrf
                     <input id=nombre type=text name=nombre>
@@ -29,9 +24,9 @@
             </div>           
         </div>
 
-        <div style="display:grid;grid-template-columns: 20% 20%;">
+        <div class="cuadroOpciones">
         Apellidos: {{ $cliente->apellidos }}
-            <div style="display:inline-block;text-align:right">
+            <div class="elemDerecho">
                 <form>
                     @csrf
                     <input id=apellidos type=text name=apellidos></input>
@@ -40,9 +35,9 @@
             </div>           
         </div>
 
-        <div style="display:grid;grid-template-columns: 20% 20%;">
+        <div class="cuadroOpciones">
         Tef.: {{ $cliente->telefono }}
-            <div style="display:inline-block;text-align:right">
+            <div class="elemDerecho">
                 <form>
                     @csrf
                     <input id=telefono type=tel name=telefono></input>
@@ -51,9 +46,9 @@
             </div>           
         </div>
 
-        <div style="display:grid;grid-template-columns: 20% 20%;">
+        <div class="cuadroOpciones">
         DNI: {{ $cliente->dni}}
-            <div style="display:inline-block;text-align:right">
+            <div class="elemDerecho">
                 <form>
                     @csrf
                     <input id=dni type=text name=dni></input>
@@ -62,9 +57,9 @@
             </div>           
         </div>
 
-        <div style="display:grid;grid-template-columns: 20% 20%;">
+        <div class="cuadroOpciones">
         Núm. Pasaporte: {{ $cliente->pasaporte }}
-            <div style="display:inline-block;text-align:right">
+            <div class="elemDerecho">
                 <form>
                     @csrf
                     <input id=pasaporte type=text name=pasaporte></input>
@@ -73,9 +68,9 @@
             </div>           
         </div>
 
-        <div style="display:grid;grid-template-columns: 20% 20%;">
+        <div class="cuadroOpciones">
         Email: {{ $cliente->email }}
-            <div style="display:inline-block;text-align:right">
+            <div class="elemDerecho">
                 <form>
                     @csrf
                     <input id=email type=email name=email></input>

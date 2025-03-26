@@ -9,6 +9,7 @@ use App\Http\Controllers\{
     AdminController,
     ReservaController,
     VueloController,
+    PerfilController,
 };
 
 // Rutas públicas
