@@ -38,4 +38,22 @@ Route::prefix('admin')->group(function () {
     Route::get('/users', [UserController::class, 'index']);
     Route::get('/reservas', [ReservaController::class, 'index']);
     Route::get('/vuelos', [VueloController::class, 'index']);
+    
 });
+
+// Ruta para crear el usuario (método POST)
+Route::post('/admin/users', [UserController::class, 'store'])->name('users.store');
+Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
+
+// Ruta para mostrar el formulario de edición
+Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+
+// Ruta para actualizar el usuario
+Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('users.update');
+
+Route::get('users/{id}/edit', [UserController::class, 'edit']);
+
+Route::delete('admin/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+
+
