@@ -11,10 +11,7 @@
     @include('menu.header')
 
     <main class="content">
-        @php
-            $messages = array_fill(0, 50, '<h3>BIENVENIDO A AIRBOOKER</h3>');
-            echo implode('', $messages);                            
-        @endphp
+        @include('buscadorVuelo')
     </main>
 
     <footer class="footer">
