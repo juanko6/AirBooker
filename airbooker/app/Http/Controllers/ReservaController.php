@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Reserva;
 use Illuminate\Http\Request;
 
+
 class ReservaController extends Controller
 {
     /**
@@ -12,9 +13,16 @@ class ReservaController extends Controller
      */
     public function index()
     {
-        //
+        {
+            try {
+                $reservas = Reserva::paginate(10);
+        
+                return view('admin.reservas', compact('reservas'));
+            } catch (\Exception $e) {
+                return response()->json(['error' => $e->getMessage()], 500);
+            }
+        }
     }
-
     /**
      * Show the form for creating a new resource.
      */
