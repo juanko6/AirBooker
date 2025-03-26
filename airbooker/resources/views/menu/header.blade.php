@@ -56,6 +56,10 @@
                         <li class="opciones-menu">
                             <a class="nav-link" href="{{ url('/contacto') }}">CONTACTO</a>
                         </li>
+                        <li class="opciones-menu">
+                            <a class="nav-link" href="{{ url('/admin') }}">DASHBOARD</a>
+                        </li>
+
                     </ul>
                     <!-- Botón Acceder -->
                     <a href="{{ url('auth/login') }}" class="btn btn-access ms-3">
