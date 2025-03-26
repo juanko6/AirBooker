@@ -21,4 +21,5 @@ class Oferta extends Model
     {
         return $this->FechaFin < now() ? 'Vencida' : $value;
     }
+    
 }
