@@ -20,6 +20,7 @@
     @stack('styles')
 </head>
 <body>
+@include('menu.header')
 
 <div class="d-flex flex-column vh-100">
     <!-- Barra superior -->
@@ -79,5 +80,6 @@ function loadContent(view) {
 </script>
 
 @stack('scripts')
+@include('menu.footer')
 </body>
 </html>
