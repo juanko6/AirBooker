@@ -66,4 +66,11 @@ class VueloController extends Controller
     {
         //
     }
+
+    public function filtrar(Request $request)
+    {
+        $fecha = $request->query('fecha');
+        $vuelos = Vuelo::whereDate('fecha', $fecha)->get();
+        return response()->json($vuelos);
+    }
 }
