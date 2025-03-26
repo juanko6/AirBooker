@@ -25,7 +25,7 @@
             </td>
             <td>{{ $reserva->fecha }}</td>
             <td>${{ number_format($reserva->precio, 2) }}</td>
-            <td>{{ $reserva->cliente->nombre }} {{ $reserva->cliente->apellido }}</td>
+            <td>{{ $reserva->user_id }}</td>
             <td>{{ optional($reserva->vuelo)->origen }} → {{ optional($reserva->vuelo)->destino }}</td>
             <td>
                 <button class="btn btn-sm btn-info">✏️ Editar</button>
