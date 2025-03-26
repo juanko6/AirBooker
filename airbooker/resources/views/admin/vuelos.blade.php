@@ -2,15 +2,17 @@
 
 @section('content')
 <h1>✈️ Vuelos</h1>
-<table class="table table-striped">
-    <thead>
+<table id="usersTable" class="table table-striped table-bordered">
+<thead>
         <tr>
-            <th>ID</th>
-            <th>Fecha</th>
-            <th>Hora</th>
-            <th>Origen</th>
-            <th>Destino</th>
-            <th>Reservas</th>
+            <th onclick="sortTable(0)">ID</th>
+            <th onclick="sortTable(1)">Aerolinea</th>
+            <th onclick="sortTable(2)">Fecha</th>
+            <th onclick="sortTable(3)">Hora</th>
+            <th onclick="sortTable(4)">Origen</th>
+            <th onclick="sortTable(5)">Destino</th>
+            <th onclick="sortTable(6)">Precio</th>
+            <th onclick="sortTable(7)">Oferta</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -18,11 +20,19 @@
         @foreach($vuelos as $vuelo)
         <tr>
             <td>{{ $vuelo->id }}</td>
+            <td>{{ $vuelo->aerolinea->nombre }}</td>
             <td>{{ $vuelo->fecha }}</td>
             <td>{{ $vuelo->hora }}</td>
             <td>{{ $vuelo->origen }}</td>
             <td>{{ $vuelo->destino }}</td>
-            <td>{{ $vuelo->reservas->count() }}</td>
+            <td>${{ number_format($vuelo->precio, 2) }}</td>
+            <td>
+                @if(optional($vuelo->oferta)->ProcentajeDescuento)
+                    {{ optional($vuelo->oferta)->ProcentajeDescuento }}%
+                @else
+                    Sin oferta
+                @endif
+            </td>
             <td>
                 <button class="btn btn-sm btn-info">✏️ Editar</button>
                 <button class="btn btn-sm btn-danger">🗑️ Eliminar</button>
@@ -32,5 +42,9 @@
     </tbody>
 </table>
 
-{{ $vuelos->links() }}
+<!-- Paginación -->
+<div class="d-flex justify-content-center mt-4">
+{{ $vuelos->links('pagination::bootstrap-5') }}
+</div>
+
 @endsection

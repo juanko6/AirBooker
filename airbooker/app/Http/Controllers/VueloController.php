@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use App\Models\Vuelo;
 
 class VueloController extends Controller
 {
@@ -11,9 +14,10 @@ class VueloController extends Controller
      */
     public function index()
     {
-        $vuelos = Vuelo::with('reservas')->paginate(10);
+        $vuelos = Vuelo::with('oferta')->paginate(10);
         return view('admin.vuelos', compact('vuelos'));
     }
+    
 
     /**
      * Show the form for creating a new resource.

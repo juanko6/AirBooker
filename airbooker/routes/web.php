@@ -1,40 +1,39 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SignUpController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\PerfilController;
-use App\Http\Controllers\ReservaController;
-use App\Http\Controllers\VueloController;
+use App\Http\Controllers\{
+    HomeController,
+    LoginController,
+    SignUpController,
+    UserController,
+    AdminController,
+    ReservaController,
+    VueloController,
+};
 
-//Para poder ir viendo las vistas
-Route::get('/', function () {
-    return view('login');
+// Rutas públicas
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Rutas de autenticación
+Route::prefix('auth')->group(function () {
+    Route::get('signup', [SignUpController::class, 'showSignUp'])->name('signup');
+    Route::post('signup', [SignUpController::class, 'signup']);
+    Route::get('login', [LoginController::class, 'showLogin'])->name('login');
+    Route::post('login', [LoginController::class, 'login']);
 });
 
-// Ruta para mostrar el formulario de registro
-Route::get('signup', [SignUpController::class, 'showSignUp'])->name('signup');
+// Rutas del panel de administración
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    // Dashboard
+    Route::controller(AdminController::class)->group(function () {
+        Route::get('/', 'dashboard')->name('admin.dashboard');
+        Route::get('/dashboard', 'dashboard')->withoutMiddleware('admin'); // Permitir acceso a usuarios no admin
+    });
 
-// Ruta para procesar el registro
-Route::post('signup', [SignUpController::class, 'signup']);
-
-// Ruta para mostrar el formulario de inicio de sesión
-Route::get('login', [SignUpController::class, 'showLogin'])->name('login');
-
-// Ruta para procesar el inicio de sesión
-Route::post('login', [SignUpController::class, 'login']);
-
-// Agrupar las rutas bajo /admin
-Route::prefix('admin')->group(function () {
-    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/dashboard', [AdminController::class, 'dashboard']);
-    Route::get('/clientes', [ClienteController::class, 'index']);
-    Route::get('/reservas', [ReservaController::class, 'index']);
-    Route::get('/vuelos', [VueloController::class, 'index']);
-    
+    // Gestión de recursos
+    Route::resource('users', UserController::class)->except(['create', 'show']);
+    Route::resource('reservas', ReservaController::class)->only(['index']);
+    Route::resource('vuelos', VueloController::class)->only(['index']);
 });
-
 // Ruta para mostrar el perfil
 Route::get('perfil', [PerfilController::class, 'index'])->name('perfil');
