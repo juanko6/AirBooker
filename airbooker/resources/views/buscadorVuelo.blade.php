@@ -4,18 +4,18 @@
     <div class="card shadow">
         <div class="card-body">
             <h5 class="card-title text-center mb-4">Buscar Vuelos</h5>
-            <form id="buscadorForm" action="{{ route('buscador.vuelos') }}" method="GET">
+            <form id="buscadorForm" action="{{ route('vuelos.disponibles') }}" method="GET">
                 <div class="row g-3">
                     <!-- Origen -->
                     <div class="col-md-6">
                         <label for="ciudad_origen" class="form-label">Ciudad de Origen</label>
-                        <input type="text" class="form-control" id="ciudad_origen" name="ciudad_origen" required>
+                        <input type="text" class="form-control" id="ciudad_origen" name="ciudad_origen" value ="París" required>
                     </div>
 
                     <!-- Destino -->
                     <div class="col-md-6">
                         <label for="ciudad_destino" class="form-label">Ciudad de Destino</label>
-                        <input type="text" class="form-control" id="ciudad_destino" name="ciudad_destino" required>
+                        <input type="text" class="form-control" id="ciudad_destino" name="ciudad_destino" value ="Roma" required>
                     </div>
 
                     <!-- Fecha de salida -->
@@ -35,52 +35,7 @@
         </div>
     </div>
 
-    <!-- Resultados de búsqueda -->
-    <div class="mt-4" id="resultadosContainer">
-        <!-- Esta seeccion se activa cuando controlador devuelve la vista con la variable vuelos -->
-        @if(isset($vuelos))
-            @include('menu.header')
-            <div >
-                <table class="table table-striped table-hover">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>N° Vuelo</th>
-                            <th>Aerolínea</th>
-                            <th>Origen</th>
-                            <th>Destino</th>
-                            <th>Fecha</th>
-                            <th>Hora</th>
-                            <th>Precio</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($vuelos as $vuelo)
-                            <tr>
-                                <td>{{ $vuelo->id }}</td>
-                                <td>{{ $vuelo->aerolinea->nombre }}</td>
-                                <td>{{ $vuelo->origen }}</td>
-                                <td>{{ $vuelo->destino }}</td>
-                                <td>{{ $vuelo->fecha }}</td>
-                                <td>{{ $vuelo->hora }}</td>
-                                <td>
-                                @if($vuelo->oferta && $vuelo->oferta->estado === 'Activa')
-                                    <del>${{ number_format($vuelo->precio, 2) }}</del>
-                                    <span class="text-success fw-bold">
-                                        ${{ number_format($vuelo->precio_con_descuento, 2) }}
-                                    </span>
-                                @else
-                                    ${{ number_format($vuelo->precio, 2) }}
-                                @endif
-                                </td>
-                                
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        @include('menu.footer')
-        @endif
-    </div>
+    
 </div>
 
 <script>

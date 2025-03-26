@@ -1,24 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrarse</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Estilos personalizados para ajustar el espacio */
-        .card {
-            width: 100%;
-            max-width: 500px; /* Limita el ancho máximo del formulario */
-            
-            margin: 150px auto; /* Añade margen vertical de 50px y centra horizontalmente */
-            padding: 25px 0; /* Añade padding arriba y abajo de 25px */
-        }
-    </style>
-</head>
-<body>
-    @include('menu.header')
-
+@extends('layouts.app')
+@section('title', 'SignUp')
+@section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -71,6 +53,5 @@
             </div>
         </div>
     </div>
-    @include('menu.footer')
-</body>
-</html>
+
+@endsection

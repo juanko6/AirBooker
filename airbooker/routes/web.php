@@ -8,16 +8,25 @@ use App\Http\Controllers\{
     UserController,
     AdminController,
     ReservaController,
-    VueloController,
-    BuscadorVueloController,
+    VueloController, 
+    VuelosDisponiblesController,
 };
+
+/*
+Que hace ->name('') ?  Si en el futuro cambias la URL de /buscar-vuelos a /vuelos-disponibles, 
+solo necesitas actualizar la definición de la ruta en web.php. Todas las 
+referencias usando route('buscador.vuelos') seguirán funcionando correctamente.
+*/
 
 // Rutas públicas
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Rutas del buscador de vuelos
-Route::get('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos'])->name('buscador.vuelos');
-Route::post('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos']);
+
+ 
+
+// Nueva ruta para resultados de búsqueda
+Route::get('/vuelos-disponibles', [VuelosDisponiblesController::class, 'VuelosDisponibles'])
+    ->name('vuelos.disponibles');
 
 
 // Rutas de autenticación
