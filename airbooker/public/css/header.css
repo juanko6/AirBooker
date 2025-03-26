@@ -1,4 +1,8 @@
 /* Estilos del Header */
+body {
+    padding-top: 70px; /* Ajusta este valor según la altura de tu navbar */
+}
+
 .header-container .navbar {
     background: linear-gradient(135deg, #003399 0%, #0055ff 100%);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
