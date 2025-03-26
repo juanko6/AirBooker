@@ -15,13 +15,22 @@
 
 @include('menu.header')
 
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 {{--@section('content')--}}
     <div style="padding:15px;">
         <h1>📝 Perfil de usuario</h1>
     
         <div class="row">
 
-        <form>
+        <form id="actualizarUsuarioForm" action="{{ route('users.update', ['user' => $usuario->id]) }}" method="POST">
+        @csrf
+        @method('PUT')
+            <input type="hidden" name="rol" id="formRol" value="{{ $usuario->rol }}">
             <div class="column">
                 <div class="mb-3">
                     <label for="formNombre" class="form-label">Nombre</label>

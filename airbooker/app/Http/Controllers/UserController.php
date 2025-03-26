@@ -124,7 +124,7 @@ class UserController extends Controller
         $user->save(); // Guardar los cambios en la base de datos
 
         // Redirigir de vuelta con un mensaje de éxito
-        return redirect()->route('users.index')->with('success', 'Usuario actualizado exitosamente');
+        return back()->with('success', 'Usuario actualizado exitosamente');
     }
 
     /**
