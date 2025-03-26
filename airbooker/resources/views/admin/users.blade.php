@@ -1,7 +1,23 @@
 @if(session('success'))
-    <div class="alert alert-success">
+    <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
         {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+
+    <script>
+        // Desaparecer y eliminar el mensaje después de 3 segundos
+        setTimeout(function() {
+            var alertElement = document.getElementById('success-alert');
+            if (alertElement) {
+                alertElement.classList.remove('show');
+                alertElement.classList.add('fade');
+                // Esperar a que termine la animación y eliminar el elemento
+                setTimeout(function() {
+                    alertElement.remove();
+                }, 500); // 500ms para asegurar el tiempo de la animación
+            }
+        }, 3000); // Desaparece después de 3 segundos
+    </script>
 @endif
 
 @extends('admin.layout')

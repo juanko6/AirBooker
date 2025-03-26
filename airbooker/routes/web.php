@@ -38,6 +38,13 @@ Route::prefix('admin')->group(function () {
 
     // Gestión de recursos
     Route::resource('users', UserController::class)->except(['create', 'show']);
-    Route::resource('reservas', ReservaController::class)->only(['index']);
+    Route::resource('reservas', ReservaController::class)->except(['create', 'show']);
     Route::resource('vuelos', VueloController::class)->only(['index']);
+
+    Route::get('/reservas/{id}/edit', [ReservaController::class, 'edit'])->name('reservas.edit');
+    Route::put('/reservas/{id}', [ReservaController::class, 'update'])->name('reservas.update');
 });
+
+Route::get('/api/usuarios', [UserController::class, 'buscar']);
+Route::get('/api/vuelos', [VueloController::class, 'filtrar']);
+
