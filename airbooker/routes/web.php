@@ -16,16 +16,12 @@ use App\Http\Controllers\{
 // Rutas públicas
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// Rutas del buscador de vuelos
+Route::get('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos'])->name('buscador.vuelos');
+Route::post('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos']);
 
- 
-});
-
-
-
-// Nueva ruta para resultados de búsqueda
-Route::get('/vuelos-disponibles', [VueloController::class, 'buscarVuelos'])
-    ->name('vuelos.disponibles');
-
+// Rutas de contactanos
+Route::get('/contactanos', [ContactanosController::class, 'showContactanos'])->name('contactanos');
 
 // Rutas de autenticación
 Route::prefix('auth')->group(function () {
@@ -54,4 +50,3 @@ Route::prefix('admin')->group(function () {
 
 Route::get('/api/usuarios', [UserController::class, 'buscar']);
 Route::get('/api/vuelos', [VueloController::class, 'filtrar']);
-
