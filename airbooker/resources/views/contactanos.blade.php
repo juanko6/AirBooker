@@ -46,10 +46,6 @@
         .centered-contact-image img {
             width: 100%;
             height: auto;
-            display: block;
-            border-radius: 50%;
-            border: 3px solid #4CAF50;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
         /* Formulario (mantenemos tus estilos originales) */
@@ -271,19 +267,19 @@
         
         <div class="divider"></div>
         
-        <!-- Sección FAQ (se mantiene igual) -->
+        <!-- Sección FAQ -->
         <div class="faq-section">
-            <h2 class="faq-title">FAQ</h2>
-            <p>Is this where I can include some frequently asked questions?</p>
-            <p>Yes, exactly. Here you can provide immediate answers to a few common and pressing questions.</p>
-            <p>This will not only reduce your support tickets, but it will also reassure users - and make them more likely to click your CTA.</p>
+            <h2 class="faq-title">Preguntas Frecuentes</h2>
+            <p>¿Es aquí donde puedo incluir algunas preguntas frecuentes?</p>
+            <p>Sí, exactamente. Aquí puedes proporcionar respuestas inmediatas a algunas preguntas comunes y urgentes.</p>
+            <p>Esto no solo reducirá tus tickets de soporte, sino que también tranquilizará a los usuarios y hará que sea más probable que hagan clic en tu llamado a la acción.</p>
             
             <div class="faq-item">
-                <div class="faq-question">This is a frequently asked question. <a href="#">psum dolor sit amet?</a></div>
+                <div class="faq-question">Esta es una pregunta frecuente. <a href="#">¿psum dolor sit amet?</a></div>
             </div>
             
             <div class="faq-item">
-                <div class="faq-question">This is a frequently asked question. <a href="#">psum dolor sit amet?</a></div>
+                <div class="faq-question">Esta es una pregunta frecuente. <a href="#">¿psum dolor sit amet?</a></div>
             </div>
         </div>
     </div>
