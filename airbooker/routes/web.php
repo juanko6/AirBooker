@@ -11,6 +11,8 @@ use App\Http\Controllers\{
     ReservaController,
     VueloController, 
     VuelosDisponiblesController,
+    AerolineaController,
+    OfertaController,
 };
 
 /*
@@ -51,12 +53,18 @@ Route::prefix('admin')->group(function () {
     });
 
     // Gestión de recursos
-    Route::resource('users', UserController::class)->except(['create', 'show']);
-    Route::resource('reservas', ReservaController::class)->except(['create', 'show']);
-    Route::resource('vuelos', VueloController::class)->only(['index']);
+    Route::resource('users', UserController::class);
+    Route::resource('reservas', ReservaController::class);
+    Route::resource('vuelos', VueloController::class);
+    Route::resource('aerolineas', AerolineaController::class);
+    Route::resource('ofertas', OfertaController::class);
 
     Route::get('/reservas/{id}/edit', [ReservaController::class, 'edit'])->name('reservas.edit');
     Route::put('/reservas/{id}', [ReservaController::class, 'update'])->name('reservas.update');
+
+    Route::get('/aerolineas/{aerolinea}/edit', [AerolineaController::class, 'edit']);
+
+
 });
 
 Route::get('/api/usuarios', [UserController::class, 'buscar']);
