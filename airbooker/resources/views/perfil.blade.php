@@ -13,7 +13,10 @@
     </style>
 </head>
 
-@include('menu.header')
+@extends('layoutCliente')
+
+
+@section('content')
 
 @if(session('success'))
     <div class="alert alert-success">
@@ -21,7 +24,6 @@
     </div>
 @endif
 
-{{--@section('content')--}}
     <div style="padding:15px;">
         <h1>📝 Perfil de usuario</h1>
     
@@ -78,6 +80,4 @@
     </div>
 
     
-    {{--@endsection--}}
-
-@include('menu.footer')
+@endsection
