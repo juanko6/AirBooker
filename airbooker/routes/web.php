@@ -9,7 +9,7 @@ use App\Http\Controllers\{
     AdminController,
     ReservaController,
     VueloController,
-    PerfilController,
+    ReservaClienteController,
 };
 
 // Rutas públicas
@@ -39,3 +39,5 @@ Route::prefix('admin')->group(function () {
 
 // Ruta para mostrar el perfil
 Route::get('perfil/{id}', [UserController::class, 'show']);
+
+Route::get('reservas', [ReservaClienteController::class, 'index']);
