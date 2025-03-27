@@ -22,12 +22,17 @@ referencias usando route('buscador.vuelos') seguirán funcionando correctamente.
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
- 
-
 // Nueva ruta para resultados de búsqueda
 Route::get('/vuelos-disponibles', [VueloController::class, 'buscarVuelos'])
     ->name('vuelos.disponibles');
 
+
+// Rutas del buscador de vuelos
+Route::get('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos'])->name('buscador.vuelos');
+Route::post('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos']);
+
+// Rutas de contactanos
+Route::get('/contactanos', [ContactanosController::class, 'showContactanos'])->name('contactanos');
 
 // Rutas de autenticación
 Route::prefix('auth')->group(function () {
@@ -56,4 +61,3 @@ Route::prefix('admin')->group(function () {
 
 Route::get('/api/usuarios', [UserController::class, 'buscar']);
 Route::get('/api/vuelos', [VueloController::class, 'filtrar']);
-

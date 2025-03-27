@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Vuelo;
+use App\Models\Aerolinea;
+use App\Models\Oferta;
 
 class VueloController extends Controller
 {
@@ -66,6 +68,9 @@ class VueloController extends Controller
         //
     }
 
+    /**
+     * Filtrar vuelos por fecha
+     */
     /**
      * Filtrar vuelos por fecha
      */
