@@ -16,19 +16,16 @@ use App\Http\Controllers\{
 // Rutas públicas
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Rutas del buscador de vuelos
-Route::get('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos'])->name('buscador.vuelos');
-Route::post('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos']);
 
-// Rutas de contactanos
-Route::get('/contactanos', [ContactanosController::class, 'showContactanos'])->name('contactanos');
-
-// Rutas de autenticación
-Route::prefix('auth')->group(function () {
-    Route::get('signup', [SignUpController::class, 'showSignUp'])->name('signup');
-    Route::post('signup', [SignUpController::class, 'signup']);
-    Route::get('login', [LoginController::class, 'showLogin'])->name('login');
-    Route::post('login', [LoginController::class, 'login']);
+// Agrupo las rutas relacionadas con la autenticación
+Route::controller(SignUpController::class)->group(function () {
+    // Defino las rutas para el registro de usuarios
+    Route::get('signup', 'showSignUp')->name('signup');
+    Route::post('signup', 'signup');
+    
+    // Defino las rutas para el inicio de sesión
+    Route::get('login', 'showLogin')->name('login');
+    Route::post('login', 'login');
 });
 
 // Rutas del panel de administración
