@@ -1,4 +1,3 @@
-layout.blade.php
 
 @extends('layouts.app')
 @section('title', 'Dashboard')
