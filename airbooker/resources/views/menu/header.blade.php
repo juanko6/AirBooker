@@ -56,7 +56,7 @@
                             <a class="nav-link" href="{{ url('/#faq') }}">FAQ</a>
                         </li>
                         <li class="opciones-menu">
-                            <a class="nav-link" href="{{ url('/contacto') }}">CONTACTO</a>
+                            <a class="nav-link" href="{{ url('/contactanos') }}">CONTACTO</a>
                         </li>
                         <li class="opciones-menu">
                             <a class="nav-link" href="{{ url('/admin') }}">DASHBOARD</a>
@@ -71,5 +71,3 @@
             </div>
         </nav>        
     </div>
-</body>
-</html>

@@ -20,7 +20,6 @@ class VueloController extends Controller
         return view('admin.vuelos', compact('vuelos'));
     }
     
-
     /**
      * Show the form for creating a new resource.
      */
@@ -72,6 +71,9 @@ class VueloController extends Controller
     /**
      * Filtrar vuelos por fecha
      */
+    /**
+     * Filtrar vuelos por fecha
+     */
     public function filtrar(Request $request)
     {
         $fecha = $request->query('fecha');
@@ -103,9 +105,7 @@ class VueloController extends Controller
 
         // Calcular precios con descuento
         foreach ($vuelos as $vuelo) {
-
-
-            //el metodo getPrecioConDescuento esta en el modelo Vuelo
+            
             $vuelo->precio_con_descuento = $vuelo->getPrecioConDescuento();
         }
    
@@ -117,13 +117,10 @@ class VueloController extends Controller
             'fecha_salida' => $request->fecha_salida,
         ];
 
-        return view('VistasAuxVuelos.vuelosDisponibles', compact('vuelos', 'busqueda'));         
+        return view('vuelosDisponibles', compact('vuelos', 'busqueda'));         
     }    
 
-    /**
-     * Mostrar los vuelos disponibles
-     */
-    public function VuelosDisponibles(Request $request)
+    public function vuelosDisponibles(Request $request)
     {
         // Parámetros de búsqueda
         $origen = $request->input('origen');
@@ -175,7 +172,4 @@ class VueloController extends Controller
             ]
         ]);
     }
-
-
-
 }

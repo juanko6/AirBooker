@@ -3,5 +3,5 @@
 @section('title', 'AirBooker')
 
 @section('content')
-    @include('VistasAuxVuelos.buscadorVuelo')
+    @include('buscadorVuelo')
 @endsection

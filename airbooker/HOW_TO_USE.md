@@ -52,3 +52,12 @@ php artisan db:seed
 
 
 # se crean migraciones
+
+
+
+
+
+#Falta por agregar siguientes atributos a la BD:
+tabla user: imagen
+tabla aerolinea: imagen
+tabla vuelo: duracion del viaje | tipo de clase enum(estanda, primera clase)
