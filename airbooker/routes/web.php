@@ -17,15 +17,19 @@ use App\Http\Controllers\{
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
-// Agrupo las rutas relacionadas con la autenticación
-Route::controller(SignUpController::class)->group(function () {
-    // Defino las rutas para el registro de usuarios
-    Route::get('signup', 'showSignUp')->name('signup');
-    Route::post('signup', 'signup');
-    
-    // Defino las rutas para el inicio de sesión
-    Route::get('login', 'showLogin')->name('login');
-    Route::post('login', 'login');
+ 
+
+// Nueva ruta para resultados de búsqueda
+Route::get('/vuelos-disponibles', [VueloController::class, 'buscarVuelos'])
+    ->name('vuelos.disponibles');
+
+
+// Rutas de autenticación
+Route::prefix('auth')->group(function () {
+    Route::get('signup', [SignUpController::class, 'showSignUp'])->name('signup');
+    Route::post('signup', [SignUpController::class, 'signup']);
+    Route::get('login', [LoginController::class, 'showLogin'])->name('login');
+    Route::post('login', [LoginController::class, 'login']);
 });
 
 // Rutas del panel de administración
