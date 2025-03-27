@@ -16,6 +16,12 @@ use App\Http\Controllers\{
 // Rutas públicas
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+
+// Nueva ruta para resultados de búsqueda
+Route::get('/vuelos-disponibles', [VueloController::class, 'buscarVuelos'])
+    ->name('vuelos.disponibles');
+
+
 // Rutas del buscador de vuelos
 Route::get('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos'])->name('buscador.vuelos');
 Route::post('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos']);
