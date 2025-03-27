@@ -27,6 +27,8 @@
                     <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('users'); return false;">👥 Clientes</a></li>
                     <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('reservas'); return false;">📅 Reservas</a></li>
                     <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('vuelos'); return false;">✈️ Vuelos</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('aerolineas'); return false;">⭐ Aerolineas</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('ofertas'); return false;">⌚ Ofertas</a></li>
                 </ul>
             </nav>
 

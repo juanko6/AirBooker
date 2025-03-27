@@ -27,5 +27,21 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Aerolineas</h5>
+                    <p class="card-text">{{ $totalAerolineas }} en uso</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-secondary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Ofertas</h5>
+                    <p class="card-text">{{ $totalOfertas }} creadas</p>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
