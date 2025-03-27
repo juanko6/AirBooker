@@ -18,6 +18,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
  
+});
+
+
 
 // Nueva ruta para resultados de búsqueda
 Route::get('/vuelos-disponibles', [VueloController::class, 'buscarVuelos'])
