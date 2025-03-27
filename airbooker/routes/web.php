@@ -64,6 +64,9 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/aerolineas/{aerolinea}/edit', [AerolineaController::class, 'edit']);
 
+    Route::get('/ofertas/{oferta}/edit', [OfertaController::class, 'edit'])->name('ofertas.edit');
+
+
 
 });
 
