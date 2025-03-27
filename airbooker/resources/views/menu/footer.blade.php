@@ -62,7 +62,7 @@
                                 <li><a href="#ofertas">OFERTAS</a></li>
                                 <li><a href="/auth/login">LOGIN</a></li>
                                 <li><a href="/auth/signup">SIGNUP</a></li>
-                                <li><a href="#">CONTACTO</a></li>                                    
+                                <li><a href="/contactanos">CONTACTO</a></li>                                    
                                 <li><a href="#faq">FAQ</a></li>
                             </ul>
                         </div>

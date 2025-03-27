@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contáctanos - AirBooker</title>
+
+@extends('layouts.app')
+@section('title', 'Contacto')
+@section('content')
     <style>
         /* Estilos base */
         * {
@@ -217,9 +215,6 @@
             }
         }
     </style>
-</head>
-<body>
-    @include('menu.header')
 
     <!-- Imagen de atención al cliente (se mantiene igual) -->
     <div class="attention-container">
@@ -293,6 +288,4 @@
         </div>
     </div>
 
-    @include('menu.footer')
-</body>
-</html>
+@endsection

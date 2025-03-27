@@ -120,5 +120,56 @@ class VueloController extends Controller
         return view('vuelosDisponibles', compact('vuelos', 'busqueda'));         
     }    
 
+    public function vuelosDisponibles(Request $request)
+    {
+        // Parámetros de búsqueda
+        $origen = $request->input('origen');
+        $destino = $request->input('destino');
+        $fecha = $request->input('fecha');
+        $aerolinea = $request->input('aerolinea');
+        $precioMin = $request->input('precio_min');
+        $precioMax = $request->input('precio_max');
 
+        // Consulta base
+        $query = Vuelo::query()
+            ->select('vuelos.*', 'aerolineas.nombre as aerolinea_nombre')
+            ->selectRaw('
+                CASE 
+                    WHEN ofertas.id IS NOT NULL THEN 
+                        FORMAT(vuelos.precio * (1 - ofertas.ProcentajeDescuento/100), 2)
+                    ELSE 
+                        FORMAT(vuelos.precio, 2)
+                END as precio_final
+            ')
+            ->join('aerolineas', 'vuelos.aerolinea_id', '=', 'aerolineas.id')
+            ->leftJoin('ofertas', 'vuelos.oferta_id', '=', 'ofertas.id');
+
+        // Filtros básicos
+        if ($origen) $query->where('vuelos.origen', $origen);
+        if ($destino) $query->where('vuelos.destino', $destino);
+        if ($fecha) $query->where('vuelos.fecha', $fecha);
+
+        // Filtros avanzados
+        if ($aerolinea) $query->where('aerolineas.nombre', $aerolinea);
+        if ($precioMin && $precioMax) {
+            $query->whereBetween('vuelos.precio', [$precioMin, $precioMax]);
+        }
+
+        // Obtener resultados
+        $vuelos = $query->get();
+        $aerolineas = Aerolinea::all();
+
+        return view('vuelosDisponibles', [
+            'vuelos' => $vuelos,
+            'aerolineas' => $aerolineas,
+            'filtros' => [
+                'origen' => $origen,
+                'destino' => $destino,
+                'fecha' => $fecha,
+                'aerolinea' => $aerolinea,
+                'precioMin' => $precioMin,
+                'precioMax' => $precioMax
+            ]
+        ]);
+    }
 }

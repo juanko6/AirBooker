@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     HomeController,
+    ContactanosController,
     LoginController,
     SignUpController,
     UserController,
@@ -23,8 +24,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 // Nueva ruta para resultados de búsqueda
-Route::get('/vuelos-disponibles', [VueloController::class, 'buscarVuelos'])
-    ->name('vuelos.disponibles');
+Route::get('/vuelos-disponibles', [VueloController::class, 'vuelosDisponibles']) ->name('vuelos.disponibles');
 
 
 // Rutas del buscador de vuelos
