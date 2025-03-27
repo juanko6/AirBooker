@@ -33,7 +33,7 @@
             <!-- Contenido dinámico -->
             <main class="container-fluid p-4 flex-grow-1">
                 <div id="content">
-                    @yield('content') {{-- Aquí se cargarán dinámicamente las vistas --}}
+                    @yield('tablas') {{-- Aquí se cargarán dinámicamente las vistas --}}
                 </div>
             </main>
         </div>

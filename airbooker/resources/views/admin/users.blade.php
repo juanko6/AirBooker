@@ -22,7 +22,7 @@
 
 @extends('admin.layout')
 
-@section('content')
+@section('tablas')
     <h1>👥 Usuarios</h1>
     <!-- Botón para abrir el modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUserModal">

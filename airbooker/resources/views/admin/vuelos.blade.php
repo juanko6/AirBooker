@@ -1,6 +1,6 @@
 @extends('admin.layout')
 
-@section('content')
+@section('tablas')
 <h1>✈️ Vuelos</h1>
 <table id="usersTable" class="table table-striped table-bordered">
 <thead>

@@ -22,7 +22,7 @@
 
 @extends('admin.layout')
 
-@section('content')
+@section('tablas')
 <h1>📅 Reservas</h1>
 
 <!-- Botón para Crear Reserva -->
