@@ -105,13 +105,13 @@ Crear Oferta
 
 
 <!-- Tabla de Ofertas -->
-<table id="ofertasTable" class="table table-striped table-bordered">
+<table id="adminTable" class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th onclick="sortTable(0)">ID</th>
-            <th onclick="sortTable(1)">Fecha Inicio</th>
-            <th onclick="sortTable(2)">Fecha Fin</th>
-            <th onclick="sortTable(3)">Descuento (%)</th>
+            <th>ID</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Descuento (%)</th>
             <th>Estado</th>
             <th>Acciones</th>
         </tr>

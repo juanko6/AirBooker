@@ -14,7 +14,7 @@ class VueloController extends Controller
      */
     public function index()
     {
-        $vuelos = Vuelo::with('oferta')->paginate(3);
+        $vuelos = Vuelo::with('oferta')->paginate(10);
         return view('admin.vuelos', compact('vuelos'));
     }
 
