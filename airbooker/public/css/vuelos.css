@@ -1,91 +1,169 @@
-.style-vuelos-disponibles {
-    /* Aquí puedes añadir estilos generales para toda la página de vuelos disponibles */
-    padding-top: 50px;
-    padding-bottom: 150px;
+/* Variables globales */
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #0056b3;
+  --success-color: #28a745;
+  --gray-light: rgba(68, 71, 69, 0.103);
+  --transition-time: 0.3s ease;
 }
- 
+
+/* Estilos generales para la página de vuelos disponibles */
+.style-vuelos-disponibles {
+  padding: 50px 0 150px; /* Combinamos padding-top y padding-bottom */
+}
+
 /* Estilos para la tarjeta de vuelos disponibles */
 .styl-card-vuelos-disponibles .flight-card {
-    transition: all 0.3s ease;
-    border-radius: 15px;
-    overflow: hidden;
+  transition: all var(--transition-time);
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 .styl-card-vuelos-disponibles .flight-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
 }
 
 .styl-card-vuelos-disponibles .card-header {
-    background: linear-gradient(135deg, #007bff, #0056b3);
-    padding: 1rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  padding: 1rem;
 }
 
 .styl-card-vuelos-disponibles .btn-primary {
-    transition: all 0.3s ease;
+  transition: all var(--transition-time);
 }
 
-.styl-card-vuelos-disponibles .btn-primary:hover {
-    transform: scale(1.02);
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+.styl-card-vuelos-disponibles .btn-primary:hover,
+.btn-reserva:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+  background-color: var(--secondary-color) !important;
 }
 
+/* Estilos para la ruta del vuelo */
 .styl-card-vuelos-disponibles .flight-route {
-    position: relative;
+  position: relative;
 }
 
 .styl-card-vuelos-disponibles .flight-route::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 20%;
-    right: 20%;
-    height: 3px;
-    background-color: rgba(68, 71, 69, 0.103); /* Verde con opacidad 0.5 */
-    transform: translateY(-50%);
-    z-index: 1;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  right: 20%;
+  height: 3px;
+  background-color: var(--gray-light);
+  transform: translateY(-50%);
+  z-index: 1;
 }
 
 .styl-card-vuelos-disponibles .plane-icon {
-    position: absolute;
-    left: 50%;
-    top: 60%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
 }
 
 .styl-card-vuelos-disponibles .plane-icon .fa-plane {
-    color: #28a745; /* Verde para el icono del avión */
-    font-size: 24px;
+  color: var(--success-color);
+  font-size: 24px;
 }
 
 /* Estilos para la paginación */
 .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 .pagination .page-item .page-link {
-    color: #007bff;
-    background-color: #fff;
-    border-color: #dee2e6;
-    transition: all 0.3s ease;
+  color: var(--primary-color);
+  background-color: #fff;
+  border-color: #dee2e6;
+  transition: all var(--transition-time);
 }
 
 .pagination .page-item.active .page-link {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: #fff;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
 }
 
 .pagination .page-item.disabled .page-link {
-    color: #6c757d;
-    pointer-events: none;
-    cursor: not-allowed;
+  color: #6c757d;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* Animación de la línea de ruta */
+.route-line {
+  flex-grow: 1;
+  height: 2px;
+  background: #ddd;
+  position: relative;
+}
+
+.route-line::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary-color);
+  animation: routeAnimation 2s linear infinite;
+}
+
+@keyframes routeAnimation {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* Fondo degradado primario */
+.bg-gradient-primary {
+  background: linear-gradient(45deg, var(--primary-color), #00c6ff);
+}
+
+ 
+
+
+
+
+
+
+
+
+/*-----------------------------------------------------------------*/
+/* Estilo básico para el div */
+.sombreado {
+ 
+  background-color: #ffffff; /* Color de fondo */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 
+              0px 8px 12px rgba(0, 0, 0, 0.15); /* Efecto de sombreado */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+}
+
+/* Efecto hover para mejorar la interacción */
+.sombreado:hover {
+  transform: translateY(-5px); /* Levanta ligeramente el div */
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15), 
+              0px 12px 16px rgba(0, 0, 0, 0.2); /* Sombras más pronunciadas */
 }
 
 
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------------------------------------------*/
 
 /* Estilos para el botón de búscador de vuelos */
 .styl-btn-buscador-vuelos {
@@ -195,4 +273,88 @@
 
 
 
-  
+
+
+/*------------------------------------------------------------------------*/
+  /* 
+  **Estilos del switch 
+  */ 
+
+
+/* Estilos generales  */
+#filter-form {
+  background-color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/*
+.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+*/
+/*------------------------------------------------------------------------*/
+/* Estilos del switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-left: 10px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px; /* Ajustado para que sea proporcional al tamaño */
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* Estado activado */
+input:checked + .slider {
+  background-color: #2196F3; /* Color azul cuando está activado */
+}
+
+input:checked + .slider::before {
+  transform: translateX(26px); /* Mover el círculo hacia la derecha */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+ 

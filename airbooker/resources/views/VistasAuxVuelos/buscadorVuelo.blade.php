@@ -1,5 +1,6 @@
 <!-- Formulario de búsqueda -->
-<div class="container mt-4">
+<div style="padding: 120px 0;">
+<div class="sombreado" >
     <div class="card shadow">
         <div class="card-body">
             <h5 class="card-title text-center mb-4">Buscar Vuelos</h5>
@@ -33,4 +34,4 @@
             </form>
         </div>
     </div>
-</div>
+    </div></div>

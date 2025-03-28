@@ -1,14 +1,14 @@
-<div >
-    <form method="GET" action="{{ route('vuelos.disponibles') }}">
+<div class="sombreado" style="border-radius: 10px; padding: 20px;"> 
+    <form method="GET" action="{{ route('vuelos.disponibles') }}" >
         <!-- Campos Ocultos -->
         <input type="hidden" name="origen" value="{{ $filtros['origen'] }}">
         <input type="hidden" name="destino" value="{{ $filtros['destino'] }}">
         <input type="hidden" name="fecha" value="{{ $filtros['fecha'] }}">
 
         <!-- Panel de Filtros -->
-        <div class="card mb-4">
-            <div class="card-header">Filtros</div>
-            <div class="card-body p-3">
+        <div >
+            <div class="card-header" style="padding-bottom: 20px;"  >Filtros</div>
+            <div class="card-body p-3 sombreado">
                 <!-- Filtro por Aerolíneas -->
                 <div class="mb-3">
                     <label class="d-block mb-2">Aerolíneas</label>
