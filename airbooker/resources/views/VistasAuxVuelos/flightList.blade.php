@@ -58,7 +58,7 @@
     @endif
 
     <!-- Paginación -->
-    <div class="d-flex justify-content-center mt-4">
+    <div class="Pagination">
         {{ $vuelos->links('pagination::bootstrap-4') }}
     </div>
 </div> 

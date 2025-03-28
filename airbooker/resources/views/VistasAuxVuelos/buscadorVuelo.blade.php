@@ -25,8 +25,8 @@
 
                     <!-- Botón de búsqueda -->
                     <div class="col-12 text-center">
-                        <button type="submit" class="btn btn-warning text-white">
-                            <i class="fas fa-search"></i> Buscar
+                        <button type="submit" class="styl-btn-buscador-vuelos">
+                            <span><i class="fas fa-search"></i> Buscar</span>
                         </button>
                     </div>
                 </div>
