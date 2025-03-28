@@ -200,7 +200,7 @@ class VueloController extends Controller
         $origen = $request->input('origen');
         $destino = $request->input('destino');
         $fecha = $request->input('fecha');
-        $aerolinea = $request->input('aerolinea');
+        $aerolineas = $request->input('aerolinea', []); // Ahora es un array
         $precioMin = $request->input('precio_min');
         $precioMax = $request->input('precio_max');
 
@@ -213,13 +213,14 @@ class VueloController extends Controller
                 $q->where('estado', '!=', 'CANCELADA');
             });
 
-        // Filtros avanzados
-        if ($aerolinea) {
-            $query->whereHas('aerolinea', function ($q) use ($aerolinea) {
-                $q->where('nombre', 'LIKE', '%' . $aerolinea . '%');
+        // Filtro por múltiples aerolíneas
+        if (!empty($aerolineas)) {
+            $query->whereHas('aerolinea', function ($q) use ($aerolineas) {
+                $q->whereIn('nombre', $aerolineas);
             });
         }
 
+        // Filtro por rango de precios
         if ($precioMin && $precioMax) {
             $query->whereBetween('precio', [$precioMin, $precioMax]);
         }
@@ -229,12 +230,11 @@ class VueloController extends Controller
             'origen' => $origen,
             'destino' => $destino,
             'fecha' => $fecha,
-            'aerolinea' => $aerolinea,
+            'aerolinea' => $aerolineas, // Mantener los valores seleccionados
             'precio_min' => $precioMin,
             'precio_max' => $precioMax,
         ]);
-        
-        
+
         // Calcular precios con descuento
         foreach ($vuelos as $vuelo) {
             $vuelo->precio_con_descuento = $vuelo->getPrecioConDescuento();
@@ -245,7 +245,7 @@ class VueloController extends Controller
             'origen' => $origen,
             'destino' => $destino,
             'fecha' => $fecha,
-            'aerolinea' => $aerolinea,
+            'aerolinea' => $aerolineas, // Array de aerolíneas seleccionadas
             'precio_min' => $precioMin,
             'precio_max' => $precioMax,
         ];

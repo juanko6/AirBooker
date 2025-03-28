@@ -9,15 +9,25 @@
                         <img src="{{ asset('logo-v2.png') }}" alt="Logo" class="img-fluid" style="width: 35px;">
                         </div>
                         <div class="card-body">
-                            <div class="mb-3">
+                           <!-- Aquí puedes agregar información adicional del vuelo -->
+                            <div class="d-flex justify-content-between align-items-center mb-3">
                                 <div class="text-muted">
-                                    <i class="fas fa-calendar-day me-2"></i>
-                                    {{ $vuelo->fecha }}
+                                    <div>
+                                        <i class="fas fa-calendar-day me-2"></i>
+                                        {{ $vuelo->fecha }}
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-clock me-2"></i>
+                                        {{ $vuelo->hora }}
+                                    </div>                                
                                 </div>
-                                <div class="text-muted">
-                                    <i class="fas fa-clock me-2"></i>
-                                    {{ $vuelo->hora }}
+
+                                <div>
+                                    @if($vuelo->oferta_id)
+                                        <span class="badge bg-success rounded-pill px-2 py-1 mt-1">Oferta Especial</span>
+                                    @endif
                                 </div>
+
                             </div>
                             <div class="d-flex justify-content-between align-items-center mb-3 flight-route">
                                 <div>
@@ -25,7 +35,7 @@
                                     <span class="fw-bold">{{ $vuelo->origen }}</span>
                                 </div>
                                 
-                                <p style="padding-bottom: 20px;"> 3h 15 </p>
+                                <p style="padding-bottom: 20px; opacity: 0.4;"> 3h 15 </p>
 
                                 <div class="plane-icon">                                   
                                     
@@ -40,9 +50,7 @@
                                 <h4 class="mb-0 {{ $vuelo->oferta_id ? 'text-success' : 'text-primary' }}">
                                     ${{ number_format($vuelo->precio_con_descuento, 2) }}
                                 </h4>
-                                @if($vuelo->oferta_id)
-                                    <span class="badge bg-success rounded-pill px-2 py-1 mt-1">Oferta Especial</span>
-                                @endif
+                                 
                             </div>
                         </div>
                         <button class="card-footer bg-white border-0">
