@@ -1,5 +1,40 @@
   <div class="styl-card-vuelos-disponibles">
     
+    <div class="mb-4">
+        <form method="GET" action="{{ route('vuelos.disponibles') }}" id="filter-form">
+            <!-- Mantener parámetros de búsqueda originales -->
+            <input type="hidden" name="origen" value="{{ $filtros['origen'] }}">
+            <input type="hidden" name="destino" value="{{ $filtros['destino'] }}">
+            <input type="hidden" name="fecha" value="{{ $filtros['fecha'] }}">
+            <input type="hidden" name="aerolinea" value="{{ implode(',', $filtros['aerolinea'] ?? []) }}">
+            <input type="hidden" name="precio_min" value="{{ $filtros['precio_min'] }}">
+            <input type="hidden" name="precio_max" value="{{ $filtros['precio_max'] }}">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <!-- Filtros de vuelos ordenados por oferta-->
+                <div>
+                    <label>
+                        <strong>Mostrar Ofertas</strong>
+                    </label>
+                    <label class="switch" for="mostrar_ofertas">
+                        <input type="checkbox" id="mostrar_ofertas" name="mostrar_ofertas" 
+                            onchange="document.getElementById('filter-form').submit()"
+                            {{ $filtros['mostrar_ofertas'] ? 'checked' : '' }}>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <!-- Filtros de vuelos ordenados por precio -->
+                <div class="d-flex align-items-center">                    
+                    <select class="form-select" name="ordenar_por_precio" id="ordenar_por_precio" onchange="document.getElementById('filter-form').submit()">
+                        
+                        <option value="barato" {{ ($filtros['ordenar_por_precio'] ?? '') == 'barato' ? 'selected' : '' }}>Más barato primero</option>
+                        <option value="caro" {{ ($filtros['ordenar_por_precio'] ?? '') == 'caro' ? 'selected' : '' }}>Más caro primero</option>
+                    </select>
+                </div>
+            </div>  </form>
+    </div>
+ 
     @if($vuelos->count() > 0)
         <div class="row g-4">
             @foreach($vuelos as $vuelo)

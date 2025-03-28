@@ -125,6 +125,45 @@
   background: linear-gradient(45deg, var(--primary-color), #00c6ff);
 }
 
+ 
+
+
+
+
+
+
+
+
+/*-----------------------------------------------------------------*/
+/* Estilo básico para el div */
+.sombreado {
+ 
+  background-color: #ffffff; /* Color de fondo */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 
+              0px 8px 12px rgba(0, 0, 0, 0.15); /* Efecto de sombreado */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+}
+
+/* Efecto hover para mejorar la interacción */
+.sombreado:hover {
+  transform: translateY(-5px); /* Levanta ligeramente el div */
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15), 
+              0px 12px 16px rgba(0, 0, 0, 0.2); /* Sombras más pronunciadas */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------------------------------------------*/
 
 /* Estilos para el botón de búscador de vuelos */
 .styl-btn-buscador-vuelos {
@@ -225,6 +264,95 @@
   .styl-btn-buscador-vuelos span:hover:after {
     width: 100%;
   }
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------------------------------------------*/
+  /* 
+  **Estilos del switch 
+  */ 
+
+
+/* Estilos generales  */
+#filter-form {
+  background-color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/*
+.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+*/
+/*------------------------------------------------------------------------*/
+/* Estilos del switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-left: 10px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px; /* Ajustado para que sea proporcional al tamaño */
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* Estado activado */
+input:checked + .slider {
+  background-color: #2196F3; /* Color azul cuando está activado */
+}
+
+input:checked + .slider::before {
+  transform: translateX(26px); /* Mover el círculo hacia la derecha */
+}
+
+
+
+
+
+
+
+
 
 
 
