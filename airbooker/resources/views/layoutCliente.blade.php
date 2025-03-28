@@ -21,9 +21,9 @@
         <!-- Barra lateral fija -->
         <nav class="sidebar bg-light p-3 vh-100">
             <ul class="nav flex-column">
-                
-                
                 <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('reservas'); return false;">📅 Mis Reservas</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('cartera'); return false;">💵 Mi Cartera</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('reservas'); return false;">🔎 Buscar Vuelos ✈️</a></li>
                 
             </ul>
         </nav>

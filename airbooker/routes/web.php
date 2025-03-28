@@ -10,6 +10,7 @@ use App\Http\Controllers\{
     ReservaController,
     VueloController,
     ReservaClienteController,
+    CarteraController,
 };
 
 // Rutas públicas
@@ -40,4 +41,8 @@ Route::prefix('admin')->group(function () {
 // Ruta para mostrar el perfil
 Route::get('perfil/{id}', [UserController::class, 'show']);
 
+// Ruta para mostrar reservas de un usuario
 Route::get('reservas', [ReservaClienteController::class, 'index']);
+
+// Ruta para mostrar la cartera
+Route::get('cartera', [CarteraController::class, 'index']);
