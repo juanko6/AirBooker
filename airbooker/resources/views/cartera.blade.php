@@ -1,7 +1,7 @@
 @extends('layoutCliente')
 
 
-@section('content')
+@section('DashboardContent')
 
 <div style="padding:15px;">
     <h1>💵 Mi Cartera</h1>

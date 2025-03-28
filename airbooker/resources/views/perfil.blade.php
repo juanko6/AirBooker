@@ -16,7 +16,7 @@
 @extends('layoutCliente')
 
 
-@section('content')
+@section('DashboardContent')
 
 @if(session('success'))
     <div class="alert alert-success">
@@ -52,6 +52,12 @@
                     <input id="formTelefono" class="form-control" type="tel" name="telefono" value="{{ $usuario->telefono }}" required>
 
                 </div>
+                <div class="mb-3">
+                    <label for="formPassword" class="form-label">Nueva Contraseña</label>
+
+                    <input id="formPassword" class="form-control" type="password" name="password">
+
+                </div> 
                 <button type="submit" class="btn btn-success">Actualizar Datos</button>
             </div>
             <div class="column">
@@ -71,6 +77,12 @@
                     <label for="formCorreo" class="form-label">Email</label>
 
                     <input id="formCorreo" class="form-control" type="email" name="email" value="{{ $usuario->email }}" required>
+
+                </div> 
+                <div class="mb-3">
+                    <label for="formPassConfirm" class="form-label">Confirmar Contraseña</label>
+
+                    <input id="formPassConfirm" class="form-control" type="password" name="password_confirmation">
 
                 </div> 
             </div>

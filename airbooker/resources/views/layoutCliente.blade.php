@@ -1,4 +1,6 @@
-@include('menu.header')
+@extends('layouts.app')
+@section('title', 'Dashboard')
+@section('content')
 
 <div class="d-flex flex-column vh-100">
     <!-- Barra superior -->
@@ -31,7 +33,7 @@
         <!-- Contenido dinámico -->
         <main class="container-fluid p-4 flex-grow-1">
             <div id="content">
-                @yield('content') {{-- Aquí se cargarán dinámicamente las vistas --}}
+                @yield('DashboardContent') {{-- Aquí se cargarán dinámicamente las vistas --}}
             </div>
         </main>
     </div>
@@ -59,4 +61,3 @@ function loadContent(view) {
 </script>
 
 @stack('scripts')
-@include('menu.footer')

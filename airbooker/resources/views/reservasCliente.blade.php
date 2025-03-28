@@ -16,7 +16,7 @@
 @extends('layoutCliente')
 
 
-@section('content')
+@section('DashboardContent')
 
 <h1>📅 Mis Reservas</h1>
 
