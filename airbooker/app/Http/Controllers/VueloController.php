@@ -120,8 +120,20 @@ class VueloController extends Controller
         return view('vuelosDisponibles', compact('vuelos', 'busqueda'));         
     }    
 
+    /**
+     * Método para mostrar los vuelos disponibles
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
     public function vuelosDisponibles(Request $request)
     {
+        // Validación de parámetros
+        $request->validate([
+            'origen' => 'required|string|max:255',
+            'destino' => 'required|string|max:255',
+            'fecha' => 'required|date|after_or_equal:today',
+        ]);
+
         // Parámetros de búsqueda
         $origen = $request->input('origen');
         $destino = $request->input('destino');
@@ -131,45 +143,46 @@ class VueloController extends Controller
         $precioMax = $request->input('precio_max');
 
         // Consulta base
-        $query = Vuelo::query()
-            ->select('vuelos.*', 'aerolineas.nombre as aerolinea_nombre')
-            ->selectRaw('
-                CASE 
-                    WHEN ofertas.id IS NOT NULL THEN 
-                        FORMAT(vuelos.precio * (1 - ofertas.ProcentajeDescuento/100), 2)
-                    ELSE 
-                        FORMAT(vuelos.precio, 2)
-                END as precio_final
-            ')
-            ->join('aerolineas', 'vuelos.aerolinea_id', '=', 'aerolineas.id')
-            ->leftJoin('ofertas', 'vuelos.oferta_id', '=', 'ofertas.id');
-
-        // Filtros básicos
-        if ($origen) $query->where('vuelos.origen', $origen);
-        if ($destino) $query->where('vuelos.destino', $destino);
-        if ($fecha) $query->where('vuelos.fecha', $fecha);
+        $query = Vuelo::with(['aerolinea', 'oferta'])
+            ->where('origen', 'LIKE', '%' . $origen . '%')
+            ->where('destino', 'LIKE', '%' . $destino . '%')
+            ->where('fecha', '>=', $fecha)
+            ->whereDoesntHave('reservas', function ($q) {
+                $q->where('estado', '!=', 'CANCELADA');
+            });
 
         // Filtros avanzados
-        if ($aerolinea) $query->where('aerolineas.nombre', $aerolinea);
-        if ($precioMin && $precioMax) {
-            $query->whereBetween('vuelos.precio', [$precioMin, $precioMax]);
+        if ($aerolinea) {
+            $query->whereHas('aerolinea', function ($q) use ($aerolinea) {
+                $q->where('nombre', 'LIKE', '%' . $aerolinea . '%');
+            });
         }
 
-        // Obtener resultados
-        $vuelos = $query->get();
+        if ($precioMin && $precioMax) {
+            $query->whereBetween('precio', [$precioMin, $precioMax]);
+        }
+
+        // Paginación
+        $vuelos = $query->paginate(10);
+
+        // Calcular precios con descuento
+        foreach ($vuelos as $vuelo) {
+            $vuelo->precio_con_descuento = $vuelo->getPrecioConDescuento();
+        }
+
+        // Mantener parámetros de búsqueda en la vista
+        $filtros = [
+            'origen' => $origen,
+            'destino' => $destino,
+            'fecha' => $fecha,
+            'aerolinea' => $aerolinea,
+            'precio_min' => $precioMin,
+            'precio_max' => $precioMax,
+        ];
+
+        // Obtener aerolíneas para el filtro lateral
         $aerolineas = Aerolinea::all();
 
-        return view('vuelosDisponibles', [
-            'vuelos' => $vuelos,
-            'aerolineas' => $aerolineas,
-            'filtros' => [
-                'origen' => $origen,
-                'destino' => $destino,
-                'fecha' => $fecha,
-                'aerolinea' => $aerolinea,
-                'precioMin' => $precioMin,
-                'precioMax' => $precioMax
-            ]
-        ]);
+        return view('vuelosDisponibles', compact('vuelos', 'filtros', 'aerolineas'));
     }
 }

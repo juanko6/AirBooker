@@ -4,7 +4,7 @@
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $vuelo->aerolinea_nombre }}</h5>
+                        <h5 class="card-title">{{ $vuelo->aerolinea->nombre }}</h5>
                         <p class="card-text">
                             <i class="fas fa-plane-departure"></i> {{ $vuelo->origen }} → 
                             <i class="fas fa-plane-arrival"></i> {{ $vuelo->destino }}
@@ -14,7 +14,7 @@
                             <i class="fas fa-clock"></i> {{ $vuelo->hora }}
                         </p>
                         <h4 class="text-primary">
-                            ${{ $vuelo->precio_final }}
+                            ${{ number_format($vuelo->precio_con_descuento, 2) }}
                             @if($vuelo->oferta_id)
                                 <span class="badge bg-success">OFERTA</span>
                             @endif
