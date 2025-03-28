@@ -84,3 +84,115 @@
     pointer-events: none;
     cursor: not-allowed;
 }
+
+
+
+/* Estilos para el botón de búscador de vuelos */
+.styl-btn-buscador-vuelos {
+    display: block; /* Permite que el botón ocupe el ancho total del contenedor */
+    width: 100%; /* El botón ocupará todo el ancho disponible */
+    height: auto; /* Altura automática para mantener la proporción */
+    font-size: 24px; /* Aumenta el tamaño del texto en un 40% */
+    padding: auto; /* Aumenta el padding en un 40% */
+    color: #fff;
+    border-radius: 5px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+      7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+      4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+    outline: none;
+  }
+  
+  .styl-btn-buscador-vuelos {
+    background: rgb(0, 172, 238);
+    background: linear-gradient(0deg, rgba(0, 172, 238, 1) 0%, rgba(2, 126, 251, 1) 100%);
+    border: none;
+    line-height: calc(42px * 1.4); /* Aumenta el alto de la línea en un 40% */
+  }
+  
+  .styl-btn-buscador-vuelos span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .styl-btn-buscador-vuelos:before,
+  .styl-btn-buscador-vuelos:after {
+    position: absolute;
+    content: "";
+    right: 0;
+    top: 0;
+    background: rgba(2, 126, 251, 1);
+    transition: all 0.3s ease;
+  }
+  
+  .styl-btn-buscador-vuelos:before {
+    height: 0%;
+    width: calc(2px * 1.4); /* Aumenta el grosor del borde en un 40% */
+  }
+  
+  .styl-btn-buscador-vuelos:after {
+    width: 0%;
+    height: calc(2px * 1.4); /* Aumenta el grosor del borde en un 40% */
+  }
+  
+  .styl-btn-buscador-vuelos:hover {
+    background: transparent;
+    box-shadow: none;
+  }
+  
+  .styl-btn-buscador-vuelos:hover:before {
+    height: 100%;
+  }
+  
+  .styl-btn-buscador-vuelos:hover:after {
+    width: 100%;
+  }
+  
+  .styl-btn-buscador-vuelos span:hover {
+    color: rgba(2, 126, 251, 1);
+  }
+  
+  .styl-btn-buscador-vuelos span:before,
+  .styl-btn-buscador-vuelos span:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    background: rgba(2, 126, 251, 1);
+    transition: all 0.3s ease;
+  }
+  
+  .styl-btn-buscador-vuelos span:before {
+    width: calc(2px * 1.4); /* Aumenta el grosor del borde en un 40% */
+    height: 0%;
+  }
+  
+  .styl-btn-buscador-vuelos span:after {
+    width: 0%;
+    height: calc(2px * 1.4); /* Aumenta el grosor del borde en un 40% */
+  }
+  
+  .styl-btn-buscador-vuelos span:hover:before {
+    height: 100%;
+  }
+  
+  .styl-btn-buscador-vuelos span:hover:after {
+    width: 100%;
+  }
+
+
+
+
+
+
+
+
+
+  
