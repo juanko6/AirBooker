@@ -1,0 +1,86 @@
+.style-vuelos-disponibles {
+    /* Aquí puedes añadir estilos generales para toda la página de vuelos disponibles */
+    padding-top: 50px;
+    padding-bottom: 150px;
+}
+ 
+/* Estilos para la tarjeta de vuelos disponibles */
+.styl-card-vuelos-disponibles .flight-card {
+    transition: all 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.styl-card-vuelos-disponibles .flight-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+.styl-card-vuelos-disponibles .card-header {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    padding: 1rem;
+}
+
+.styl-card-vuelos-disponibles .btn-primary {
+    transition: all 0.3s ease;
+}
+
+.styl-card-vuelos-disponibles .btn-primary:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+}
+
+.styl-card-vuelos-disponibles .flight-route {
+    position: relative;
+}
+
+.styl-card-vuelos-disponibles .flight-route::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    right: 20%;
+    height: 3px;
+    background-color: rgba(68, 71, 69, 0.103); /* Verde con opacidad 0.5 */
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.styl-card-vuelos-disponibles .plane-icon {
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.styl-card-vuelos-disponibles .plane-icon .fa-plane {
+    color: #28a745; /* Verde para el icono del avión */
+    font-size: 24px;
+}
+
+/* Estilos para la paginación */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.pagination .page-item .page-link {
+    color: #007bff;
+    background-color: #fff;
+    border-color: #dee2e6;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: not-allowed;
+}

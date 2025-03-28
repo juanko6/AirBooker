@@ -64,7 +64,7 @@ class UserController extends Controller
         $user->save();
 
         // Redirigir a la página de usuarios con un mensaje de éxito
-        return redirect()->route('users.index')->with('success', 'Usuario creado exitosamente');
+        return back()->with('success', 'Usuario creado exitosamente');
     }
 
     /**
@@ -139,12 +139,20 @@ class UserController extends Controller
             $user->delete();
     
             // Redirect to the user list with success message
-            return redirect()->route('users.index')->with('success', 'Usuario eliminado exitosamente');
+            return back()->with('success', 'Usuario eliminado exitosamente');
         } catch (\Exception $e) {
             // Handle exception if user is not found or any other error occurs
-            return redirect()->route('users.index')->with('error', 'Error al eliminar el usuario');
+            return back()->with('error', 'Error al eliminar el usuario');
         }
     }
- 
+
+    public function buscar(Request $request)
+    {
+        $query = $request->query('query');
+        $usuarios = User::where('name', 'like', "%$query%")
+                        ->orWhere('apellidos', 'like', "%$query%")
+                        ->get();
+        return response()->json($usuarios);
+    }
 }
 

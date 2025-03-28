@@ -12,9 +12,13 @@ class OfertaController extends Controller
      */
     public function index()
     {
-        // Obtener todas las ofertas ordenadas por fecha de creación descendente
-        $ofertas = Oferta::orderBy('created_at', 'desc')->get();
-        return view('ofertas.index', compact('ofertas'));
+        try {
+            $ofertas = Oferta::paginate(10); // ✅ Usar paginate() en lugar de all()
+    
+            return view('admin.ofertas', compact('ofertas'));
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -36,7 +40,7 @@ class OfertaController extends Controller
             'FechaInicio' => 'required|date',
             'FechaFin' => 'required|date|after:FechaInicio',
             'ProcentajeDescuento' => 'required|numeric|min:0|max:100',
-            'estado' => 'required|in:ACTIVA,INACTIVA',
+            'estado' => 'required|in:Activa,Vencida',
         ]);
 
         // Crear una nueva oferta
@@ -65,34 +69,41 @@ class OfertaController extends Controller
      */
     public function edit(Oferta $oferta)
     {
-        // Mostrar el formulario para editar una oferta existente
-        return view('ofertas.edit', compact('oferta'));
+        // Verificar si la oferta existe
+        if (!$oferta) {
+            return response()->json(['error' => 'Oferta no encontrada'], 404);
+        }
+    
+        // Devolver los datos de la oferta
+        return response()->json(['oferta' => $oferta]);
     }
+    
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Oferta $oferta)
     {
-        // Validar los datos del formulario
-        $request->validate([
+        // Validar los datos entrantes
+        $validatedData = $request->validate([
             'FechaInicio' => 'required|date',
-            'FechaFin' => 'required|date|after:FechaInicio',
-            'ProcentajeDescuento' => 'required|numeric|min:0|max:100',
-            'estado' => 'required|in:ACTIVA,INACTIVA',
+            'FechaFin' => 'required|date',
+            'ProcentajeDescuento' => 'required|numeric',
+            'estado' => 'required|in:Activa,Vencida',
         ]);
-
+    
         // Actualizar la oferta
         $oferta->update([
-            'FechaInicio' => $request->input('FechaInicio'),
-            'FechaFin' => $request->input('FechaFin'),
-            'ProcentajeDescuento' => $request->input('ProcentajeDescuento'),
-            'estado' => $request->input('estado'),
+            'FechaInicio' => $request->FechaInicio,
+            'FechaFin' => $request->FechaFin,
+            'ProcentajeDescuento' => $request->ProcentajeDescuento,
+            'estado' => $request->estado,
         ]);
-
-        // Redirigir con mensaje de éxito
-        return redirect()->route('ofertas.index')->with('success', 'Oferta actualizada exitosamente.');
+    
+        // Retornar una respuesta exitosa
+        return back()->with('success', 'Oferta actualizada exitosamente');
     }
+    
 
     /**
      * Remove the specified resource from storage.

@@ -1,18 +1,18 @@
 @extends('admin.layout')
 
-@section('content')
+@section('tablas')
 <h1>✈️ Vuelos</h1>
-<table id="usersTable" class="table table-striped table-bordered">
+<table id="adminTable" class="table table-striped table-bordered">
 <thead>
         <tr>
-            <th onclick="sortTable(0)">ID</th>
-            <th onclick="sortTable(1)">Aerolinea</th>
-            <th onclick="sortTable(2)">Fecha</th>
-            <th onclick="sortTable(3)">Hora</th>
-            <th onclick="sortTable(4)">Origen</th>
-            <th onclick="sortTable(5)">Destino</th>
-            <th onclick="sortTable(6)">Precio</th>
-            <th onclick="sortTable(7)">Oferta</th>
+            <th>ID</th>
+            <th>Aerolinea</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th>Precio</th>
+            <th>Oferta</th>
             <th>Acciones</th>
         </tr>
     </thead>

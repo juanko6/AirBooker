@@ -13,9 +13,13 @@ class AerolineaController extends Controller
      */
     public function index()
     {
-        // Obtener todas las aerolíneas
-        $aerolineas = Aerolinea::all();
-        return response()->json($aerolineas, 200);
+        try {
+            $aerolineas = Aerolinea::paginate(10); // ✅ Usar paginate() en lugar de all()
+    
+            return view('admin.aerolineas', compact('aerolineas'));
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -38,7 +42,7 @@ class AerolineaController extends Controller
             'nombre' => 'required|string|max:255',
             'contacto' => 'required|string|max:255',
             'paisOrigen' => 'required|string|max:255',
-            'sitio_web' => 'required|url|max:255',
+            'sitio_web' => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -53,7 +57,7 @@ class AerolineaController extends Controller
             'sitio_web' => $request->sitio_web,
         ]);
 
-        return response()->json(['message' => 'Aerolínea creada exitosamente', 'data' => $aerolinea], 201);
+        return back()->with('success', 'Aerolinea creado exitosamente');
     }
 
     /**
@@ -72,7 +76,7 @@ class AerolineaController extends Controller
     {
         // Este método generalmente se usa para mostrar un formulario en aplicaciones web.
         // En APIs RESTful, este método no suele ser necesario.
-        return response()->json(['message' => 'Use PUT /aerolineas/{id} para actualizar esta aerolínea'], 200);
+        return response()->json($aerolinea); // Devolver los datos como JSON    
     }
 
     /**
@@ -85,7 +89,7 @@ class AerolineaController extends Controller
             'nombre' => 'nullable|string|max:255',
             'contacto' => 'nullable|string|max:255',
             'paisOrigen' => 'nullable|string|max:255',
-            'sitio_web' => 'nullable|url|max:255',
+            'sitio_web' => 'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -100,7 +104,7 @@ class AerolineaController extends Controller
             'sitio_web' => $request->sitio_web ?? $aerolinea->sitio_web,
         ]);
 
-        return response()->json(['message' => 'Aerolínea actualizada exitosamente', 'data' => $aerolinea], 200);
+        return back()->with('success', 'Aerolínea actualizada exitosamente');
     }
 
     /**
@@ -110,6 +114,7 @@ class AerolineaController extends Controller
     {
         // Eliminar la aerolínea
         $aerolinea->delete();
-        return response()->json(['message' => 'Aerolínea eliminada exitosamente'], 200);
+        return back()->with('success', 'Aerolinea Eliminada exitosamente');
+
     }
 }

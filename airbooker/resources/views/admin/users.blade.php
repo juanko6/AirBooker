@@ -1,12 +1,28 @@
 @if(session('success'))
-    <div class="alert alert-success">
+    <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
         {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+
+    <script>
+        // Desaparecer y eliminar el mensaje después de 3 segundos
+        setTimeout(function() {
+            var alertElement = document.getElementById('success-alert');
+            if (alertElement) {
+                alertElement.classList.remove('show');
+                alertElement.classList.add('fade');
+                // Esperar a que termine la animación y eliminar el elemento
+                setTimeout(function() {
+                    alertElement.remove();
+                }, 500); // 500ms para asegurar el tiempo de la animación
+            }
+        }, 3000); // Desaparece después de 3 segundos
+    </script>
 @endif
 
 @extends('admin.layout')
 
-@section('content')
+@section('tablas')
     <h1>👥 Usuarios</h1>
     <!-- Botón para abrir el modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUserModal">
@@ -143,17 +159,17 @@
     </div>
 
 
-        <table id="usersTable" class="table table-striped table-bordered">
+        <table id="adminTable" class="table table-striped table-bordered">
     <thead>
         <tr>
-        <th onclick="sortTable(0)">ID</th>
-        <th onclick="sortTable(1)">Rol</th>
-        <th onclick="sortTable(2)">Nombre</th>
-        <th onclick="sortTable(3)">Apellidos</th>
-        <th onclick="sortTable(4)">Correo</th>
-        <th onclick="sortTable(5)">DNI</th>
-        <th onclick="sortTable(6)">Pasaporte</th>
-        <th onclick="sortTable(7)">Telefono</th>
+        <th>ID</th>
+        <th>Rol</th>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Correo</th>
+        <th>DNI</th>
+        <th>Pasaporte</th>
+        <th>Telefono</th>
         
         
         <th>Acciones</th>

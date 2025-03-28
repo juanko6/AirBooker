@@ -10,9 +10,13 @@ class Vuelo extends Model
     protected $fillable = [
         'fecha',
         'hora',
-        'id',
         'origen',
-        'destino'
+        'destino', 
+        'precio',
+        'aerolinea_id',
+        'oferta_id',
+        'created_at',
+        'updated_at',
     ];
  
     // Defino la relación con Aerolinea - Un vuelo pertenece a una aerolínea
@@ -32,6 +36,17 @@ class Vuelo extends Model
     {
         return $this->belongsTo(Oferta::class);
     }
-
+    
+    
+    
+        
+    // Defino un atributo calculado para obtener el precio con descuento
+    public function getPrecioConDescuento()
+    {
+        if ($this->oferta && $this->oferta->estado === 'Activa') {
+            return $this->precio * (1 - $this->oferta->ProcentajeDescuento / 100);
+        }
+        return $this->precio;
+    }
     
 }
