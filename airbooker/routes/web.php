@@ -10,6 +10,8 @@ use App\Http\Controllers\{
     AdminController,
     ReservaController,
     VueloController, 
+    ReservaClienteController,
+    CarteraController,
     VuelosDisponiblesController,
     AerolineaController,
     OfertaController,
@@ -72,3 +74,12 @@ Route::prefix('admin')->group(function () {
 
 Route::get('/api/usuarios', [UserController::class, 'buscar']);
 Route::get('/api/vuelos', [VueloController::class, 'filtrar']);
+
+// Ruta para mostrar el perfil
+Route::get('perfil/{id}', [UserController::class, 'show']);
+
+// Ruta para mostrar reservas de un usuario
+Route::get('reservas', [ReservaClienteController::class, 'index']);
+
+// Ruta para mostrar la cartera
+Route::get('cartera', [CarteraController::class, 'index']);
