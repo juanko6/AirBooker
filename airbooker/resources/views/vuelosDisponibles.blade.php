@@ -4,7 +4,7 @@
 
 
 <div class="style-vuelos-disponibles">
-    <div class="container">
+    <div class=" ">
         <!-- Vista 1: Barra de búsqueda -->
         @include('VistasAuxVuelos.searchBar', ['filtros' => $filtros])
 
