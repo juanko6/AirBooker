@@ -225,7 +225,7 @@ class VueloController extends Controller
         }
 
         // Paginación
-        $vuelos = $query->paginate(3)->appends([
+        $vuelos = $query->paginate(4)->appends([
             'origen' => $origen,
             'destino' => $destino,
             'fecha' => $fecha,
@@ -233,7 +233,8 @@ class VueloController extends Controller
             'precio_min' => $precioMin,
             'precio_max' => $precioMax,
         ]);
-
+        
+        
         // Calcular precios con descuento
         foreach ($vuelos as $vuelo) {
             $vuelo->precio_con_descuento = $vuelo->getPrecioConDescuento();
