@@ -24,7 +24,11 @@
                                     <i class="fas fa-plane-departure me-2 text-primary"></i>
                                     <span class="fw-bold">{{ $vuelo->origen }}</span>
                                 </div>
-                                <div class="plane-icon">
+                                
+                                <p style="padding-bottom: 20px;"> 3h 15 </p>
+
+                                <div class="plane-icon">                                   
+                                    
                                     <i class="fas fa-plane text-success"></i>
                                 </div>
                                 <div>
