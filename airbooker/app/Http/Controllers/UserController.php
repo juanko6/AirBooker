@@ -70,9 +70,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        //Muestra la vista de perfil con los datos del usuario con el ID suministrado
+        return view('perfil', ['usuario' => User::findorFail($id)]);
     }
 
     /**
