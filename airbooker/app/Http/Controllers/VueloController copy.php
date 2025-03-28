@@ -204,8 +204,6 @@ class VueloController extends Controller
         $precioMin = $request->input('precio_min');
         $precioMax = $request->input('precio_max');
 
-        
-
         // Consulta base
         $query = Vuelo::with(['aerolinea', 'oferta'])
             ->where('origen', 'LIKE', '%' . $origen . '%')

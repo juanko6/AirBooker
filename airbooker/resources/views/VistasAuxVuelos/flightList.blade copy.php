@@ -1,5 +1,6 @@
-  <div class="styl-card-vuelos-disponibles">
-    
+ 
+ 
+<div class="styl-card-vuelos-disponibles">
     @if($vuelos->count() > 0)
         <div class="row g-4">
             @foreach($vuelos as $vuelo)
@@ -31,12 +32,6 @@
                                         <i class="fas fa-plane-departure text-primary me-2"></i>
                                         <span class="fw-bold">{{ $vuelo->origen }}</span>
                                     </div>
-                                    
-                                    <!-- Icono de avión dorado -->
-                                    <div class="plane-icon">                                                                       
-                                        <i class="fas fa-plane text-warning"></i>
-                                    </div>
-
                                     <div class="route-line mx-3"></div>
                                     <div class="arrival">
                                         <i class="fas fa-plane-arrival text-primary me-2"></i>
@@ -81,4 +76,43 @@
         </div>
     @endif
 </div>
- 
+
+<style>
+/* Estilos personalizados para la tarjeta */
+.bg-gradient-primary {
+    background: linear-gradient(45deg, #007bff, #00c6ff);
+}
+
+.flight-card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+}
+
+.route-line {
+    flex-grow: 1;
+    height: 2px;
+    background: #ddd;
+    position: relative;
+}
+
+.route-line::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #007bff;
+    animation: routeAnimation 2s linear infinite;
+}
+
+@keyframes routeAnimation {
+    0% { background-position: 0% 50% }
+    100% { background-position: 100% 50% }
+}
+
+.btn-reserva:hover {
+    background-color: #0056b3 !important;
+    transition: background-color 0.3s ease;
+}
+</style>
