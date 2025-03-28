@@ -159,17 +159,17 @@
     </div>
 
 
-        <table id="usersTable" class="table table-striped table-bordered">
+        <table id="adminTable" class="table table-striped table-bordered">
     <thead>
         <tr>
-        <th onclick="sortTable(0)">ID</th>
-        <th onclick="sortTable(1)">Rol</th>
-        <th onclick="sortTable(2)">Nombre</th>
-        <th onclick="sortTable(3)">Apellidos</th>
-        <th onclick="sortTable(4)">Correo</th>
-        <th onclick="sortTable(5)">DNI</th>
-        <th onclick="sortTable(6)">Pasaporte</th>
-        <th onclick="sortTable(7)">Telefono</th>
+        <th>ID</th>
+        <th>Rol</th>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Correo</th>
+        <th>DNI</th>
+        <th>Pasaporte</th>
+        <th>Telefono</th>
         
         
         <th>Acciones</th>

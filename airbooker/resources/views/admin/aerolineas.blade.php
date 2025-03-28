@@ -113,14 +113,14 @@
     </div>
 
     <!-- Tabla de aerolíneas -->
-    <table id="aerolineasTable" class="table table-striped table-bordered">
+    <table id="adminTable" class="table table-striped table-bordered">
         <thead>
             <tr>
-                <th onclick="sortTable(0)">ID</th>
-                <th onclick="sortTable(1)">Nombre</th>
-                <th onclick="sortTable(2)">País Origen</th>
-                <th onclick="sortTable(3)">Contacto</th>
-                <th onclick="sortTable(4)">Sitio Web</th>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>País Origen</th>
+                <th>Contacto</th>
+                <th>Sitio Web</th>
                 <th>Acciones</th>
             </tr>
         </thead>
