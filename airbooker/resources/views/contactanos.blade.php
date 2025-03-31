@@ -57,22 +57,11 @@
     </div>
     
     <div class="divider"></div>
+
     
-    <!-- Sección FAQ -->
-    <div class="faq-section">
-        <h2 class="faq-title">Preguntas Frecuentes</h2>
-        <p>¿Es aquí donde puedo incluir algunas preguntas frecuentes?</p>
-        <p>Sí, exactamente. Aquí puedes proporcionar respuestas inmediatas a algunas preguntas comunes y urgentes.</p>
-        <p>Esto no solo reducirá tus tickets de soporte, sino que también tranquilizará a los usuarios y hará que sea más probable que hagan clic en tu llamado a la acción.</p>
-        
-        <div class="faq-item">
-            <div class="faq-question">Esta es una pregunta frecuente. <a href="#">¿psum dolor sit amet?</a></div>
-        </div>
-        
-        <div class="faq-item">
-            <div class="faq-question">Esta es una pregunta frecuente. <a href="#">¿psum dolor sit amet?</a></div>
-        </div>
-    </div>
 </div>
+
+<!-- Sección FAQ -->
+@include('VistasAuxVuelos.miniFaq')
 
 @endsection
