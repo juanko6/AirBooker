@@ -13,10 +13,10 @@
 @include('VistasAuxVuelos.DestinosPopulares')
 
 <!-- Sección de Vuelos con Ofertas -->
-@include('VistasAuxVuelos.VuelosconOfertas')f
+@include('VistasAuxVuelos.VuelosconOfertas')
 
 <!-- Sección de Ventajas -->
-@include('VistasAuxVuelos.VentajasAirbooker')f
+@include('VistasAuxVuelos.VentajasAirbooker')
 
 <!-- Sección de preguntas frecuentes -->
 @include('VistasAuxVuelos.miniFaq')
