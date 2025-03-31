@@ -1,0 +1,13 @@
+SELECT 
+    TABLE_NAME,
+    COLUMN_NAME,
+    DATA_TYPE,
+    CHARACTER_MAXIMUM_LENGTH,
+    IS_NULLABLE,
+    COLUMN_KEY,
+    COLUMN_DEFAULT,
+    EXTRA
+FROM 
+    information_schema.COLUMNS
+WHERE 
+    TABLE_SCHEMA = 'dss';
