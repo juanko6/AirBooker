@@ -59,11 +59,11 @@
                             </div>
                             <ul>
                                 <li><a href="/">HOME</a></li>
-                                <li><a href="#ofertas">OFERTAS</a></li>
+                                <li><a href="{{ url('/#offers-section') }}">OFERTAS</a></li>
                                 <li><a href="/auth/login">LOGIN</a></li>
                                 <li><a href="/auth/signup">SIGNUP</a></li>
                                 <li><a href="/contactanos">CONTACTO</a></li>                                    
-                                <li><a href="#faq">FAQ</a></li>
+                                <li><a href="{{ url('/#faq-section') }}">FAQ</a></li>
                             </ul>
                         </div>
                     </div>
