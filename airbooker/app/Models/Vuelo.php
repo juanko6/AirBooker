@@ -2,51 +2,98 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Vuelo extends Model
 {
-    // Defino los campos que pueden ser rellenados masivamente
+    use HasFactory;
+
     protected $fillable = [
+        'aerolinea_id',
+        'origen',
+        'destino',
         'fecha',
         'hora',
-        'origen',
-        'destino', 
         'precio',
-        'aerolinea_id',
         'oferta_id',
-        'created_at',
-        'updated_at',
     ];
- 
-    // Defino la relación con Aerolinea - Un vuelo pertenece a una aerolínea
-    public function aerolinea()
+
+    protected $casts = [
+        'fecha' => 'date',
+        'hora' => 'datetime:H:i',
+        'precio' => 'decimal:2',
+    ];
+
+    /**
+     * Obtener la aerolínea asociada al vuelo.
+     */
+    public function aerolinea(): BelongsTo
     {
         return $this->belongsTo(Aerolinea::class);
     }
 
-    // Defino la relación con Reserva - Un vuelo puede tener múltiples reservas
-    public function reservas()
-    {
-        return $this->hasMany(Reserva::class);
-    }
-      
-    // Defino la relación con Oferta - Un vuelo puede estar asociado a una oferta
-    public function oferta()
+    /**
+     * Obtener la oferta asociada al vuelo.
+     */
+    public function oferta(): BelongsTo
     {
         return $this->belongsTo(Oferta::class);
     }
-    
-    
-    
-        
-    // Defino un atributo calculado para obtener el precio con descuento
+
+    /**
+     * Obtener las reservas del vuelo.
+     */
+    public function reservas(): HasMany
+    {
+        return $this->hasMany(Reserva::class);
+    }
+
+    /**
+     * Calcular el precio con descuento si hay oferta activa.
+     */
     public function getPrecioConDescuento()
     {
-        if ($this->oferta && $this->oferta->estado === 'Activa') {
-            return $this->precio * (1 - $this->oferta->ProcentajeDescuento / 100);
+        if ($this->oferta && $this->oferta->isActiva()) {
+            $descuento = $this->precio * ($this->oferta->ProcentajeDescuento / 100);
+            return $this->precio - $descuento;
         }
+
         return $this->precio;
     }
-    
+
+    /**
+     * Filtrar vuelos por origen.
+     */
+    public function scopeOrigen($query, $origen)
+    {
+        if ($origen) {
+            return $query->where('origen', 'like', "%$origen%");
+        }
+        return $query;
+    }
+
+    /**
+     * Filtrar vuelos por destino.
+     */
+    public function scopeDestino($query, $destino)
+    {
+        if ($destino) {
+            return $query->where('destino', 'like', "%$destino%");
+        }
+        return $query;
+    }
+
+    /**
+     * Filtrar vuelos por fecha.
+     */
+    public function scopeFecha($query, $fecha)
+    {
+        if ($fecha) {
+            return $query->whereDate('fecha', $fecha);
+        }
+        return $query;
+    }
 }

@@ -2,6 +2,7 @@
 @section('title', 'Login')
 @section('content')
 
+<div style="padding: 120px 0;">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -33,5 +34,5 @@
             </div>
         </div>
     </div>
-</div>
+</div></div>
 @endsection

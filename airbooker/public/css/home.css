@@ -1,0 +1,343 @@
+/* Estilos para la sección Hero */
+#hero-section {
+    position: relative;
+    height: 400px;
+    background: linear-gradient(to right, #0055FF, #528bee);
+    color: white;
+    text-align: center;
+    padding-top: 100px;
+    overflow: hidden;
+}
+
+#hero-section .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80') no-repeat center center;
+    background-size: cover;
+    opacity: 0.2;
+    z-index: 1;
+}
+
+#hero-section .content-container {
+    position: relative;
+    z-index: 2;
+}
+
+#hero-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+#hero-section p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Estilos para la sección Ofertas */
+#offers-section {
+    padding: 60px 20px;
+    background-color: #f9fafb;
+}
+
+#offers-section h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#offers-section .offers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.offer-card {
+    
+    background: url('../images/img-default.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.offer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.offer-header {
+    background: #0055FF;
+    color: white;
+    padding: 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.offer-body {
+    padding: 15px;
+}
+
+.offer-body p {
+    margin-bottom: 10px;
+}
+
+.offer-body a {
+    color: #0055FF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Estilos para la sección Destinos Populares */
+#popular-destinations-section {
+    padding: 25px;
+    background-color: white;
+}
+
+.destination-card {
+    position: relative;
+    background-image: url('https://www.recomiendopirque.cl/wp-content/uploads/2023/06/mejores-destinos-turisticos-viaje-mundo-turismo-Recomiendo-Pirque-01.jpg');
+    margin: 25px;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 25px !important;
+    margin-right: 25px !important;
+}
+
+.destination-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.destination-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: white;
+    padding: 15px;
+}
+
+.destination-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.destination-content p {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.destination-content a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Estilos para la sección Vuelos con Ofertas */
+#discounted-flights-section {
+    padding: 60px 20px;
+    background-color: #f9fafb;
+}
+
+.flight-card {
+    padding-bottom: 25px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.flight-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.flight-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.flight-pricing .old-price {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.flight-pricing .new-price {
+    font-size: 1.2rem;
+    color: #0055FF;
+    font-weight: bold;
+}
+
+.flight-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.flight-details a {
+    background: #0055FF;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.flight-details a:hover {
+    background: #FFD700;
+    color:black;
+}
+
+/* Estilos para la sección Ventajas */
+#advantages-section {
+    padding: 60px 20px;
+    background-color: white;
+}
+
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.advantage-card {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.advantage-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.advantage-card .icon {
+    background: #0055FF;
+    color: white;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+}
+
+.advantage-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.advantage-card p {
+    color: gray;
+}
+
+
+
+
+
+ /* Estilos para la sección FAQ 1*/
+  .styl-faq-custome {
+    --primary-color: #0055FF;
+    --secondary-color: #fff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --hover-shadow-color: rgba(0, 0, 0, 0.15);
+    --transition-speed: 0.3s;
+    --border-radius: 10px;
+    --gap-spacing: 20px;
+    --padding-item: 20px;
+    --font-size-question: 1.2rem;
+    --font-size-answer: 1rem;
+  }
+
+  .styl-faq-custome body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    line-height: 1.6;
+  }
+
+  .styl-faq-custome .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .styl-faq-custome h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+  }
+
+  .styl-faq-custome .faq-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-spacing);
+  }
+
+  .styl-faq-custome .faq-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: var(--padding-item);
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  }
+
+  .styl-faq-custome .faq-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px var(--hover-shadow-color);
+  }
+
+  .styl-faq-custome .faq-question {
+    font-size: var(--font-size-question);
+    font-weight: bold;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+
+  .styl-faq-custome .faq-answer {
+    font-size: var(--font-size-answer);
+    line-height: 1.5;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity var(--transition-speed) ease, max-height var(--transition-speed) ease;
+  }
+
+  .styl-faq-custome .faq-item.active .faq-answer {
+    opacity: 1;
+    max-height: 200px;
+  }
+
+  @media (max-width: 768px) {
+    .styl-faq-custome h1 {
+      font-size: 2rem;
+    }
+    .styl-faq-custome .faq-question {
+      font-size: 1rem;
+    }
+  } 
+
+
+
+ 

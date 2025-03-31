@@ -2,29 +2,64 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Reserva extends Model
 {
-    // Defino los campos que se pueden asignar masivamente
+    use HasFactory;
+
     protected $fillable = [
-        'id',
-        'estado',
+        'vuelo_id',
+        'user_id',
         'fecha',
-        'precio'
+        'precio',
+        'estado',
     ];
 
-    // Establezco la relación con el modelo User
-    // Una reserva pertenece a un usuario (N:1)
-    public function user()
+    protected $casts = [
+        'fecha' => 'datetime',
+        'precio' => 'decimal:2',
+    ];
+
+    /**
+     * Obtener el vuelo asociado a la reserva.
+     */
+    public function vuelo(): BelongsTo
+    {
+        return $this->belongsTo(Vuelo::class);
+    }
+
+    /**
+     * Obtener el usuario asociado a la reserva.
+     */
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    // Establezco la relación con el modelo Vuelo
-    // Una reserva pertenece a un vuelo (N:1)
-    public function vuelo() 
+    /**
+     * Verificar si la reserva está pendiente.
+     */
+    public function isPendiente(): bool
     {
-        return $this->belongsTo(Vuelo::class);
+        return $this->estado === 'pendiente';
+    }
+
+    /**
+     * Verificar si la reserva está pagada.
+     */
+    public function isPagada(): bool
+    {
+        return $this->estado === 'pagada';
+    }
+
+    /**
+     * Verificar si la reserva está cancelada.
+     */
+    public function isCancelada(): bool
+    {
+        return $this->estado === 'cancelada';
     }
 }
