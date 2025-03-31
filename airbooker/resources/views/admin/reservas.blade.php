@@ -138,7 +138,7 @@ Crear Reserva
                     {{ ucfirst($reserva->estado) }}
                 </span>
             </td>
-            <td>{{ $reserva->fecha }}</td>
+            <td>{{ $loop->iteration }}</td>
             <td>${{ number_format($reserva->precio, 2) }}</td>
             <td>{{ $reserva->user->name ?? 'Sin asignar' }} {{ $reserva->user->apellidos ?? '' }}</td>
             <td>{{ optional($reserva->vuelo)->origen }} → {{ optional($reserva->vuelo)->destino }}</td>

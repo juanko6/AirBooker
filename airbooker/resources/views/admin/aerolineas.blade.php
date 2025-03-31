@@ -127,7 +127,7 @@
         <tbody>
             @foreach ($aerolineas as $aerolinea)
                 <tr>
-                    <td>{{ $aerolinea->id }}</td>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{ $aerolinea->nombre }}</td>
                     <td>{{ $aerolinea->paisOrigen }}</td>
                     <td>{{ $aerolinea->contacto }}</td>
