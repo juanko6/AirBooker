@@ -39,7 +39,7 @@
                     <div class="col-xl-4 col-lg-4 mb-50">
                         <div class="footer-widget">
                             <div class="footer-logo">
-                                <a href="index.html"><img src="{{ asset('logo-v2.png') }}"  class="img-fluid" alt="logo"></a>
+                                <a href="index.html"><img src="{{ asset('images/logo-v2.png') }}"  class="img-fluid" alt="logo"></a>
                             </div>
                             <div class="footer-text">
                                 <p>Viajar con AirBooker con los mejores precios a donde sea que deseas.</p>

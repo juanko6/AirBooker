@@ -57,7 +57,7 @@
 
 .offer-card {
     
-    background: url('https://assets-us-01.kc-usercontent.com/b2956330-c34f-0064-2c6f-27bd5c0147fc/3e160dac-6a97-4c0c-b09d-92ea0a70c49f/Widget-DClub%20%283%29%20%281%29%20%281%29.png');
+    background: url('../images/img-default.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -254,7 +254,7 @@
 
 
 
- /* Estilos para la sección FAQ*/
+ /* Estilos para la sección FAQ 1*/
   .styl-faq-custome {
     --primary-color: #0055FF;
     --secondary-color: #fff;
@@ -337,3 +337,7 @@
       font-size: 1rem;
     }
   } 
+
+
+
+ 

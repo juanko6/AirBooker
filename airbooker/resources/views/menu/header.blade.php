@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <!-- Logo -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('logo-v2.png') }}" alt="Airbooker Logo">
+                <img src="{{ asset('images/logo-v2.png') }}" alt="Airbooker Logo">
             </a>
 
             <!-- Botón toggle para móviles -->
