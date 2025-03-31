@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Oferta;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class OfertaController extends Controller
 {
@@ -35,24 +36,32 @@ class OfertaController extends Controller
      */
     public function store(Request $request)
     {
-        // Validar los datos del formulario
-        $request->validate([
-            'FechaInicio' => 'required|date',
-            'FechaFin' => 'required|date|after:FechaInicio',
-            'ProcentajeDescuento' => 'required|numeric|min:0|max:100',
-            'estado' => 'required|in:Activa,Vencida',
+        // Validación de los datos
+        $validated = $request->validate([
+            'fechaInicio' => 'required|date',
+            'fechaFin' => 'required|date',
+            'porcentajeDescuento' => 'required|numeric|min:0|max:100',
+            'estado' => 'required|in:Activa,Vencida'
         ]);
 
-        // Crear una nueva oferta
-        Oferta::create([
-            'FechaInicio' => $request->input('FechaInicio'),
-            'FechaFin' => $request->input('FechaFin'),
-            'ProcentajeDescuento' => $request->input('ProcentajeDescuento'),
-            'estado' => $request->input('estado'),
-        ]);
+        // Convertir las fechas al formato adecuado (si es necesario)
+        $fechaInicio = Carbon::parse($request->fechaInicio);
+        $fechaFin = Carbon::parse($request->fechaFin);
 
-        // Redirigir con mensaje de éxito
-        return redirect()->route('ofertas.index')->with('success', 'Oferta creada exitosamente.');
+        // Crear la nueva oferta
+        try {
+            Oferta::create([
+                'FechaInicio' => $fechaInicio,
+                'FechaFin' => $fechaFin,
+                'ProcentajeDescuento' => $request->porcentajeDescuento,
+                'estado' => $request->estado
+            ]);
+            return redirect()->route('ofertas.index')->with('success', 'Oferta creada exitosamente');
+        } catch (\Exception $e) {
+            // Capturar y mostrar el error
+            return back()->withErrors(['error' => 'Hubo un problema al guardar la oferta: ' . $e->getMessage()]);
+        }
+        
     }
 
     /**
