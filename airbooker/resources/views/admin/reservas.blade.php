@@ -132,7 +132,7 @@ Crear Reserva
     <tbody>
         @foreach($reservas as $reserva)
         <tr>
-            <td>{{ $loop->iteration }}</td>
+            <td>{{ $loop->iteration + ($reservas->currentPage() - 1) * $reservas->perPage() }}</td>
             <td>
                 <span class="badge {{ $reserva->estado == 'confirmada' ? 'bg-success' : ($reserva->estado == 'pendiente' ? 'bg-warning' : 'bg-danger') }}">
                     {{ ucfirst($reserva->estado) }}

@@ -148,7 +148,7 @@
     <tbody>
         @foreach($vuelos as $vuelo)
         <tr>
-            <td>{{ $loop->iteration }}</td>
+            <td>{{ $loop->iteration + ($vuelos->currentPage() - 1) * $vuelos->perPage() }}</td>
             <td>{{ $vuelo->aerolinea->nombre }}</td>
             <td>{{ \Carbon\Carbon::parse($vuelo->fecha)->format('Y/m/d') }}</td>
             <td>{{ \Carbon\Carbon::parse($vuelo->hora)->format('H:i') }}</td>

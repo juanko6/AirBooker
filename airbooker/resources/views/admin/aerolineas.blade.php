@@ -127,7 +127,7 @@
         <tbody>
             @foreach ($aerolineas as $aerolinea)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $loop->iteration + ($aerolineas->currentPage() - 1) * $aerolineas->perPage() }}</td>
                     <td>{{ $aerolinea->nombre }}</td>
                     <td>{{ $aerolinea->paisOrigen }}</td>
                     <td>{{ $aerolinea->contacto }}</td>

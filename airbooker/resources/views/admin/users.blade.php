@@ -178,7 +178,7 @@
     <tbody>
         @foreach ($users as $user)
         <tr>
-        <td>{{ $loop->iteration }}</td>
+        <td>{{ $loop->iteration + ($users->currentPage() - 1) * $users->perPage() }}</td>
         <td>{{ $user->rol }}</td>
         <td>{{ $user->name }}</td>
         <td>{{ $user->apellidos }}</td>
