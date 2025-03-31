@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Modelo para la tabla aerolineas.
@@ -10,24 +12,20 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Aerolinea extends Model
 {
-    // Defino la tabla asociada
-    protected $table = "aerolineas";
     
-    // Especifico los campos que pueden ser llenados masivamente
+    use HasFactory;
+
     protected $fillable = [
-        "nombre",
-        "paisOrigen",
-        "contacto", 
-        "sitio_web",
-        "created_at",
-        "updated_at",
+        'nombre',
+        'paisOrigen',
+        'sitio_web',
+        'contacto',
     ];
 
     /**
-     * Obtengo los vuelos asociados a esta aerolínea.
-     * Relación 1:N - Una aerolínea tiene muchos vuelos
+     * Obtener los vuelos asociados a la aerolínea.
      */
-    public function vuelos()
+    public function vuelos(): HasMany
     {
         return $this->hasMany(Vuelo::class);
     }

@@ -21,10 +21,10 @@
                         <a class="nav-link" href="{{ url('/') }}">INICIO</a>
                     </li>
                     <li class="opciones-menu">
-                        <a class="nav-link" href="{{ url('/#ofertas') }}">OFERTA</a>
+                        <a class="nav-link" href="{{ url('/#offers-section') }}">OFERTA</a>
                     </li>
                     <li class="opciones-menu">
-                        <a class="nav-link" href="{{ url('/#faq') }}">FAQ</a>
+                        <a class="nav-link" href="{{ url('/#faq-section') }}">FAQ</a>
                     </li>
                     <li class="opciones-menu">
                         <a class="nav-link" href="{{ url('/contactanos') }}">CONTACTO</a>
