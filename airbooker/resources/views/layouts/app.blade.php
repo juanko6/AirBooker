@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <link rel="stylesheet" href="{{ asset('css/vuelos.css') }}">
     <link rel="stylesheet" href="{{ asset('css/contactanos.css') }}"> <!-- CSS específico para la página de contacto -->
     

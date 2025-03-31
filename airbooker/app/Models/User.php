@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Clase User que representa a los usuarios en el sistema.
@@ -13,31 +14,73 @@ use Illuminate\Notifications\Notifiable;
  */
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
-
     /**
-     * Defino los campos que pueden ser asignados masivamente.
-     * Esto protege contra la asignación masiva no deseada.
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
      */
     protected $fillable = [
-        'name', 
+        'name',
+        'apellidos',
+        'email',
+        'password',
         'dni',
         'pasaporte',
-        'email',
         'telefono',
         'rol',
-        'password',
     ];
 
     /**
-     * Especifico los atributos que deben ocultarse al serializar.
-     * Por seguridad, oculto password y token.
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',
         'remember_token',
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    /**
+     * Obtener las reservas del usuario.
+     */
+    public function reservas(): HasMany
+    {
+        return $this->hasMany(Reserva::class);
+    }
+
+    /**
+     * Verificar si el usuario es administrador.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->rol === 'administrador';
+    }
+
+    /**
+     * Verificar si el usuario es operario.
+     */
+    public function isOperario(): bool
+    {
+        return $this->rol === 'operario';
+    }
+
+    /**
+     * Verificar si el usuario es cliente.
+     */
+    public function isCliente(): bool
+    {
+        return $this->rol === 'cliente';
+    }
 
     /**
      * Defino el casteo de atributos para un correcto manejo de tipos.
@@ -50,12 +93,5 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * Establezco la relación uno a muchos con las reservas.
-     * Un usuario puede tener múltiples reservas.
-     */
-    public function reservas()
-    {
-        return $this->hasMany(Reserva::class);
-    }
+    
 }

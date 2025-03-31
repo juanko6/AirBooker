@@ -4,36 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Oferta extends Model
 {
     use HasFactory;
 
-    // Define los campos que pueden ser asignados masivamente
     protected $fillable = [
         'FechaInicio',
         'FechaFin',
         'ProcentajeDescuento',
         'estado',
-        'created_at',
-        'updated_at',
     ];
 
-    // Si es necesario, define la tabla asociada (opcional si sigue la convención de nombres)
-    protected $table = 'ofertas';
-
-    // Define los tipos de datos para campos específicos (opcional)
-    protected $casts = [
-        'FechaInicio' => 'date',
-        'FechaFin' => 'date',
-        'ProcentajeDescuento' => 'decimal:2',
-        'estado' => 'string',
-    ];
-    
-    // Defino la relación uno a muchos con los vuelos
-    public function vuelos()
+    /**
+     * Obtener los vuelos asociados a la oferta.
+     */
+    public function vuelos(): HasMany
     {
         return $this->hasMany(Vuelo::class);
+    }
+
+    /**
+     * Verificar si la oferta está activa.
+     */
+    public function isActiva(): bool
+    {
+        return $this->estado === 'activa';
     }
  
     // Determino automáticamente si una oferta está vencida

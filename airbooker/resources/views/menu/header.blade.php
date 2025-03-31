@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <!-- Logo -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('logo-v2.png') }}" alt="Airbooker Logo">
+                <img src="{{ asset('images/logo-v2.png') }}" alt="Airbooker Logo">
             </a>
 
             <!-- Botón toggle para móviles -->
@@ -21,10 +21,10 @@
                         <a class="nav-link" href="{{ url('/') }}">INICIO</a>
                     </li>
                     <li class="opciones-menu">
-                        <a class="nav-link" href="{{ url('/#ofertas') }}">OFERTA</a>
+                        <a class="nav-link" href="{{ url('/#offers-section') }}">OFERTA</a>
                     </li>
                     <li class="opciones-menu">
-                        <a class="nav-link" href="{{ url('/#faq') }}">FAQ</a>
+                        <a class="nav-link" href="{{ url('/#faq-section') }}">FAQ</a>
                     </li>
                     <li class="opciones-menu">
                         <a class="nav-link" href="{{ url('/contactanos') }}">CONTACTO</a>
