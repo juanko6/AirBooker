@@ -24,7 +24,7 @@
 
     @foreach($reservas as $reserva)
     <div class="card mb-3 column" style="max-width: 18rem;">
-        <div class="card-header {{ $reserva->estado == 'confirmada' ? 'bg-success' : 'bg-warning' }}">
+        <div class="card-header {{ $reserva->estado == 'confirmada' ? 'bg-success' : ($reserva->estado == 'pendiente' ? 'bg-warning' : 'bg-danger') }}">
             Estado: {{ ucfirst($reserva->estado) }}
         </div>
         <div class="card-body bg-white">
@@ -32,7 +32,20 @@
             <p class="card-text"> Fecha: {{ $reserva->fecha }} </p>
         </div>
         <div class="card-footer bg-light">
-            <button class="btn btn-sm btn-info">❌ Cancelar</button>
+            @if($reserva->estado == 'confirmada')
+                <form id="cancelarReserva" action="/admin/reservas/{{$reserva->id}}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="user_id" id="editUserSelect" value="{{$reserva->user_id}}"></input>
+                    <input type="hidden" name="vuelo_id" id="editFlightSelect" value="{{$reserva->vuelo_id}}"></input>
+                    <input type="hidden" name="fecha" id="editFecha" value="{{$reserva->fecha}}">
+                    <input type="hidden" name="precio" id="editPrecio" value="{{$reserva->precio}}">
+                    <input type="hidden" name="estado" id="editEstado" value="cancelada">
+                    <button type="submit" class="btn btn-sm btn-info">❌ Cancelar</button>
+                </form>
+            @else
+            <div style="height:31px"></div>
+            @endif
         </div>
     </div>
     @endforeach

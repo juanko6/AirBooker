@@ -134,7 +134,7 @@ Crear Reserva
         <tr>
             <td>{{ $reserva->id }}</td>
             <td>
-                <span class="badge {{ $reserva->estado == 'confirmada' ? 'bg-success' : 'bg-warning' }}">
+                <span class="badge {{ $reserva->estado == 'confirmada' ? 'bg-success' : ($reserva->estado == 'pendiente' ? 'bg-warning' : 'bg-danger') }}">
                     {{ ucfirst($reserva->estado) }}
                 </span>
             </td>
