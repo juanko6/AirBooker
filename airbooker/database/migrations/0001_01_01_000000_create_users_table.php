@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('telefono', 25);
             $table->enum('rol', ['Administrador', 'Cliente']);
+            $table->string('urlImg')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

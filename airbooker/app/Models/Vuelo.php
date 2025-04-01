@@ -17,13 +17,17 @@ class Vuelo extends Model
         'destino',
         'fecha',
         'hora',
+        'horaFinVuelo',         
         'precio',
         'oferta_id',
+        'clase',
+        'urlImgDestino',
     ];
 
     protected $casts = [
         'fecha' => 'date',
         'hora' => 'datetime:H:i',
+        'horaFinVuelo' => 'datetime:H:i',
         'precio' => 'decimal:2',
     ];
 
@@ -56,11 +60,9 @@ class Vuelo extends Model
      */
     public function getPrecioConDescuento()
     {
-        if ($this->oferta && $this->oferta->isActiva()) {
-            $descuento = $this->precio * ($this->oferta->ProcentajeDescuento / 100);
-            return $this->precio - $descuento;
+        if ($this->oferta && $this->oferta->estado === 'Activa') {
+            return $this->precio * (1 - $this->oferta->ProcentajeDescuento / 100);
         }
-
         return $this->precio;
     }
 
