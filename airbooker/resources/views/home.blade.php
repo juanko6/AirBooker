@@ -3,17 +3,16 @@
 @section('title', 'AIrbooker')
 
 @section('content')
+
 <!-- Hero Section -->
 @include('VistasAuxVuelos.buscadorVuelo')
 
 <!-- Sección de Ofertas Destacadas -->
 @include('VistasAuxVuelos.OfertasDestacadas')
 
-<!-- Sección de Destinos Populares -->
-@include('VistasAuxVuelos.DestinosPopulares')
 
-<!-- Sección de Vuelos con Ofertas -->
-@include('VistasAuxVuelos.VuelosconOfertas')
+<!-- Sección de Destinos Populares -->
+
 
 <!-- Sección de Ventajas -->
 @include('VistasAuxVuelos.VentajasAirbooker')

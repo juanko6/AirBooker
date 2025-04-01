@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('vuelos', function (Blueprint $table) {
             // Defino los campos básicos
             $table->id();  // Ya incluye primary key por defecto
-            $table->date('fecha');
+            $table->date('fecha');            
             $table->time('hora');
+            $table->time('horaFinVuelo')->nullable();
+            $table->string('duracionDelViaje')->nullable(); // Agrega la columna duracionDelViaje
             $table->string('origen');
             $table->string('destino');
             $table->decimal('precio', 8, 2);
+            $table->enum('clase', ['Primera Clase', 'Ejecutiva', 'Económica']);
+            $table->string('urlImgDestino')->nullable();;
 
             // Establezco la relación con aerolíneas
             $table->foreignId('aerolinea_id')

@@ -1,4 +1,4 @@
-<form method="GET" action="{{ route('vuelos.disponibles') }}" class="row g-3">
+<form method="GET" action="{{ route('vuelos.disponibles') }}" class="row g-3 p-3 border rounded shadow" style="background-color: white;">
     <div class="col-md-4">
         <input type="text" name="origen" class="form-control" 
                placeholder="Origen" value="{{ $filtros['origen'] ?? '' }}" required>

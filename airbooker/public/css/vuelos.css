@@ -1,3 +1,8 @@
+
+ 
+
+
+
 /* Variables globales */
 :root {
   --primary-color: #007bff;
@@ -7,9 +12,18 @@
   --transition-time: 0.3s ease;
 }
 
+.container_segundario { 
+  max-width: 1200px;
+  margin: 0 auto;    
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;    
+}
+
+
 /* Estilos generales para la página de vuelos disponibles */
 .style-vuelos-disponibles {
-  padding: 50px 0 150px; /* Combinamos padding-top y padding-bottom */
+  padding: 70px 0 150px; /* Combinamos padding-top y padding-bottom */
 }
 
 /* Estilos para la tarjeta de vuelos disponibles */
@@ -138,7 +152,7 @@
 /* Estilo básico para el div */
 .sombreado {
  
-  background-color: #ffffff; /* Color de fondo */
+  background-color: rgba(255, 255, 255, 0.712); /* Fondo blanco con opacidad 0.4 */
   border-radius: 10px; /* Bordes redondeados */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 
               0px 8px 12px rgba(0, 0, 0, 0.15); /* Efecto de sombreado */
@@ -152,14 +166,16 @@
               0px 12px 16px rgba(0, 0, 0, 0.2); /* Sombras más pronunciadas */
 }
 
+ 
+
+.card { 
+  --bs-card-bg: #ffffff36 !important; 
+}
 
 
+ 
 
-
-
-
-
-
+ 
 
 
 
@@ -350,7 +366,7 @@ input:checked + .slider::before {
 
 
 
-
+ 
 
 
 
