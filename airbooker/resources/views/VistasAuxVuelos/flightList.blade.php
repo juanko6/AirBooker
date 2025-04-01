@@ -43,20 +43,19 @@
                         <!-- Cabecera con efecto degradado -->
                         <div class="card-header bg-gradient-primary text-white border-0">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0">{{ $vuelo->aerolinea->nombre }}</h5>
-                                <img src="{{ asset($vuelo->aerolinea->urlLogo) }}" alt="Logo" class="img-fluid" style="height: 55px; width: auto; object-fit: contain;">  </div>
+                                <h5 class="mb-0" style="border-bottom: 2px solid gold;">{{ $vuelo->aerolinea->nombre }}</h5>  <img src="{{ asset($vuelo->aerolinea->urlLogo) }}" alt="Logo" class="img-fluid" style="height: 55px; width: auto; object-fit: contain;">  </div>
                         </div>
                         
                         <div class="card-body">
                             <!-- Detalles del vuelo -->
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
-                                    <i class="fas fa-calendar-day me-2"></i> {{ date('d M Y', strtotime($vuelo->fecha)) }}  </div>
+                                    <i class="fas fa-calendar-day me-2 text-warning"></i> {{ date('d M Y', strtotime($vuelo->fecha)) }}
+                                </div>
                                 <div>
-                                    <i class="fas fa-clock me-2"></i> {{ date('H:i', strtotime($vuelo->hora)) }}  </div>
-                            </div>
-
-                            <!-- Ruta con animación -->
+                                    <i class="fas fa-clock me-2 text-warning"></i> {{ date('H:i', strtotime($vuelo->hora)) }}
+                                </div>
+                            </div>  <!-- Ruta con animación -->
                             <div class="flight-route mb-3">
                                 <div class="d-flex align-items-center">
                                     <div class="departure">
