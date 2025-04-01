@@ -16,7 +16,9 @@ class VueloSeeder extends Seeder
         // Obtener IDs de aerolíneas y ofertas existentes
         $aerolineaIds = \App\Models\Aerolinea::pluck('id')->toArray();
         $ofertaIds = \App\Models\Oferta::pluck('id')->toArray();
-        
+        // Obtener la lista de imágenes en la carpeta public/images/Destinos
+        $imagenes = glob(public_path('images/Destinos/*.{jpg}'), GLOB_BRACE);
+
         // Generar 100 vuelos
         for ($i = 0; $i < 100; $i++) {
 
@@ -38,6 +40,7 @@ class VueloSeeder extends Seeder
                 'clase' => $faker->randomElement(['Primera Clase', 'Ejecutiva', 'Económica']),
                 'aerolinea_id' => $faker->randomElement($aerolineaIds), // ID de aerolínea aleatorio
                 'oferta_id' => $faker->optional(0.3)->randomElement($ofertaIds), // 30% de los vuelos tendrán oferta
+                'urlImgDestino' => asset('images/Destinos/' . basename($faker->randomElement($imagenes))), // URL completa con asset()
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

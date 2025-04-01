@@ -10,7 +10,7 @@
                     <div class="date-range">{{ \Carbon\Carbon::parse($vuelo->fecha)->format('d M') }}</div>
                     <div class="destination">{{ $vuelo->destino }}</div>
                     <div class="image-container">
-                        <img src="{{ asset('images/img-default.jpg') }}" alt="{{ $vuelo->destino }}">
+                        <img src="{{ $vuelo->urlImgDestino }}" alt="{{ $vuelo->destino }}">
                     </div>
 
                     <!-- Precio con efecto hover -->                            

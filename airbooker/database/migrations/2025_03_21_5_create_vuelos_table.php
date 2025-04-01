@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('destino');
             $table->decimal('precio', 8, 2);
             $table->enum('clase', ['Primera Clase', 'Ejecutiva', 'Económica']);
-
+            $table->string('urlImgDestino')->nullable();;
 
             // Establezco la relación con aerolíneas
             $table->foreignId('aerolinea_id')

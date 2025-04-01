@@ -21,6 +21,7 @@ class Vuelo extends Model
         'precio',
         'oferta_id',
         'clase',
+        'urlImgDestino',
     ];
 
     protected $casts = [
