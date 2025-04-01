@@ -17,13 +17,16 @@ class Vuelo extends Model
         'destino',
         'fecha',
         'hora',
+        'horaFinVuelo',         
         'precio',
         'oferta_id',
+        'clase',
     ];
 
     protected $casts = [
         'fecha' => 'date',
         'hora' => 'datetime:H:i',
+        'horaFinVuelo' => 'datetime:H:i',
         'precio' => 'decimal:2',
     ];
 

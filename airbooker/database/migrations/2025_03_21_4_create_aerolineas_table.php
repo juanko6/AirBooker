@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('paisOrigen');
             $table->string('contacto');
             $table->string('sitio_web');
+            $table->string('urlLogo');
+
+
             
             // Agrego timestamps para auditoría
             $table->timestamps();

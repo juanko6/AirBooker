@@ -60,4 +60,6 @@ php artisan db:seed
 #Falta por agregar siguientes atributos a la BD:
 tabla user: imagen
 tabla aerolinea: imagen
-tabla vuelo: duracion del viaje | tipo de clase enum(estanda, primera clase)
+tabla vuelo: 
+-duracion del viaje tipo date  "fechaFinVuelo"
+-tipo de clase enum(clase business, primera clase y turista)
