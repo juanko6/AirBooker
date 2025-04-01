@@ -10,8 +10,8 @@ background-position: center;">
         <div class="sombreado">
             <div class="card shadow ">
                 <div class="card-body">                
-                    <h3 class="text-secondary" style="border-bottom: 3px solid white; font-family: 'Open Sans', sans-serif;">
-                        <i class="fas fa-plane-departure text-white"></i> 
+                    <h3 class="text-secondary" style="border-bottom: 3px solid #1C49A9; font-family: 'Open Sans', sans-serif; padding: 0px 0px 10px 0px;">
+                        <i class="fas fa-plane-departure" style="color: #1C49A9;"></i> 
                         Busca, Reserva y Viaja
                     </h3>
                     <form id="buscadorForm" action="{{ route('vuelos.disponibles') }}" method="GET">

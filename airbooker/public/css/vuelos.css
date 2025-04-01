@@ -12,6 +12,15 @@
   --transition-time: 0.3s ease;
 }
 
+.container_segundario { 
+  max-width: 1200px;
+  margin: 0 auto;    
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;    
+}
+
+
 /* Estilos generales para la página de vuelos disponibles */
 .style-vuelos-disponibles {
   padding: 70px 0 150px; /* Combinamos padding-top y padding-bottom */
