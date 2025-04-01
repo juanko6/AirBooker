@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Vuelo;
 use App\Models\Aerolinea;
+use App\Models\Oferta;
+use Carbon\Carbon;
 
 class VueloController extends Controller
 {
@@ -14,8 +16,11 @@ class VueloController extends Controller
      */
     public function index()
     {
-        $vuelos = Vuelo::with('oferta')->paginate(10);
-        return view('admin.vuelos', compact('vuelos'));
+    $vuelos = Vuelo::with('aerolinea', 'oferta')->paginate(10); // para la tabla
+    $aerolineas = Aerolinea::all(); // para el select
+    $ofertas = Oferta::all(); // si tienes select de ofertas
+
+    return view('admin.vuelos', compact('vuelos', 'aerolineas', 'ofertas'));
     }
 
     /**
@@ -61,8 +66,7 @@ class VueloController extends Controller
             'oferta_id' => $request->oferta_id,
         ]);
 
-        return redirect()->route('admin.vuelos.index')
-            ->with('success', 'Vuelo creado exitosamente.');
+        return back()->with('success', 'Vuelo creado exitosamente.');
     }
 
     /**
@@ -78,13 +82,12 @@ class VueloController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Vuelo $vuelo)
     {
-        // Obtener el vuelo y las aerolíneas para el formulario de edición
-        $vuelo = Vuelo::findOrFail($id);
-        $aerolineas = Aerolinea::all();
-        return view('admin.vuelos.edit', compact('vuelo', 'aerolineas'));
+        $vuelo->load(['aerolinea', 'oferta']);
+        return response()->json($vuelo);
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -120,8 +123,7 @@ class VueloController extends Controller
             'oferta_id' => $request->oferta_id,
         ]);
 
-        return redirect()->route('admin.vuelos.index')
-            ->with('success', 'Vuelo actualizado exitosamente.');
+        return back()->with('success', 'Vuelo actualizado exitosamente.');
     }
 
     /**
@@ -133,8 +135,7 @@ class VueloController extends Controller
         $vuelo = Vuelo::findOrFail($id);
         $vuelo->delete();
 
-        return redirect()->route('admin.vuelos.index')
-            ->with('success', 'Vuelo eliminado exitosamente.');
+        return back()->with('success', 'Vuelo eliminado exitosamente.');
     }
 
     /**

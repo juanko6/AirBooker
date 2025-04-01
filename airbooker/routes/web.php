@@ -69,6 +69,9 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/ofertas/{oferta}/edit', [OfertaController::class, 'edit'])->name('ofertas.edit');
 
+    Route::get('/vuelos/{vuelo}/edit', [VueloController::class, 'edit']);
+
+
 
 
 });
@@ -84,3 +87,5 @@ Route::get('reservas', [ReservaClienteController::class, 'index']);
 
 // Ruta para mostrar la cartera
 Route::get('cartera', [CarteraController::class, 'index']);
+
+Route::resource('vuelos', VueloController::class)->names('vuelos');

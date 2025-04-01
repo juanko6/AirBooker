@@ -119,7 +119,7 @@ Crear Oferta
     <tbody>
         @foreach($ofertas as $oferta)
         <tr>
-            <td>{{ $oferta->id }}</td>
+            <td>{{ $loop->iteration + ($ofertas->currentPage() - 1) * $ofertas->perPage() }}</td>
             <td>{{ \Carbon\Carbon::parse($oferta->FechaInicio)->format('Y/m/d') }}</td>
             <td>{{ \Carbon\Carbon::parse($oferta->FechaFin)->format('Y/m/d') }}</td>
             <td>{{ $oferta->ProcentajeDescuento }}%</td>
