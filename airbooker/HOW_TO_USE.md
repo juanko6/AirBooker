@@ -56,7 +56,7 @@ php artisan db:seed
 
 
  
-#Nueva actualizacion en los modelos + seeders + migrations.
+# Nueva actualizacion en los modelos + seeders + migrations.
 Se ha añadido a la BD siguientes columnas:
 -Tabla user: imagen
 -Tabla aerolinea: imagen
@@ -67,3 +67,7 @@ Se ha añadido a la BD siguientes columnas:
 Mejora en las carta vuelo.
 
 Agregando nuevas imagenes.
+
+
+# falta
+Añadir UrlImagenDestino tipo string en la tabla vuelo por defecto sera img-default.jpg

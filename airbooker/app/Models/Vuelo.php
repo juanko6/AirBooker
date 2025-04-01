@@ -59,11 +59,9 @@ class Vuelo extends Model
      */
     public function getPrecioConDescuento()
     {
-        if ($this->oferta && $this->oferta->isActiva()) {
-            $descuento = $this->precio * ($this->oferta->ProcentajeDescuento / 100);
-            return $this->precio - $descuento;
+        if ($this->oferta && $this->oferta->estado === 'Activa') {
+            return $this->precio * (1 - $this->oferta->ProcentajeDescuento / 100);
         }
-
         return $this->precio;
     }
 

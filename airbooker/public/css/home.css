@@ -1,97 +1,171 @@
-/* Estilos para la sección Hero */
-#hero-section {
-    position: relative;
-    height: 400px;
-    background: linear-gradient(to right, #0055FF, #528bee);
-    color: white;
-    text-align: center;
-    padding-top: 100px;
-    overflow: hidden;
+ 
+/* Containers*/
+ .container_estirado { 
+    margin: 0px  0% 0px  0%  !important;
+    padding: 250px  0% 0px  0%  !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;    
+  }
+
+.container_segundario { 
+    max-width: 1200px;
+    margin: 0 auto;    
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;    
 }
 
-#hero-section .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80') no-repeat center center;
-    background-size: cover;
-    opacity: 0.2;
-    z-index: 1;
+.container_buscador { 
+    margin: 250px 25% 0px 25% !important;
+    padding: 0px  0% 0px  0%  !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;    
 }
 
-#hero-section .content-container {
-    position: relative;
-    z-index: 2;
+.titulo-h3-seccsion{
+    font-size: 38px;
+    padding-bottom: 25px;
+    text-align: left !important; 
+    text-decoration: underline 3px #FFD700;
+    text-underline-offset: 10px;
+}
+ 
+
+@media screen and (max-width: 1200px) {
+    .container_buscador {
+        margin: 0px 0% -55px 0% !important;
+        padding: 25px !important;
+    }
+
+    .container_estirado { 
+        margin: 0px  0% 0px  0%  !important;
+        padding: 100px  0% 0px  0%  !important;  
+      }
 }
 
-#hero-section h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
 
-#hero-section p {
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Estilos para la sección Ofertas */
 #offers-section {
-    padding: 60px 20px;
-    background-color: #f9fafb;
+    padding: 80px 20px; /* Reducido el padding para evitar excesivo espacio */
+    background-color: #F9F9F9;
 }
 
-#offers-section h2 {
+#offers-section h3.titulo-h3-seccsion {
     font-size: 2rem;
     text-align: center;
     margin-bottom: 40px;
+    color: #333; /* Mejora visual */
 }
 
 #offers-section .offers-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ancho mínimo 250px, máximo adaptativo */
+    gap: 24px; /* Espaciado entre tarjetas */
 }
 
-.offer-card {
-    
-    background: url('../images/img-default.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.offer-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-}
-
-.offer-header {
-    background: #0055FF;
+/* Estilos para cada tarjeta */
+.styl-card-offers-vuelo .offer-card {
+    background-color: #003366;
     color: white;
-    padding: 15px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: auto; /* Altura dinámica */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efecto hover suave */
 }
 
-.offer-body {
-    padding: 15px;
+.styl-card-offers-vuelo .offer-card:hover {
+    transform: translateY(-5px); /* Levanta ligeramente la tarjeta */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
 }
 
-.offer-body p {
+.styl-card-offers-vuelo .date-range {
+    font-size: 14px;
+    text-transform: uppercase;
     margin-bottom: 10px;
 }
 
-.offer-body a {
-    color: #0055FF;
-    text-decoration: none;
+.styl-card-offers-vuelo .destination {
+    font-size: 24px;
     font-weight: bold;
+    margin-bottom: 5px;
 }
+
+.styl-card-offers-vuelo .from {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.styl-card-offers-vuelo .image-container {
+    width: 100%;
+    height: 200px; /* Altura fija para imágenes */
+    overflow: hidden;
+    border-radius: 15px;
+    margin-bottom: 15px; /* Espacio entre imagen y precios */
+}
+
+.styl-card-offers-vuelo .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    transition: transform 0.3s ease; /* Efecto zoom en la imagen */
+}
+
+.styl-card-offers-vuelo .image-container img:hover {
+    transform: scale(1.1); /* Zoom ligero en la imagen */
+}
+
+.styl-card-offers-vuelo .prices {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.styl-card-offers-vuelo .old-price {
+    font-size: 16px;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.styl-card-offers-vuelo .new-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.styl-card-offers-vuelo .new-price span {
+    font-size: 14px;
+}
+
+
+
+
+
 
 /* Estilos para la sección Destinos Populares */
 #popular-destinations-section {

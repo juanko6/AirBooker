@@ -14,7 +14,7 @@ class Oferta extends Model
         'FechaInicio',
         'FechaFin',
         'ProcentajeDescuento',
-        'estado',
+        'estado', 
     ];
 
     /**
