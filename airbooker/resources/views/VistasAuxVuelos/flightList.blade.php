@@ -44,8 +44,7 @@
                         <div class="card-header bg-gradient-primary text-white border-0">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="mb-0">{{ $vuelo->aerolinea->nombre }}</h5>
-                                <img src="{{ asset('images/logo-v2.png') }}" alt="Logo" class="img-fluid" style="width: 35px;">
-                            </div>
+                                <img src="{{ asset($vuelo->aerolinea->urlLogo) }}" alt="Logo" class="img-fluid" style="height: 35px; width: auto; object-fit: contain;">  </div>
                         </div>
                         
                         <div class="card-body">

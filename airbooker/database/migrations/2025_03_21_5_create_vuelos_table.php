@@ -16,11 +16,11 @@ return new class extends Migration
             $table->id();  // Ya incluye primary key por defecto
             $table->date('fecha');            
             $table->time('hora');
-            $table->date('horaFinVuelo')->nullable();
+            $table->time('horaFinVuelo')->nullable();
             $table->string('origen');
             $table->string('destino');
             $table->decimal('precio', 8, 2);
-            $table->enum('clase', ['business', 'primera', 'turista']);
+            $table->enum('clase', ['Primera Clase', 'Ejecutiva', 'Económica']);
 
 
             // Establezco la relación con aerolíneas

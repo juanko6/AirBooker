@@ -16,7 +16,6 @@ class VueloSeeder extends Seeder
         // Obtener IDs de aerolíneas y ofertas existentes
         $aerolineaIds = \App\Models\Aerolinea::pluck('id')->toArray();
         $ofertaIds = \App\Models\Oferta::pluck('id')->toArray();
-        $clase = ['pendiente', 'confirmada', 'cancelada']; 
         
         // Generar 100 vuelos
         for ($i = 0; $i < 100; $i++) {
@@ -30,7 +29,7 @@ class VueloSeeder extends Seeder
                 'origen' => $faker->randomElement(['Madrid', 'Barcelona', 'Londres', 'París', 'Berlín']), // Orígenes fijos
                 'destino' => $faker->randomElement(['Nueva York', 'Tokio', 'Roma', 'Moscú', 'Dubai']), // Destinos fijos
                 'precio' => $faker->randomFloat(2, 100, 1000), // Precios entre 100 y 1000 con 2 decimales
-                'clase' => $clase[array_rand($clase)], // Clase aleatoria
+                'clase' => $faker->randomElement(['Primera Clase', 'Ejecutiva', 'Económica']),
                 'aerolinea_id' => $faker->randomElement($aerolineaIds), // ID de aerolínea aleatorio
                 'oferta_id' => $faker->optional(0.3)->randomElement($ofertaIds), // 30% de los vuelos tendrán oferta
                 'created_at' => now(),

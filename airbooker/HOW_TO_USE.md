@@ -58,8 +58,14 @@ php artisan db:seed
 
 
 #Falta por agregar siguientes atributos a la BD:
-tabla user: imagen
-tabla aerolinea: imagen
-tabla vuelo: 
--duracion del viaje tipo date  "fechaFinVuelo"
--tipo de clase enum(clase business, primera clase y turista)
+Nueva actualizacion en los modelos + seeders + migrations.
+Se ha añadido a la BD siguientes columnas:
+-Tabla user: imagen
+-Tabla aerolinea: imagen
+-Tabla vuelo: 
+-Duracion del viaje tipo date  "fechaFinVuelo"
+-Tipo de clase enum(clase 'Primera Clase', 'Ejecutiva', 'Económica')
+
+Mejora en las carta vuelo.
+
+Agregando nuevas imagenes.
