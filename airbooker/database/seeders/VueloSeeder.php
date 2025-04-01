@@ -20,12 +20,18 @@ class VueloSeeder extends Seeder
         // Generar 100 vuelos
         for ($i = 0; $i < 100; $i++) {
 
-            $hora = $faker->time('H:i:s'); // Generar horas aleatorias
-            $horaFinVuelo = date('H:i:s', strtotime($hora . ' + ' . $faker->numberBetween(1, 4) . ' hours'));
+            $hora = $faker->time('H:i:s'); // Generar hora inicial aleatoria
+            $horasDeVuelo = $faker->numberBetween(1, 4); // Duración del vuelo en horas
+            $horaFinVuelo = date('H:i:s', strtotime($hora . ' + ' . $horasDeVuelo . ' hours')); // Calcular hora final
+
+            // Calcular la duración del viaje en formato H:i:s
+            $duracionDelViaje = gmdate('H:i', strtotime($horaFinVuelo) - strtotime($hora));
+            
             DB::table('vuelos')->insert([
                 'fecha' => $faker->dateTimeBetween('-1 month', '+6 months')->format('Y-m-d'), // Fechas entre hace 1 mes y dentro de 6 meses                
                 'hora' => $hora, // Horas aleatorias
-                'horaFinVuelo' => $horaFinVuelo, 
+                'horaFinVuelo' => $horaFinVuelo, // Hora final del vuelo
+                'duracionDelViaje' => $duracionDelViaje, // Duración del viaje en formato H:i:s
                 'origen' => $faker->randomElement(['Madrid', 'Barcelona', 'Londres', 'París', 'Berlín']), // Orígenes fijos
                 'destino' => $faker->randomElement(['Nueva York', 'Tokio', 'Roma', 'Moscú', 'Dubai']), // Destinos fijos
                 'precio' => $faker->randomFloat(2, 100, 1000), // Precios entre 100 y 1000 con 2 decimales

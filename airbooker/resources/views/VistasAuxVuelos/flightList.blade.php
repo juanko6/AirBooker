@@ -44,18 +44,16 @@
                         <div class="card-header bg-gradient-primary text-white border-0">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h5 class="mb-0">{{ $vuelo->aerolinea->nombre }}</h5>
-                                <img src="{{ asset($vuelo->aerolinea->urlLogo) }}" alt="Logo" class="img-fluid" style="height: 35px; width: auto; object-fit: contain;">  </div>
+                                <img src="{{ asset($vuelo->aerolinea->urlLogo) }}" alt="Logo" class="img-fluid" style="height: 55px; width: auto; object-fit: contain;">  </div>
                         </div>
                         
                         <div class="card-body">
                             <!-- Detalles del vuelo -->
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
-                                    <i class="fas fa-calendar-day me-2"></i> {{ $vuelo->fecha }}
-                                </div>
+                                    <i class="fas fa-calendar-day me-2"></i> {{ date('d M Y', strtotime($vuelo->fecha)) }}  </div>
                                 <div>
-                                    <i class="fas fa-clock me-2"></i> {{ $vuelo->hora }}
-                                </div>
+                                    <i class="fas fa-clock me-2"></i> {{ date('H:i', strtotime($vuelo->hora)) }}  </div>
                             </div>
 
                             <!-- Ruta con animación -->
@@ -65,13 +63,12 @@
                                         <i class="fas fa-plane-departure text-primary me-2"></i>
                                         <span class="fw-bold">{{ $vuelo->origen }}</span>
                                     </div>
-                                    
-                                    <!-- Icono de avión dorado -->
-                                    <div class="plane-icon">                                                                       
+                                    <div class="plane-icon text-center" style=" ">
+                                        <div style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%);">
+                                        {{ $vuelo->duracionDelViaje }}h
+                                        </div>
                                         <i class="fas fa-plane text-warning"></i>
-                                    </div>
-
-                                    <div class="route-line mx-3"></div>
+                                    </div>  <div class="route-line mx-3"></div>
                                     <div class="arrival">
                                         <i class="fas fa-plane-arrival text-primary me-2"></i>
                                         <span class="fw-bold">{{ $vuelo->destino }}</span>

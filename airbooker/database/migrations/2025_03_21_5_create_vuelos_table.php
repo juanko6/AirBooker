@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('fecha');            
             $table->time('hora');
             $table->time('horaFinVuelo')->nullable();
+            $table->string('duracionDelViaje')->nullable(); // Agrega la columna duracionDelViaje
             $table->string('origen');
             $table->string('destino');
             $table->decimal('precio', 8, 2);
