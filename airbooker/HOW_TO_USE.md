@@ -55,10 +55,8 @@ php artisan db:seed
 
 
 
-
-
-#Falta por agregar siguientes atributos a la BD:
-Nueva actualizacion en los modelos + seeders + migrations.
+ 
+#Nueva actualizacion en los modelos + seeders + migrations.
 Se ha añadido a la BD siguientes columnas:
 -Tabla user: imagen
 -Tabla aerolinea: imagen
