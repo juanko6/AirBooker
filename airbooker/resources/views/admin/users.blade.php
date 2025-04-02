@@ -144,8 +144,9 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña</label>
+                            <label for="password" class="form-label">Contraseña (opcional)</label>
                             <input type="password" class="form-control" id="edit_password" name="password">
+                            <small class="text-muted">Dejar en blanco para mantener la contraseña actual</small>
                         </div>
                         <div class="mb-3">
                             <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
