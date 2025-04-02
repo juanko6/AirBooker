@@ -20,6 +20,7 @@ class Aerolinea extends Model
         'paisOrigen',
         'sitio_web',
         'contacto',
+        'urlLogo',
     ];
 
     /**

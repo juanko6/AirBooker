@@ -31,9 +31,10 @@ class UserSeeder extends Seeder
                     'password' => Hash::make('password'), // Contraseña común para todos ('password')
                     'telefono' => $faker->phoneNumber,
                     'rol' => $faker->randomElement(['Administrador', 'Cliente']), // Rol aleatorio
+                    'urlImg' => 'https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg',
                     'remember_token' => Str::random(10),
                     'created_at' => now(),
-                    'updated_at' => now(),
+                    'updated_at' => now()
                 ]);
             }
         }

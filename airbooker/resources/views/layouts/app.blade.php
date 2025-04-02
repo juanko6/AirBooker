@@ -24,7 +24,11 @@
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 
-    
+    <!-- Fonts google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
@@ -46,7 +50,7 @@
     </header>
 
     <!-- Contenido principal -->
-    <main class="container">
+    <main>
         @yield('content') <!-- Aquí se inyecta el contenido de la vista hija -->
     </main>
 
@@ -56,7 +60,7 @@
     
 
     <!-- Scripts globales -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    
     @stack('scripts') <!-- Para scripts específicos de la vista -->
 </body>
 </html>

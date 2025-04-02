@@ -132,13 +132,13 @@ Crear Reserva
     <tbody>
         @foreach($reservas as $reserva)
         <tr>
-            <td>{{ $reserva->id }}</td>
+            <td>{{ $loop->iteration + ($reservas->currentPage() - 1) * $reservas->perPage() }}</td>
             <td>
                 <span class="badge {{ $reserva->estado == 'confirmada' ? 'bg-success' : ($reserva->estado == 'pendiente' ? 'bg-warning' : 'bg-danger') }}">
                     {{ ucfirst($reserva->estado) }}
                 </span>
             </td>
-            <td>{{ $reserva->fecha }}</td>
+            <td>{{ \Carbon\Carbon::parse($reserva->fecha)->format('Y/m/d') }}</td>
             <td>${{ number_format($reserva->precio, 2) }}</td>
             <td>{{ $reserva->user->name ?? 'Sin asignar' }} {{ $reserva->user->apellidos ?? '' }}</td>
             <td>{{ optional($reserva->vuelo)->origen }} → {{ optional($reserva->vuelo)->destino }}</td>

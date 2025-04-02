@@ -16,7 +16,7 @@ class HomeController extends Controller
     // Definir una constante para el número máximo de ofertas a mostrar
     const MAX_OFERTAS_BANNER = 3;
     const MAX_DESTINOS_POPULARES_BANNER = 3;
-    const MAX_VUELOS_CON_OFFERTAS = 3;
+    const MAX_VUELOS_CON_OFFERTAS = 8;
 
     public function index()
     {
