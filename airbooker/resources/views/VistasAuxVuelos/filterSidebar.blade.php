@@ -1,9 +1,17 @@
 <div class="sombreado" style="border-radius: 10px; padding: 20px;"> 
-    <form method="GET" action="{{ route('vuelos.disponibles') }}" >
-        <!-- Campos Ocultos -->
+    <form method="GET" action="{{ route('buscar.vuelos') }}" >
+
+        <!-- Mantener parámetros de búsqueda originales -->
         <input type="hidden" name="origen" value="{{ $filtros['origen'] }}">
         <input type="hidden" name="destino" value="{{ $filtros['destino'] }}">
-        <input type="hidden" name="fecha" value="{{ $filtros['fecha'] }}">
+        <input type="hidden" name="fecha" value="{{ $filtros['fecha'] }}"> 
+        
+        <input type="hidden" name="precio_min" value="{{ $filtros['precio_min'] }}">
+        <input type="hidden" name="precio_max" value="{{ $filtros['precio_max'] }}">
+
+
+        <input type="hidden" name="mostrar_ofertas" value="{{ $filtros['mostrar_ofertas'] }}"> 
+        <input type="hidden" name="ordenar_por_precio" value="{{ $filtros['ordenar_por_precio'] }}">  
 
         <!-- Panel de Filtros -->
         <div >

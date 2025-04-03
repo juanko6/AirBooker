@@ -24,12 +24,11 @@ referencias usando route('buscador.vuelos') seguirán funcionando correctamente.
 */
 
 // Rutas públicas
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::post('/buscar-vuelos', [HomeController::class, 'buscar'])->name('vuelos.buscar'); 
+Route::get('/', [HomeController::class, 'index'])->name('home'); 
 
 
 // Nueva ruta para resultados de búsqueda
-Route::get('/vuelos-disponibles', [VueloController::class, 'vuelosDisponibles']) ->name('vuelos.disponibles');
+Route::get('/buscar-vuelos', [VueloController::class, 'vuelosDisponibles'])->name('buscar.vuelos');
 
  
 

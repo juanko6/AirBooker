@@ -20,7 +20,7 @@ class VueloSeeder extends Seeder
         $imagenes = glob(public_path('images/Destinos/*.{jpg}'), GLOB_BRACE);
 
         // Generar 100 vuelos
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 500; $i++) {
 
             $hora = $faker->time('H:i:s'); // Generar hora inicial aleatoria
             $horasDeVuelo = $faker->numberBetween(1, 4); // Duración del vuelo en horas
