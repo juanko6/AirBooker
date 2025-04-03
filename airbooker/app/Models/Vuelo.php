@@ -17,7 +17,7 @@ class Vuelo extends Model
         'destino',
         'fecha',
         'hora',
-        'horaFinVuelo',         
+        'horaFinVuelo',
         'precio',
         'oferta_id',
         'clase',
@@ -32,7 +32,7 @@ class Vuelo extends Model
     ];
 
     /**
-     * Obtener la aerolínea asociada al vuelo.
+     * Relación con Aerolínea
      */
     public function aerolinea(): BelongsTo
     {
@@ -40,7 +40,7 @@ class Vuelo extends Model
     }
 
     /**
-     * Obtener la oferta asociada al vuelo.
+     * Relación con Oferta
      */
     public function oferta(): BelongsTo
     {
@@ -48,7 +48,7 @@ class Vuelo extends Model
     }
 
     /**
-     * Obtener las reservas del vuelo.
+     * Relación con Reservas
      */
     public function reservas(): HasMany
     {
@@ -56,7 +56,7 @@ class Vuelo extends Model
     }
 
     /**
-     * Calcular el precio con descuento si hay oferta activa.
+     * Calcular precio con descuento si hay oferta activa
      */
     public function getPrecioConDescuento()
     {
@@ -67,35 +67,58 @@ class Vuelo extends Model
     }
 
     /**
-     * Filtrar vuelos por origen.
+     * Filtrar vuelos disponibles
+     *      * 
      */
-    public function scopeOrigen($query, $origen)
+    public static function filtrarDisponibles($filtros)
     {
-        if ($origen) {
-            return $query->where('origen', 'like', "%$origen%");
-        }
-        return $query;
-    }
+        // Calcular precio final con descuento
+        $query = self::with(['aerolinea'])
+            ->leftJoin('ofertas', 'vuelos.oferta_id', '=', 'ofertas.id')
+            ->select('vuelos.*')
+            ->selectRaw('
+                CASE 
+                    WHEN ofertas.estado = "Activa" THEN 
+                        ROUND(vuelos.precio * (1 - ofertas.ProcentajeDescuento / 100), 2)
+                    ELSE 
+                        ROUND(vuelos.precio, 2)
+                END as precio_final
+            ')
+            ->where('origen', 'LIKE', '%' . $filtros['origen'] . '%')
+            ->where('destino', 'LIKE', '%' . $filtros['destino'] . '%')
+            ->where('fecha', '>=', $filtros['fecha'])
+            ->whereDoesntHave('reservas', function ($q) {
+                $q->where('estado', '!=', 'CANCELADA');
+            });
 
-    /**
-     * Filtrar vuelos por destino.
-     */
-    public function scopeDestino($query, $destino)
-    {
-        if ($destino) {
-            return $query->where('destino', 'like', "%$destino%");
+        
+        // Filtro por aerolíneas        
+        if (!empty($filtros['aerolinea'])) {
+            $query->whereHas('aerolinea', function ($q) use ($filtros) {
+                $q->whereIn('nombre', $filtros['aerolinea']);
+            });
         }
-        return $query;
-    }
 
-    /**
-     * Filtrar vuelos por fecha.
-     */
-    public function scopeFecha($query, $fecha)
-    {
-        if ($fecha) {
-            return $query->whereDate('fecha', $fecha);
+        // Filtro por rango de precios (ahora usando precio_final)
+        if ($filtros['precio_min'] && $filtros['precio_max']) {
+            $query->havingRaw('precio_final BETWEEN ? AND ?', [$filtros['precio_min'], $filtros['precio_max']]);
         }
+
+        // Ordenación: Primero ofertas, luego por precio_final
+        if ($filtros['mostrar_ofertas']) {
+            $query->orderByRaw('oferta_id IS NOT NULL DESC'); // Priorizar ofertas
+        }
+
+        // Aplicar ordenación por precio_final
+        if ($filtros['ordenar_por_precio'] === 'barato') {
+            $query->orderBy('precio_final', 'asc');
+        } elseif ($filtros['ordenar_por_precio'] === 'caro') {
+            $query->orderBy('precio_final', 'desc');
+        } else {
+            $query->orderBy('fecha')->orderBy('hora'); // Orden predeterminado
+        }
+
         return $query;
     }
 }
+

@@ -21,8 +21,7 @@
                         <h3 class="text-secondary" style="border-bottom: 3px solid #1C49A9; font-family: 'Open Sans', sans-serif; padding: 0px 0px 10px 0px;">
                             <i class="fas fa-plane-departure" style="color: #1C49A9;"></i> 
                             Busca, Reserva y Viaja
-                        </h3>
-                        <form id="buscadorForm" action="{{ route('vuelos.disponibles') }}" method="GET">
+                        </h3> <form id="buscadorForm" action="{{ route('buscar.vuelos') }}" method="GET">
                             <div class="row g-3">
                                 <!-- Origen -->
                                 <div class="col-md-6">
@@ -50,6 +49,7 @@
                                 </div>
                             </div>
                         </form>
+                       
                     </div>
                 </div>
             </div>

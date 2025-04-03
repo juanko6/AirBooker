@@ -5,7 +5,9 @@
         <h3 class="titulo-h3-seccsion">Ofertas Exclusivas</h3>
         <div class="offers-grid">            
             @foreach($vuelosConOfertas as $vuelo)
-            <div class="styl-card-offers-vuelo">
+            <a href="{{ route('buscar.vuelos', ['destino' => $vuelo->destino, 'fecha' => $vuelo->fecha]) }}">
+            <div class="styl-card-offers-vuelo" >
+                
                 <div class="offer-card">
                     <div class="row">
                         <div class="col-6">
@@ -36,7 +38,9 @@
                         </div>                                                
                     </div>                     
                 </div>
+                 
             </div>
+            </a>
             @endforeach
         </div>
     </section>
