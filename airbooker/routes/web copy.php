@@ -17,21 +17,12 @@ use App\Http\Controllers\{
     OfertaController,
 };
 
-/*
-Que hace ->name('') ?  Si en el futuro cambias la URL de /buscar-vuelos a /vuelos-disponibles, 
-solo necesitas actualizar la definición de la ruta en web.php. Todas las 
-referencias usando route('buscador.vuelos') seguirán funcionando correctamente.
-*/
-
 // Rutas públicas
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/buscar-vuelos', [HomeController::class, 'buscar'])->name('vuelos.buscar'); 
 
-
 // Nueva ruta para resultados de búsqueda
-Route::get('/vuelos-disponibles', [VueloController::class, 'vuelosDisponibles']) ->name('vuelos.disponibles');
-
- 
+Route::get('/vuelos-disponibles', [VueloController::class, 'vuelosDisponibles'])->name('vuelos.disponibles');
 
 // Rutas de contactanos
 Route::get('/contactanos', [ContactanosController::class, 'showContactanos'])->name('contactanos');
@@ -49,7 +40,7 @@ Route::prefix('admin')->group(function () {
     // Dashboard
     Route::controller(AdminController::class)->group(function () {
         Route::get('/', 'dashboard')->name('admin.dashboard');
-        Route::get('/dashboard', 'dashboard')->withoutMiddleware('admin'); // Permitir acceso a usuarios no admin
+        Route::get('/dashboard', 'dashboard')->withoutMiddleware('admin');
     });
 
     // Gestión de recursos
@@ -59,15 +50,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('aerolineas', AerolineaController::class);
     Route::resource('ofertas', OfertaController::class);
 
-    //Route::get('/reservas/{id}/edit', [ReservaController::class, 'edit'])->name('reservas.edit');
-    //Route::put('/reservas/{id}', [ReservaController::class, 'update'])->name('reservas.update');
-
-    //Route::get('/aerolineas/{aerolinea}/edit', [AerolineaController::class, 'edit']);
-
-    //Route::get('/ofertas/{oferta}/edit', [OfertaController::class, 'edit'])->name('ofertas.edit');
-
-    //Route::get('/vuelos/{vuelo}/edit', [VueloController::class, 'edit']);
-
+    Route::get('/aerolineas/{aerolinea}/edit', [AerolineaController::class, 'edit']);
+    Route::get('/ofertas/{oferta}/edit', [OfertaController::class, 'edit'])->name('ofertas.edit');
+    Route::get('/vuelos/{vuelo}/edit', [VueloController::class, 'edit']);
 });
 
 Route::get('/api/usuarios', [UserController::class, 'buscar']);
@@ -82,4 +67,4 @@ Route::get('reservas', [ReservaClienteController::class, 'index']);
 // Ruta para mostrar la cartera
 Route::get('cartera', [CarteraController::class, 'index']);
 
-//Route::resource('vuelos', VueloController::class)->names('vuelos');
+Route::resource('vuelos', VueloController::class)->names('vuelos');
