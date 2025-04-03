@@ -17,7 +17,7 @@
 }
 
 .container_buscador { 
-    margin: 250px 25% 0px 25% !important;
+    margin: 250px 25% 15px 25% !important;
     padding: 0px  0% 0px  0%  !important;
     background-color: transparent !important;
     border: none !important;
@@ -49,10 +49,7 @@
     }
 }
 
-
-
-
-
+ 
 
 
 
@@ -89,8 +86,7 @@
 
 /* Estilos para cada tarjeta */
 .styl-card-offers-vuelo .offer-card {
-    background-color: #003366;
-    color: white;
+    background: linear-gradient(to right, #003366 60%, #003366c9 ); /* Efecto horizontal */  color: white;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     height: auto; /* Altura dinámica */
