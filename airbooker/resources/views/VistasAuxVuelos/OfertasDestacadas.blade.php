@@ -28,8 +28,10 @@
                             <div class="price-row">
                                 <span class="new-price">{{ number_format($vuelo->getPrecioConDescuento(), 2) }}€</span>
                             </div>
-                            <div class="price-row">
-                                <span>por persona</span>
+                            <div >
+                                <div class="text-end">
+                                    <span>por persona</span>
+                                </div>
                             </div>
                         </div>                                                
                     </div>                     
