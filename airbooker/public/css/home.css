@@ -153,9 +153,9 @@
 }
 
 .styl-card-offers-vuelo .new-price {
-    font-size: 20px;
+    font-size: 28px;
     font-weight: bold;
-    color: #fff;
+    color: #FFC107;
 }
 
 .styl-card-offers-vuelo .new-price span {
@@ -303,7 +303,7 @@
 }
 
 .advantage-card .icon {
-    background: #0055FF;
+    background: #003366;
     color: white;
     width: 60px;
     height: 60px;
