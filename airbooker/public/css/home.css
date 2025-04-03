@@ -17,7 +17,7 @@
 }
 
 .container_buscador { 
-    margin: 250px 25% 0px 25% !important;
+    margin: 250px 25% 15px 25% !important;
     padding: 0px  0% 0px  0%  !important;
     background-color: transparent !important;
     border: none !important;
@@ -26,7 +26,7 @@
 
 .titulo-h3-seccsion{
     font-size: 38px;
-    padding-bottom: 25px;
+    padding-bottom: 15px;
     text-align: left !important; 
     text-decoration: underline 3px #FFD700;
     text-underline-offset: 10px;
@@ -35,7 +35,7 @@
 
 @media screen and (max-width: 1200px) {
     .container_buscador {
-        margin: 0px 0% -55px 0% !important;
+        margin: 0px 0% 0px 0% !important;
         padding: 25px !important;
     }
 
@@ -43,12 +43,13 @@
         margin: 0px  0% 0px  0%  !important;
         padding: 100px  0% 0px  0%  !important;  
       }
+
+      .titulo-h3-seccsion{         
+        padding-bottom: 1px; 
+    }
 }
 
-
-
-
-
+ 
 
 
 
@@ -85,8 +86,7 @@
 
 /* Estilos para cada tarjeta */
 .styl-card-offers-vuelo .offer-card {
-    background-color: #003366;
-    color: white;
+    background: linear-gradient(to right, #003366 60%, #003366c9 ); /* Efecto horizontal */  color: white;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     height: auto; /* Altura dinámica */

@@ -31,10 +31,7 @@ Route::post('/buscar-vuelos', [HomeController::class, 'buscar'])->name('vuelos.b
 // Nueva ruta para resultados de búsqueda
 Route::get('/vuelos-disponibles', [VueloController::class, 'vuelosDisponibles']) ->name('vuelos.disponibles');
 
-
-// Rutas del buscador de vuelos
-Route::get('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos'])->name('buscador.vuelos');
-Route::post('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos']);
+ 
 
 // Rutas de contactanos
 Route::get('/contactanos', [ContactanosController::class, 'showContactanos'])->name('contactanos');
@@ -62,17 +59,14 @@ Route::prefix('admin')->group(function () {
     Route::resource('aerolineas', AerolineaController::class);
     Route::resource('ofertas', OfertaController::class);
 
-    Route::get('/reservas/{id}/edit', [ReservaController::class, 'edit'])->name('reservas.edit');
-    Route::put('/reservas/{id}', [ReservaController::class, 'update'])->name('reservas.update');
+    //Route::get('/reservas/{id}/edit', [ReservaController::class, 'edit'])->name('reservas.edit');
+    //Route::put('/reservas/{id}', [ReservaController::class, 'update'])->name('reservas.update');
 
-    Route::get('/aerolineas/{aerolinea}/edit', [AerolineaController::class, 'edit']);
+    //Route::get('/aerolineas/{aerolinea}/edit', [AerolineaController::class, 'edit']);
 
-    Route::get('/ofertas/{oferta}/edit', [OfertaController::class, 'edit'])->name('ofertas.edit');
+    //Route::get('/ofertas/{oferta}/edit', [OfertaController::class, 'edit'])->name('ofertas.edit');
 
-    Route::get('/vuelos/{vuelo}/edit', [VueloController::class, 'edit']);
-
-
-
+    //Route::get('/vuelos/{vuelo}/edit', [VueloController::class, 'edit']);
 
 });
 
@@ -88,4 +82,4 @@ Route::get('reservas', [ReservaClienteController::class, 'index']);
 // Ruta para mostrar la cartera
 Route::get('cartera', [CarteraController::class, 'index']);
 
-Route::resource('vuelos', VueloController::class)->names('vuelos');
+//Route::resource('vuelos', VueloController::class)->names('vuelos');
