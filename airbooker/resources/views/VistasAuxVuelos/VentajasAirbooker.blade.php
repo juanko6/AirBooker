@@ -24,10 +24,6 @@
             <h3>Amplia cobertura</h3>
             <p>Ofrecemos vuelos a los destinos más populares y exóticos del mundo.</p>
         </div>
-        
-
-        
-         
     </div>
     </div>
 </section>
