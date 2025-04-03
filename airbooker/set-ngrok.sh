@@ -8,4 +8,4 @@ php artisan config:cache
 php artisan route:cache
 php artisan view:clear
 
-echo "Configuración cambiada a NGROK (https://6e62-79-117-252-173.ngrok-free.app)"
+echo "Configuración cambiada a NGROK (https://goo.su/N6qM)"
