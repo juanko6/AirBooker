@@ -122,12 +122,12 @@ class VueloController extends Controller
         
         // Consulta con paginación
         $vuelos = Vuelo::filtrarDisponibles($filtros)
-            ->paginate(4)
+            ->paginate(10)
             ->appends($filtros);
 
         // Obtener aerolíneas para el filtro lateral
         $aerolineas = Aerolinea::all();
 
-        return view('vuelosDisponibles', compact('vuelos', 'filtros', 'aerolineas'));
+         return view('vuelosDisponibles', compact('vuelos', 'filtros', 'aerolineas'));
     }
 }
