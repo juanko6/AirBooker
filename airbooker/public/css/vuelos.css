@@ -374,3 +374,17 @@ input:checked + .slider::before {
 
 
  
+
+/* Efecto latido del tipo de clase de vuelo*/
+.heartbeat {
+  animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.1);
+  }
+}

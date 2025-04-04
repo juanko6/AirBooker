@@ -17,24 +17,14 @@ use App\Http\Controllers\{
     OfertaController,
 };
 
-/*
-Que hace ->name('') ?  Si en el futuro cambias la URL de /buscar-vuelos a /vuelos-disponibles, 
-solo necesitas actualizar la definición de la ruta en web.php. Todas las 
-referencias usando route('buscador.vuelos') seguirán funcionando correctamente.
-*/
-
 // Rutas públicas
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::post('/buscar-vuelos', [HomeController::class, 'buscar'])->name('vuelos.buscar'); 
+Route::get('/', [HomeController::class, 'index'])->name('home'); 
 
 
 // Nueva ruta para resultados de búsqueda
-Route::get('/vuelos-disponibles', [VueloController::class, 'vuelosDisponibles']) ->name('vuelos.disponibles');
+Route::get('/buscar-vuelos', [VueloController::class, 'vuelosDisponibles'])->name('buscar.vuelos');
 
-
-// Rutas del buscador de vuelos
-Route::get('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos'])->name('buscador.vuelos');
-Route::post('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos']);
+ 
 
 // Rutas de contactanos
 Route::get('/contactanos', [ContactanosController::class, 'showContactanos'])->name('contactanos');
@@ -60,19 +50,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('reservas', ReservaController::class);
     Route::resource('vuelos', VueloController::class);
     Route::resource('aerolineas', AerolineaController::class);
-    Route::resource('ofertas', OfertaController::class);
-
-    Route::get('/reservas/{id}/edit', [ReservaController::class, 'edit'])->name('reservas.edit');
-    Route::put('/reservas/{id}', [ReservaController::class, 'update'])->name('reservas.update');
-
-    Route::get('/aerolineas/{aerolinea}/edit', [AerolineaController::class, 'edit']);
-
-    Route::get('/ofertas/{oferta}/edit', [OfertaController::class, 'edit'])->name('ofertas.edit');
-
-    Route::get('/vuelos/{vuelo}/edit', [VueloController::class, 'edit']);
-
-
-
+    Route::resource('ofertas', OfertaController::class); 
 
 });
 
@@ -88,4 +66,4 @@ Route::get('reservas', [ReservaClienteController::class, 'index']);
 // Ruta para mostrar la cartera
 Route::get('cartera', [CarteraController::class, 'index']);
 
-Route::resource('vuelos', VueloController::class)->names('vuelos');
+//Route::resource('vuelos', VueloController::class)->names('vuelos');

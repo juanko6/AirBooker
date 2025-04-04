@@ -1,16 +1,22 @@
   <div class="styl-card-vuelos-disponibles">
     
     <div class="mb-4">
-        <form method="GET" action="{{ route('vuelos.disponibles') }}" id="filter-form">
-            <!-- Mantener parámetros de búsqueda originales -->
-            <input type="hidden" name="origen" value="{{ $filtros['origen'] }}">
-            <input type="hidden" name="destino" value="{{ $filtros['destino'] }}">
-            <input type="hidden" name="fecha" value="{{ $filtros['fecha'] }}">
-            <input type="hidden" name="aerolinea" value="{{ implode(',', $filtros['aerolinea'] ?? []) }}">
-            <input type="hidden" name="precio_min" value="{{ $filtros['precio_min'] }}">
-            <input type="hidden" name="precio_max" value="{{ $filtros['precio_max'] }}">
-
+        <form method="GET" action="{{ route('buscar.vuelos') }}" id="filter-form">          
             <div class="d-flex justify-content-between align-items-center">
+            
+                <!-- Mantener parámetros de búsqueda originales -->
+                <input type="hidden" name="origen" value="{{ $filtros['origen'] }}">
+                <input type="hidden" name="destino" value="{{ $filtros['destino'] }}">
+                <input type="hidden" name="fecha" value="{{ $filtros['fecha'] }}">                
+                <input type="hidden" name="precio_min" value="{{ $filtros['precio_min'] }}">
+                <input type="hidden" name="precio_max" value="{{ $filtros['precio_max'] }}">
+                <!-- Campo oculto para aerolíneas seleccionadas -->
+                @if (!empty($filtros['aerolinea']))
+                    @foreach ($filtros['aerolinea'] as $aerolinea)
+                        <input type="hidden" name="aerolinea[]" value="{{ $aerolinea }}">
+                    @endforeach
+                @endif
+
                 <!-- Filtros de vuelos ordenados por oferta-->
                 <div>
                     <label>
@@ -30,9 +36,11 @@
                         
                         <option value="barato" {{ ($filtros['ordenar_por_precio'] ?? '') == 'barato' ? 'selected' : '' }}>Más barato primero</option>
                         <option value="caro" {{ ($filtros['ordenar_por_precio'] ?? '') == 'caro' ? 'selected' : '' }}>Más caro primero</option>
+                        <option value="Fecha_reciente" >Más reciente</option>
                     </select>
                 </div>
-            </div>  </form>
+            </div>  
+        </form>
     </div>
  
     @if($vuelos->count() > 0)
@@ -43,8 +51,12 @@
                         <!-- Cabecera con efecto degradado -->
                         <div class="card-header bg-gradient-primary text-white border-0">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0" style="border-bottom: 2px solid gold;">{{ $vuelo->aerolinea->nombre }}</h5>  <img src="{{ asset($vuelo->aerolinea->urlLogo) }}" alt="Logo" class="img-fluid" style="height: 55px; width: auto; object-fit: contain;">  </div>
-                        </div>
+                            <h5 class="mb-0" style="border-bottom: 2px solid gold;">{{ $vuelo->aerolinea->nombre }}</h5>  <img src="{{ asset($vuelo->aerolinea->urlLogo) }}" alt="Logo" class="img-fluid" style="height: 55px; width: auto; object-fit: contain;">  </div>
+                            
+                            <div class="class-badge text-center py-1 px-3 heartbeat" style=" ; background: linear-gradient(90deg, #FFC107, #FFC107); color: #0077F7; font-weight: bold; display: inline-block;">
+                                {{ strtoupper($vuelo->clase) }}
+                            </div>  </div>
+
                         
                         <div class="card-body">
                             <!-- Detalles del vuelo -->
@@ -78,7 +90,7 @@
                             <!-- Precio con efecto hover -->
                             <div class="price-section text-end">
                                 <h4 class="mb-0 {{ $vuelo->oferta_id ? 'text-success' : 'text-primary' }}">
-                                    ${{ number_format($vuelo->precio_con_descuento, 2) }}
+                                    ${{ number_format($vuelo->precio_final, 2) }}
                                     @if($vuelo->oferta_id)
                                         <span class="badge bg-success ms-2">OFERTA</span>
                                     @endif

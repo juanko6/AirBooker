@@ -45,25 +45,5 @@ class HomeController extends Controller
 
         return view('home', compact('ofertas', 'destinosPopulares', 'vuelosConOfertas'));
     }
-
-    /**
-     * Buscar vuelos según los criterios del formulario.
-     */
-    public function buscar(Request $request)
-    {
-        $request->validate([
-            'origen' => 'required|string|max:255',
-            'destino' => 'required|string|max:255',
-            'fecha' => 'required|date|after_or_equal:today',
-            'pasajeros' => 'required|integer|min:1',
-        ]);
-
-        $vuelos = Vuelo::with(['aerolinea', 'oferta'])
-            ->where('origen', 'like', '%' . $request->origen . '%')
-            ->where('destino', 'like', '%' . $request->destino . '%')
-            ->whereDate('fecha', $request->fecha)
-            ->paginate(10);
-
-        return view('vuelos.resultados', compact('vuelos', 'request'));
-    }
+ 
 }

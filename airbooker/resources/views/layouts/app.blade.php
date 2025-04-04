@@ -30,12 +30,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
 
     <!-- Estilos personalizados -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/vuelos.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/contactanos.css') }}"> <!-- CSS específico para la página de contacto -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}"rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}"rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}"rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}"rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/vuelos.css') }}"rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/contactanos.css') }}"rel="stylesheet"> <!-- CSS específico para la página de contacto -->
     
     <!-- Scripts personalizados -->
     <script src="{{ asset('js/listas.js') }}"></script>
