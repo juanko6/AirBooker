@@ -17,12 +17,6 @@ use App\Http\Controllers\{
     OfertaController,
 };
 
-/*
-Que hace ->name('') ?  Si en el futuro cambias la URL de /buscar-vuelos a /vuelos-disponibles, 
-solo necesitas actualizar la definición de la ruta en web.php. Todas las 
-referencias usando route('buscador.vuelos') seguirán funcionando correctamente.
-*/
-
 // Rutas públicas
 Route::get('/', [HomeController::class, 'index'])->name('home'); 
 
@@ -56,16 +50,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('reservas', ReservaController::class);
     Route::resource('vuelos', VueloController::class);
     Route::resource('aerolineas', AerolineaController::class);
-    Route::resource('ofertas', OfertaController::class);
-
-    //Route::get('/reservas/{id}/edit', [ReservaController::class, 'edit'])->name('reservas.edit');
-    //Route::put('/reservas/{id}', [ReservaController::class, 'update'])->name('reservas.update');
-
-    //Route::get('/aerolineas/{aerolinea}/edit', [AerolineaController::class, 'edit']);
-
-    //Route::get('/ofertas/{oferta}/edit', [OfertaController::class, 'edit'])->name('ofertas.edit');
-
-    //Route::get('/vuelos/{vuelo}/edit', [VueloController::class, 'edit']);
+    Route::resource('ofertas', OfertaController::class); 
 
 });
 
