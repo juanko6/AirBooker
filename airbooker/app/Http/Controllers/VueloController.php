@@ -128,6 +128,6 @@ class VueloController extends Controller
         // Obtener aerolíneas para el filtro lateral
         $aerolineas = Aerolinea::all();
 
-        return view('vuelosDisponibles', compact('vuelos', 'filtros', 'aerolineas'));
+         return view('vuelosDisponibles', compact('vuelos', 'filtros', 'aerolineas'));
     }
 }
