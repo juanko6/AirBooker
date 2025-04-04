@@ -21,7 +21,15 @@
                         <h3 class="text-secondary" style="border-bottom: 3px solid #1C49A9; font-family: 'Open Sans', sans-serif; padding: 0px 0px 10px 0px;">
                             <i class="fas fa-plane-departure" style="color: #1C49A9;"></i> 
                             Busca, Reserva y Viaja
-                        </h3> <form id="buscadorForm" action="{{ route('buscar.vuelos') }}" method="GET">
+                        </h3> 
+                        <!-- Checkbox "Solo ida" -->
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="soloIda" name="soloIda" checked disabled>
+                            <label class="form-check-label" for="soloIda" style="font-family: 'Open Sans', sans-serif;">
+                                Solo ida
+                            </label>
+                        </div>
+                        <form id="buscadorForm" action="{{ route('buscar.vuelos') }}" method="GET">
                             <div class="row g-3">
                                 <!-- Origen -->
                                 <div class="col-md-6">
