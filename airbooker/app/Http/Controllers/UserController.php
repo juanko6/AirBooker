@@ -29,7 +29,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        //  Muestra la vista de creación de usuario
+        
     }
 
     public function infoCartera(Request $request)

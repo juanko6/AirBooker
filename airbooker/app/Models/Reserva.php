@@ -40,6 +40,14 @@ class Reserva extends Model
     }
 
     /**
+     * Obtener todas las reservas con estado pendiente.
+     */
+    public static function obtenerReservasPendientes()
+    {
+        return self::where('estado', 'pendiente')->get();
+    }
+    
+    /**
      * Verificar si la reserva está pendiente.
      */
     public function isPendiente(): bool

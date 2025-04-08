@@ -1,4 +1,10 @@
-INSERT INTO users (
+INSERT INTO carritos (id, user_id, created_at, updated_at)
+VALUES (
+    'id:bigint',
+    'user_id:bigint',
+    'created_at:timestamp',
+    'updated_at:timestamp'
+  );INSERT INTO users (
     id,
     name,
     apellidos,
