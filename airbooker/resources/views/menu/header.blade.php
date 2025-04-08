@@ -1,7 +1,5 @@
-
-
 <!-- Navbar -->
-<div class="header-container"> 
+<div class="header-container">
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container-fluid">
             <!-- Logo -->
@@ -32,7 +30,11 @@
                     <li class="opciones-menu">
                         <a class="nav-link" href="{{ url('/admin') }}">DASHBOARD</a>
                     </li>
-
+                    <li class="opciones-menu">
+                        <a class="nav-link" href="{{ url('/carrito') }}">
+                            <i class="fas fa-shopping-cart"></i> CARRITO
+                        </a>
+                    </li>
                 </ul>
                 <!-- Botón Acceder -->
                 <a href="{{ url('auth/login') }}" class="btn btn-access ms-3 pulse">
@@ -40,5 +42,5 @@
                 </a>
             </div>
         </div>
-    </nav>        
+    </nav>
 </div>
