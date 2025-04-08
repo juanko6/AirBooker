@@ -15,17 +15,21 @@ use App\Http\Controllers\{
     VuelosDisponiblesController,
     AerolineaController,
     OfertaController,
+    CarritoController,
 };
 
 // Rutas públicas
 Route::get('/', [HomeController::class, 'index'])->name('home'); 
 
 
-// Nueva ruta para resultados de búsqueda
+// Ruta para resultados de búsqueda
 Route::get('/buscar-vuelos', [VueloController::class, 'vuelosDisponibles'])->name('buscar.vuelos');
 
- 
- 
+// Ruta para carrito
+Route::get('/carrito', [CarritoController::class, 'index'])->name('carrito');
+
+
+
 
 // Rutas de contactanos
 Route::get('/contactanos', [ContactanosController::class, 'showContactanos'])->name('contactanos');

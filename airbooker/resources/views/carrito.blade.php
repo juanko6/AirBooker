@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Carrito de Compra - AirBooker')
+@section('title', 'Carrito')
 
 @section('content')
     <div class="container mt-5 pt-5">
         <div class="row">
             <div class="col-12">
                 <h1 class="text-center mb-4" style="color: #1C49A9; font-family: 'Rubik Mono One', monospace;">
-                    Mi Carrito de Compra
+                    Carrito
                 </h1>
                 <div class="card shadow">
                     <div class="card-header bg-primary text-white">
@@ -109,96 +109,10 @@
                     </div>
                 </div>
 
-                <!-- Recomendaciones de vuelos -->
-                <div class="card shadow mt-4">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="mb-0">
-                            <i class="fas fa-star me-2"></i> Vuelos recomendados
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <!-- Ejemplo de vuelo recomendado 1 -->
-                            <div class="col-md-4 mb-3">
-                                <div class="card h-100">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Madrid - París</h5>
-                                        <p class="card-text">
-                                            <i class="fas fa-calendar-alt me-2"></i> 15/05/2025
-                                            <br>
-                                            <i class="fas fa-plane me-2"></i> Air France
-                                            <br>
-                                            <span class="text-primary fw-bold">135,00 €</span>
-                                        </p>
-                                        <button class="btn btn-sm btn-outline-primary">
-                                            <i class="fas fa-plus-circle me-2"></i> Añadir al carrito
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Ejemplo de vuelo recomendado 2 -->
-                            <div class="col-md-4 mb-3">
-                                <div class="card h-100">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Barcelona - Roma</h5>
-                                        <p class="card-text">
-                                            <i class="fas fa-calendar-alt me-2"></i> 20/05/2025
-                                            <br>
-                                            <i class="fas fa-plane me-2"></i> Alitalia
-                                            <br>
-                                            <span class="text-primary fw-bold">142,75 €</span>
-                                        </p>
-                                        <button class="btn btn-sm btn-outline-primary">
-                                            <i class="fas fa-plus-circle me-2"></i> Añadir al carrito
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Ejemplo de vuelo recomendado 3 -->
-                            <div class="col-md-4 mb-3">
-                                <div class="card h-100">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Valencia - Londres</h5>
-                                        <p class="card-text">
-                                            <i class="fas fa-calendar-alt me-2"></i> 18/05/2025
-                                            <br>
-                                            <i class="fas fa-plane me-2"></i> British Airways
-                                            <br>
-                                            <span class="text-primary fw-bold">155,25 €</span>
-                                        </p>
-                                        <button class="btn btn-sm btn-outline-primary">
-                                            <i class="fas fa-plus-circle me-2"></i> Añadir al carrito
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
 @endsection
 
-@push('scripts')
-<script>
-    $(document).ready(function() {
-        // Aquí puedes añadir la lógica JavaScript para el carrito
-        // Por ejemplo, incrementar/decrementar pasajeros, eliminar items, etc.
-
-        // Función para actualizar el total
-        function actualizarTotal() {
-            // Implementación futura
-        }
-
-        // Ejemplo: Mostrar un vuelo en el carrito al hacer clic en un botón de recomendados
-        $('.btn-outline-primary').click(function() {
-            $('#empty-cart').hide();
-            $('#cart-item-example').clone().attr('id', 'cart-item-1').show().appendTo('tbody');
-            $('#btn-checkout').removeClass('disabled');
-        });
-    });
-</script>
-@endpush
+ 
