@@ -25,13 +25,13 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Ruta para resultados de búsqueda
 Route::get('/buscar-vuelos', [VueloController::class, 'vuelosDisponibles'])->name('buscar.vuelos');
 
-// Ruta para carrito
-Route::controller(CarritoController::class)->group(function () {
-    Route::get('/carrito', 'index')->name('carrito.index');
-    Route::delete('/carrito/eliminar/{id}', 'eliminar')->name('carrito.eliminar');
+// Rutas para carrito y reservas
+Route::prefix('carrito')->controller(CarritoController::class)->group(function () {
+    Route::get('/', 'index')->name('carrito.index');
+    Route::delete('/eliminar/{id}', 'eliminar')->name('carrito.eliminar');
 });
 
-
+Route::post('/reservar/{vuelo}', [CarritoController::class, 'reservar'])->name('reservar.vuelo');
 
 
 // Rutas de contactanos
