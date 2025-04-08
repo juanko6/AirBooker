@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Carrito;
+use App\Models\Vuelo;
 use Illuminate\Support\Facades\Auth;
 
 class CarritoController extends Controller
@@ -12,16 +13,28 @@ class CarritoController extends Controller
     /**
      * Muestra el contenido del carrito del usuario autenticado.
      */
-    public function index()
+    /**
+     * Verifica si el usuario está autenticado y redirige si no lo está.
+     */
+    private function verificarAutenticacion()
     {
-        // Obtener el usuario autenticado
         $user = Auth::user();
 
-         // Verificar si el usuario está autenticado
         if (!$user) {
-            return redirect()->route('login')->withErrors(['message' => 'Debes iniciar sesión para ver el carrito.']);
+            redirect()->route('login')->withErrors(['message' => 'Debes iniciar sesión para realizar esta acción.'])->send();
+            exit;
         }
-        
+
+        return $user;
+    }
+
+    /**
+     * Muestra el contenido del carrito del usuario autenticado.
+     */
+    public function index()
+    {
+        // Verificar autenticación
+        $user = $this->verificarAutenticacion();
 
         // Obtener el carrito del usuario con sus items y vuelos asociados
         $carrito = $user->carrito()->with('items.vuelo.aerolinea')->first();
@@ -35,30 +48,34 @@ class CarritoController extends Controller
         return view('carrito', ['carrito' => $carrito]);
     }
 
-
     /**
      * Agrega un vuelo al carrito del usuario autenticado.
      */
-    public function agregarVuelo(Request $request, $vueloId)
+    public function reservar(Vuelo $vuelo)
     {
-        // Validar la cantidad
-        $request->validate([
-            'cantidad' => 'required|integer|min:1',
-        ]);
-
-        // Obtener el usuario autenticado
-        $user = Auth::user();
+        // Verificar autenticación
+        $user = $this->verificarAutenticacion();
 
         // Obtener o crear el carrito del usuario
-        $carrito = $user->carrito()->firstOrCreate([]);
+        $carrito = $user->carrito ?? $user->carrito()->create();
 
-        // Agregar el vuelo al carrito
+        // Verificar si el vuelo ya está en el carrito
+        if ($carrito->items()->where('vuelo_id', $vuelo->id)->exists()) {
+            return back()->withErrors(['message' => 'Este vuelo ya está en tu carrito.']);
+        }
+
+        // Crear un nuevo CarritoItem
         $carrito->items()->create([
-            'vuelo_id' => $vueloId,
-            'cantidad' => $request->input('cantidad'),
-            'precio_unitario' => 100, // Aquí deberías obtener el precio real del vuelo
+            'vuelo_id' => $vuelo->id,
+            'cantidad' => 1,
+            'precio_unitario' => $vuelo->precio_final,
         ]);
 
-        return redirect()->route('carrito.index')->with('success', 'Vuelo agregado al carrito.');
+        // Redirigir con mensaje de éxito
+        return back()->with('success', 'Vuelo agregado al carrito.');
     }
+
+
+
+
 }
