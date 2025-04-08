@@ -63,6 +63,25 @@ class User extends Authenticatable
     }
 
     /**
+     * Relación: Un usuario tiene un carrito.
+     */
+    public function carrito()
+    {
+        return $this->hasOne(Carrito::class);
+    }
+
+    /**
+     * Hook: Crear un carrito automáticamente al crear un usuario.
+     */
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            // Crear un carrito vacío asociado al usuario
+            $user->carrito()->create();
+        });
+    }
+    
+    /**
      * Obtener las reservas estado "pendientes" del usuario.
      */
     public function reservasPendientes(): HasMany

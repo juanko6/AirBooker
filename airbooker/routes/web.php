@@ -26,7 +26,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/buscar-vuelos', [VueloController::class, 'vuelosDisponibles'])->name('buscar.vuelos');
 
 // Ruta para carrito
-Route::get('/carrito', [CarritoController::class, 'index'])->name('carrito');
+Route::controller(CarritoController::class)->group(function () {
+    Route::get('/carrito', 'index')->name('carrito.index');
+    Route::delete('/carrito/eliminar/{id}', 'eliminar')->name('carrito.eliminar');
+});
 
 
 
