@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('telefono', 25);
             $table->enum('rol', ['Administrador', 'Cliente']);
             $table->string('urlImg')->nullable();
+            $table->decimal('creditos', 8, 2);
             $table->rememberToken();
             $table->timestamps();
         });

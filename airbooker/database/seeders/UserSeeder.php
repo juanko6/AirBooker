@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
          $faker = Faker::create('es_ES'); // Configuración para datos en español
 
          // Crear 50 usuarios
-            for ($i = 0; $i < 15; $i++) {
+            for ($i = 1; $i <= 45; $i++) {
                 DB::table('users')->insert([
                     'name' => $faker->firstName,
                     'apellidos' => $faker->lastName,
@@ -33,6 +33,7 @@ class UserSeeder extends Seeder
                     'rol' => $faker->randomElement(['Administrador', 'Cliente']), // Rol aleatorio
                     'urlImg' => 'https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg',
                     'remember_token' => Str::random(10),
+                    'creditos' => $faker->randomFloat(2, 1000, 1500),
                     'created_at' => now(),
                     'updated_at' => now()
                 ]);

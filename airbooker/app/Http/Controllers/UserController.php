@@ -32,6 +32,15 @@ class UserController extends Controller
         //
     }
 
+    public function infoCartera(Request $request)
+    {
+        try {        
+                return view('cartera');
+            } catch (\Exception $e) {
+                return response()->json(['error' => $e->getMessage()], 500);
+            }
+    }
+
     /**
      * Store a newly created resource in storage.
      */

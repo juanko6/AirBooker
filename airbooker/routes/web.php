@@ -25,6 +25,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/buscar-vuelos', [VueloController::class, 'vuelosDisponibles'])->name('buscar.vuelos');
 
  
+ 
 
 // Rutas de contactanos
 Route::get('/contactanos', [ContactanosController::class, 'showContactanos'])->name('contactanos');
@@ -64,6 +65,6 @@ Route::get('perfil/{id}', [UserController::class, 'show']);
 Route::get('reservas', [ReservaClienteController::class, 'index']);
 
 // Ruta para mostrar la cartera
-Route::get('cartera', [CarteraController::class, 'index']);
+Route::get('cartera', [UserController::class, 'infoCartera']);
 
 //Route::resource('vuelos', VueloController::class)->names('vuelos');
