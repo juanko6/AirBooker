@@ -47,6 +47,7 @@ class CarritoController extends Controller
         // Pasar el carrito a la vista
         return view('carrito', ['carrito' => $carrito]);
     }
+    
 
     /**
      * Agrega un vuelo al carrito del usuario autenticado.
