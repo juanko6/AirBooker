@@ -46,6 +46,10 @@
     <script src="{{ asset('js/listas.js') }}"></script>
     <script src="{{ asset('js/header.js') }}"></script>
 
+
+
+    
+
     @stack('styles') <!-- Para estilos específicos de la vista -->
 </head>
 <body>
