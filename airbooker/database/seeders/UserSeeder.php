@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
                 'pasaporte' => $this->generateUniquePassport($faker),
                 'email' => $faker->unique()->safeEmail,
                 'email_verified_at' => now(),
-                'password' => Hash::make('password'), // Contraseña común para todos ('password')
+                'password' => Hash::make('123456'), // Contraseña común para todos ('123456')
                 'telefono' => $faker->phoneNumber,
                 'rol' => $faker->randomElement(['Administrador', 'Cliente']), // Rol aleatorio
                 'urlImg' => 'https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg',

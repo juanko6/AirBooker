@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             VueloSeeder::class,        
             ReservaSeeder::class, 
             CarritoSeeder::class,
-            CarritoItemSeeder::class,             
+            CarritoItemSeeder::class,   
+            FaqSeeder::class,
         ]);
     }
 }

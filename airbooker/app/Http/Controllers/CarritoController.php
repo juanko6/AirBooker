@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Carrito;
 use App\Models\Vuelo;
 use Illuminate\Support\Facades\Auth;
+use App\Models\CarritoItem;
 
 class CarritoController extends Controller
 {
@@ -45,6 +46,7 @@ class CarritoController extends Controller
         }
 
         // Pasar el carrito a la vista
+        
         return view('carrito', ['carrito' => $carrito]);
     }
     
@@ -69,14 +71,45 @@ class CarritoController extends Controller
         $carrito->items()->create([
             'vuelo_id' => $vuelo->id,
             'cantidad' => 1,
-            'precio_unitario' => $vuelo->precio_final,
+            'precio_unitario' => $vuelo->getPrecio(),
+
         ]);
 
+        // Redirigir al usuario a la página del carrito con mensaje de éxito
+        return redirect()->route('carrito.index')->with('success', 'Vuelo agregado al carrito.');
+    } 
+
+    /**
+     * Elimina un item del carrito del usuario autenticado.
+     */
+    public function eliminar($id)
+    {
+        // Obtener el usuario autenticado
+        $user = Auth::user();
+
+        // Verificar si el usuario está autenticado
+        if (!$user) {
+            return redirect()->route('login')->withErrors(['message' => 'Debes iniciar sesión para realizar esta acción.']);
+        }
+
+        // Buscar el CarritoItem por su ID
+        $item = CarritoItem::find($id);
+
+        // Verificar si el item existe
+        if (!$item) {
+            return back()->withErrors(['message' => 'El item no existe.']);
+        }
+
+        // Verificar si el item pertenece al carrito del usuario
+        if ($item->carrito->user_id !== $user->id) {
+            return back()->withErrors(['message' => 'No tienes permiso para eliminar este item.']);
+        }
+
+        // Eliminar el item
+        $item->eliminar();
+
         // Redirigir con mensaje de éxito
-        return back()->with('success', 'Vuelo agregado al carrito.');
+        return back()->with('success', 'Item eliminado del carrito.');
     }
-
-
-
-
 }
+ 

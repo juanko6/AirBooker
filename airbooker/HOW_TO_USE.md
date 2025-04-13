@@ -71,3 +71,17 @@ Agregando nuevas imagenes.
 
 # falta
 Añadir UrlImagenDestino tipo string en la tabla vuelo por defecto sera img-default.jpg
+
+
+
+
+#Actualizar contraseña de user:
+
+Desde la consola:
+    php artisan tinker
+    use Illuminate\Support\Facades\Hash;
+    $newPassword = 'password';
+    $hashedPassword = Hash::make($newPassword);
+
+Desde consola SQL:
+    UPDATE users SET password = 'HASH' WHERE id = ID_USER;

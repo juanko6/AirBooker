@@ -31,4 +31,10 @@ class CarritoItem extends Model
     {
         return $this->belongsTo(Vuelo::class);
     }
+
+    // iliminar un item del carrito
+    public function eliminar()
+    {
+        return $this->delete();
+    }
 }
