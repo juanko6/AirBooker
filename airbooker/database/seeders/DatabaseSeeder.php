@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             CarritoSeeder::class,
             CarritoItemSeeder::class,   
             FaqSeeder::class,
+            NewsletterSubscriberSeeder::class,
         ]);
     }
 }
