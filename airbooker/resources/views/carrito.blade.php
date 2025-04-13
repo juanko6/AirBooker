@@ -21,8 +21,7 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Vuelo</th>
-                                        <th>Origen - Destino</th>
+                                        <th>Vuelo</th> 
                                         <th>Fecha y Hora</th>
                                         <th>Aerolínea</th>
                                         <th>Precio</th>
@@ -32,10 +31,7 @@
                                 <tbody>
                                     @if ($carrito && $carrito->items->isNotEmpty())
                                         @foreach ($carrito->items as $item)
-                                            <tr>
-                                                <td>
-                                                    <span class="badge bg-primary">{{ $item->vuelo->id }}</span>
-                                                </td>
+                                            <tr> 
                                                 <td>
                                                     <strong>{{ $item->vuelo->origen }}</strong>
                                                     <i class="fas fa-arrow-right mx-2"></i>
@@ -46,17 +42,12 @@
                                                     <br>
                                                     <small class="text-muted">{{ \Carbon\Carbon::parse($item->vuelo->hora)->format('H:i') }}h</small>
                                                 </td>
+                                                
                                                 <td>
-                                                    <img src="{{ asset('images/aerolinias/' . $item->vuelo->aerolinea->nombre . '.png') }}" 
-                                                         alt="{{ $item->vuelo->aerolinea->nombre }}" height="30">
+                                                     <img src="{{ asset($item->vuelo->aerolinea->urlLogo) }}" lt="{{ $item->vuelo->aerolinea->nombre }}" class="img-fluid" style="height: 50px; width: 50px; object-fit: contain;"> 
                                                 </td>
+
                                                 <td>
-                                                    <div class="input-group input-group-sm" style="width: 100px;">
-                                                        <button class="btn btn-outline-secondary" type="button"><i class="fas fa-minus"></i></button>
-                                                        <input type="text" class="form-control text-center" value="{{ $item->cantidad }}">
-                                                        <button class="btn btn-outline-secondary" type="button"><i class="fas fa-plus"></i></button>
-                                                    </div>
-                                                    <br>
                                                     <strong class="text-primary">{{ number_format($item->precio_unitario, 2) }} €</strong>
                                                     @if ($item->vuelo->oferta)
                                                         <br>
@@ -94,7 +85,7 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-md-6">
-                                <a href="{{ url('/') }}" class="btn btn-outline-secondary">
+                                <a href="{{ url()->previous() }}" class="btn btn-outline-secondary">
                                     <i class="fas fa-arrow-left me-2"></i> Seguir buscando
                                 </a>
                             </div>
@@ -103,19 +94,19 @@
                                     <div class="mb-2">
                                         <span class="text-muted">Subtotal:</span>
                                         <strong class="ms-2">{{ number_format($carrito->items->sum(function ($item) {
-                                            return $item->cantidad * $item->precio_unitario;
+                                            return  $item->precio_unitario;
                                         }), 2) }} €</strong>
                                     </div>
                                     <div class="mb-2">
                                         <span class="text-muted">Descuento:</span>
                                         <strong class="ms-2 text-success">{{ number_format($carrito->items->sum(function ($item) {
-                                            return $item->vuelo->oferta ? ($item->cantidad * $item->precio_unitario * $item->vuelo->oferta->ProcentajeDescuento / 100) : 0;
+                                            return $item->vuelo->oferta ? ( $item->precio_unitario * $item->vuelo->oferta->ProcentajeDescuento / 100) : 0;
                                         }), 2) }} €</strong>
                                     </div>
                                     <div class="mb-3">
                                         <span class="text-muted h5">Total:</span>
                                         <strong class="ms-2 h5 text-primary">{{ number_format($carrito->items->sum(function ($item) {
-                                            return $item->cantidad * $item->precio_unitario * (1 - ($item->vuelo->oferta ? $item->vuelo->oferta->ProcentajeDescuento / 100 : 0));
+                                            return  $item->precio_unitario * (1 - ($item->vuelo->oferta ? $item->vuelo->oferta->ProcentajeDescuento / 100 : 0));
                                         }), 2) }} €</strong>
                                     </div>
                                     <button class="btn btn-primary btn-lg" id="btn-checkout">
