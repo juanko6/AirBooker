@@ -56,9 +56,23 @@ class Vuelo extends Model
     }
 
     /**
+     * Relación con CarritoItem
+     */
+    public function carritoItems()
+    {
+        return $this->hasMany(CarritoItem::class);
+    }
+
+    // obtener precio del vuelo
+    public function getPrecio(): float
+    {
+        return $this->precio;
+    }
+
+    /**
      * Calcular precio con descuento si hay oferta activa
      */
-    public function getPrecioConDescuento()
+    public function getPrecioConDescuento():float
     {
         if ($this->oferta && $this->oferta->estado === 'Activa') {
             return $this->precio * (1 - $this->oferta->ProcentajeDescuento / 100);

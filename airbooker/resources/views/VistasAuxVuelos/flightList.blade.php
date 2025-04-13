@@ -1,5 +1,22 @@
   <div class="styl-card-vuelos-disponibles">
-    
+    <!-- Mensajes de éxito o error -->
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+    @if($errors->any())
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
     <div class="mb-4">
         <form method="GET" action="{{ route('buscar.vuelos') }}" id="filter-form">          
             <div class="d-flex justify-content-between align-items-center">
@@ -100,10 +117,13 @@
 
                         <!-- Botón de reserva con efecto -->
                         <div class="card-footer bg-white border-0">
-                            <a href="#" class="btn btn-primary w-100 fw-bold btn-reserva">
-                                Reservar Ahora 
-                                <i class="fas fa-arrow-right ms-2"></i>
-                            </a>
+                            <form action="{{ route('reservar.vuelo', $vuelo) }}" method="POST" style="display: inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-primary w-100 fw-bold btn-reserva">
+                                    Reservar Ahora
+                                    <i class="fas fa-arrow-right ms-2"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
