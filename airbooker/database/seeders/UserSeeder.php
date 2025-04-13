@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
          $faker = Faker::create('es_ES'); // Configuración para datos en español
 
          // Crear 50 usuarios
-            for ($i = 0; $i < 50; $i++) {
+            for ($i = 0; $i < 15; $i++) {
                 DB::table('users')->insert([
                     'name' => $faker->firstName,
                     'apellidos' => $faker->lastName,
