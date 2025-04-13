@@ -22,7 +22,10 @@ class DatabaseSeeder extends Seeder
             AerolineasSeeder::class,      
             OfertaSeeder::class,                   
             VueloSeeder::class,        
-            ReservaSeeder::class,              
+            ReservaSeeder::class, 
+            CarritoSeeder::class,
+            CarritoItemSeeder::class,   
+            FaqSeeder::class,
         ]);
     }
 }

@@ -3,8 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     HomeController,
-    ContactanosController,
-    LoginController,
+    ContactanosController, 
     SignUpController,
     UserController,
     AdminController,
@@ -15,16 +14,31 @@ use App\Http\Controllers\{
     VuelosDisponiblesController,
     AerolineaController,
     OfertaController,
-};
+    CarritoController,
+}; 
+use App\Http\Controllers\Auth\LoginController;
 
 // Rutas públicas
 Route::get('/', [HomeController::class, 'index'])->name('home'); 
+Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-// Nueva ruta para resultados de búsqueda
+
+// Ruta para resultados de búsqueda
 Route::get('/buscar-vuelos', [VueloController::class, 'vuelosDisponibles'])->name('buscar.vuelos');
 
- 
+// Rutas para carrito y reservas
+Route::prefix('carrito')->controller(CarritoController::class)->group(function () {
+    Route::get('/', 'index')->name('carrito.index');
+    Route::delete('/eliminar/{id}', 'eliminar')->name('carrito.eliminar');
+});
+
+
+
+Route::post('/reservar/{vuelo}', [CarritoController::class, 'reservar'])->name('reservar.vuelo');
+
 
 // Rutas de contactanos
 Route::get('/contactanos', [ContactanosController::class, 'showContactanos'])->name('contactanos');
@@ -33,8 +47,8 @@ Route::get('/contactanos', [ContactanosController::class, 'showContactanos'])->n
 Route::prefix('auth')->group(function () {
     Route::get('signup', [SignUpController::class, 'showSignUp'])->name('signup');
     Route::post('signup', [SignUpController::class, 'signup']);
-    Route::get('login', [LoginController::class, 'showLogin'])->name('login');
-    Route::post('login', [LoginController::class, 'login']);
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login.get');
+    Route::post('login', [LoginController::class, 'login'])->name('login.post');
 });
 
 // Rutas del panel de administración
@@ -64,6 +78,6 @@ Route::get('perfil/{id}', [UserController::class, 'show']);
 Route::get('reservas', [ReservaClienteController::class, 'index']);
 
 // Ruta para mostrar la cartera
-Route::get('cartera', [CarteraController::class, 'index']);
+Route::get('cartera', [UserController::class, 'infoCartera']);
 
 //Route::resource('vuelos', VueloController::class)->names('vuelos');

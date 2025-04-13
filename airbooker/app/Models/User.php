@@ -22,13 +22,15 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'apellidos',
-        'email',
-        'password',
-        'dni',
-        'pasaporte',
         'telefono',
+        'address',
+        'dni',        
+        'pasaporte',
         'rol',
+        'email',        
+        'password',
         'urlImg',
+        'creditos',
     ];
 
     /**
@@ -51,6 +53,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    
     /**
      * Obtener las reservas del usuario.
      */
@@ -59,6 +62,50 @@ class User extends Authenticatable
         return $this->hasMany(Reserva::class);
     }
 
+    /**
+     * Relación: Un usuario tiene un carrito.
+     */
+    public function carrito()
+    {
+        return $this->hasOne(Carrito::class);
+    }
+
+    /**
+     * Hook: Crear un carrito automáticamente al crear un usuario.
+     */
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            // Crear un carrito vacío asociado al usuario
+            $user->carrito()->create();
+        });
+    }
+    
+    /**
+     * Obtener las reservas estado "pendientes" del usuario.
+     */
+    public function reservasPendientes(): HasMany
+    {
+        return $this->hasMany(Reserva::class)->where('estado', 'pendiente');
+    }
+
+    /**
+     * Obtener las reservas estado "confirmadas" del usuario.
+     */
+    public function reservasConfirmadas(): HasMany
+    {
+        return $this->hasMany(Reserva::class)->where('estado', 'confirmada');
+    }
+    /**
+     * Obtener las reservas estado "canceladas" del usuario.
+     */
+    public function reservasCanceladas(): HasMany
+    {
+        return $this->hasMany(Reserva::class)->where('estado', 'cancelada');
+    }
+ 
+  
+ 
     /**
      * Verificar si el usuario es administrador.
      */
@@ -94,5 +141,11 @@ class User extends Authenticatable
         ];
     }
 
-    
+    /* 
+    * obtener credito total de usuario
+    */
+    public function getCreditos(): float
+    {
+        return $this->creditos;
+    }
 }
