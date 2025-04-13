@@ -15,6 +15,7 @@ use App\Http\Controllers\{
     AerolineaController,
     OfertaController,
     CarritoController,
+    FooterController,
 }; 
 use App\Http\Controllers\Auth\LoginController;
 
@@ -78,6 +79,9 @@ Route::get('perfil/{id}', [UserController::class, 'show']);
 Route::get('reservas', [ReservaClienteController::class, 'index']);
 
 // Ruta para mostrar la cartera
-Route::get('cartera', [UserController::class, 'infoCartera']);
+Route::get('cartera', [UserController::class, 'infoCartera']); 
 
-//Route::resource('vuelos', VueloController::class)->names('vuelos');
+
+
+// Para manejar la suscripción:
+Route::post('/subscribe', [FooterController::class, 'subscribe'])->name('subscribe');

@@ -30,20 +30,53 @@ class UserSeeder extends Seeder
 
         
         // Crear 45 usuarios utilizando el modelo User
+        // Crear usuario Administrador por defecto
+        $admin = User::create([
+            'name' => 'Administrador',
+            'apellidos' => 'AirBooker',
+            'dni' => $this->generateUniqueDNI($faker),
+            'pasaporte' => $this->generateUniquePassport($faker),
+            'email' => 'admin@airbooker.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456'), // Contraseña para el administrador
+            'telefono' => $faker->phoneNumber,
+            'rol' => 'Administrador',
+            'urlImg' => 'https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg',
+            'remember_token' => Str::random(10),
+            'creditos' => 1500.00,
+        ]);
+
+        // Crear usuario Cliente por defecto
+        $cliente = User::create([
+            'name' => 'Cliente',
+            'apellidos' => 'AirBooker',
+            'dni' => $this->generateUniqueDNI($faker),
+            'pasaporte' => $this->generateUniquePassport($faker),
+            'email' => 'cliente@airbooker.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456'), // Contraseña para el cliente
+            'telefono' => $faker->phoneNumber,
+            'rol' => 'Cliente',
+            'urlImg' => 'https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg',
+            'remember_token' => Str::random(10),
+            'creditos' => 1000.00,
+        ]);
+
+        // Crear 45 usuarios aleatorios
         for ($i = 1; $i <= 45; $i++) {
             $user = User::create([
-                'name' => $faker->firstName,
-                'apellidos' => $faker->lastName,
-                'dni' => $this->generateUniqueDNI($faker),
-                'pasaporte' => $this->generateUniquePassport($faker),
-                'email' => $faker->unique()->safeEmail,
-                'email_verified_at' => now(),
-                'password' => Hash::make('123456'), // Contraseña común para todos ('123456')
-                'telefono' => $faker->phoneNumber,
-                'rol' => $faker->randomElement(['Administrador', 'Cliente']), // Rol aleatorio
-                'urlImg' => 'https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg',
-                'remember_token' => Str::random(10),
-                'creditos' => $faker->randomFloat(2, 1000, 1500),
+            'name' => $faker->firstName,
+            'apellidos' => $faker->lastName,
+            'dni' => $this->generateUniqueDNI($faker),
+            'pasaporte' => $this->generateUniquePassport($faker),
+            'email' => $faker->unique()->safeEmail,
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456'), // Contraseña común para todos ('123456')
+            'telefono' => $faker->phoneNumber,
+            'rol' => $faker->randomElement(['Administrador', 'Cliente']), // Rol aleatorio
+            'urlImg' => 'https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg',
+            'remember_token' => Str::random(10),
+            'creditos' => $faker->randomFloat(2, 1000, 1500),
             ]);
 
             // Verificar que el carrito se haya creado automáticamente
