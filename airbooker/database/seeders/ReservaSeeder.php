@@ -21,7 +21,7 @@ class ReservaSeeder extends Seeder
         // Generar 80 reservas
         for ($i = 0; $i < 80; $i++) {
             // Elegir un usuario y un vuelo aleatorio
-            $userId = $userIds->random();
+            $userId = rand(1, 45);
             $vueloId = $vueloIds->random();
 
             // Definir estados aleatorios

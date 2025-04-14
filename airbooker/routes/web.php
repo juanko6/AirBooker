@@ -3,8 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     HomeController,
-    ContactanosController,
-    LoginController,
+    ContactanosController, 
     SignUpController,
     UserController,
     AdminController,
@@ -15,26 +14,31 @@ use App\Http\Controllers\{
     VuelosDisponiblesController,
     AerolineaController,
     OfertaController,
-};
-
-/*
-Que hace ->name('') ?  Si en el futuro cambias la URL de /buscar-vuelos a /vuelos-disponibles, 
-solo necesitas actualizar la definición de la ruta en web.php. Todas las 
-referencias usando route('buscador.vuelos') seguirán funcionando correctamente.
-*/
+    CarritoController,
+    FooterController,
+}; 
+use App\Http\Controllers\Auth\LoginController;
 
 // Rutas públicas
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::post('/buscar-vuelos', [HomeController::class, 'buscar'])->name('vuelos.buscar'); 
+Route::get('/', [HomeController::class, 'index'])->name('home'); 
+Auth::routes();
+ 
 
 
-// Nueva ruta para resultados de búsqueda
-Route::get('/vuelos-disponibles', [VueloController::class, 'vuelosDisponibles']) ->name('vuelos.disponibles');
+
+// Ruta para resultados de búsqueda
+Route::get('/buscar-vuelos', [VueloController::class, 'vuelosDisponibles'])->name('buscar.vuelos');
+
+// Rutas para carrito y reservas
+Route::prefix('carrito')->controller(CarritoController::class)->group(function () {
+    Route::get('/', 'index')->name('carrito.index');
+    Route::delete('/eliminar/{id}', 'eliminar')->name('carrito.eliminar');
+});
 
 
-// Rutas del buscador de vuelos
-Route::get('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos'])->name('buscador.vuelos');
-Route::post('/buscar-vuelos', [BuscadorVueloController::class, 'BuscarVuelos']);
+
+Route::post('/reservar/{vuelo}', [CarritoController::class, 'reservar'])->name('reservar.vuelo');
+
 
 // Rutas de contactanos
 Route::get('/contactanos', [ContactanosController::class, 'showContactanos'])->name('contactanos');
@@ -43,8 +47,8 @@ Route::get('/contactanos', [ContactanosController::class, 'showContactanos'])->n
 Route::prefix('auth')->group(function () {
     Route::get('signup', [SignUpController::class, 'showSignUp'])->name('signup');
     Route::post('signup', [SignUpController::class, 'signup']);
-    Route::get('login', [LoginController::class, 'showLogin'])->name('login');
-    Route::post('login', [LoginController::class, 'login']);
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('login.get');
+    Route::post('login', [LoginController::class, 'login'])->name('login.post');
 });
 
 // Rutas del panel de administración
@@ -60,19 +64,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('reservas', ReservaController::class);
     Route::resource('vuelos', VueloController::class);
     Route::resource('aerolineas', AerolineaController::class);
-    Route::resource('ofertas', OfertaController::class);
-
-    Route::get('/reservas/{id}/edit', [ReservaController::class, 'edit'])->name('reservas.edit');
-    Route::put('/reservas/{id}', [ReservaController::class, 'update'])->name('reservas.update');
-
-    Route::get('/aerolineas/{aerolinea}/edit', [AerolineaController::class, 'edit']);
-
-    Route::get('/ofertas/{oferta}/edit', [OfertaController::class, 'edit'])->name('ofertas.edit');
-
-    Route::get('/vuelos/{vuelo}/edit', [VueloController::class, 'edit']);
-
-
-
+    Route::resource('ofertas', OfertaController::class); 
 
 });
 
@@ -86,6 +78,9 @@ Route::get('perfil/{id}', [UserController::class, 'show']);
 Route::get('reservas', [ReservaClienteController::class, 'index']);
 
 // Ruta para mostrar la cartera
-Route::get('cartera', [CarteraController::class, 'index']);
+Route::get('cartera', [UserController::class, 'infoCartera']); 
 
-Route::resource('vuelos', VueloController::class)->names('vuelos');
+
+
+// Para manejar la suscripción:
+Route::post('/subscribe', [FooterController::class, 'subscribe'])->name('subscribe');
