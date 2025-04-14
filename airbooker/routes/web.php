@@ -71,16 +71,22 @@ Route::prefix('admin')->group(function () {
 Route::get('/api/usuarios', [UserController::class, 'buscar']);
 Route::get('/api/vuelos', [VueloController::class, 'filtrar']);
 
+
 // Ruta para mostrar el perfil
-Route::get('perfil/{id}', [UserController::class, 'show']);
+//Route::get('user/perfil/{id}', [UserController::class, 'show']);
 
 // Ruta para mostrar reservas de un usuario
-Route::get('reservas', [ReservaClienteController::class, 'index']);
+//Route::get('reservas', [ReservaClienteController::class, 'index']);
 
 // Ruta para mostrar la cartera
-Route::get('cartera', [UserController::class, 'infoCartera']); 
+//Route::get('user/cartera', [UserController::class, 'infoCartera']); 
 
 
+Route::prefix('user')->group(function() {
+    Route::get('perfil/{id}', [UserController::class, 'show']);
+    Route::get('reservas', [ReservaClienteController::class, 'index']);
+    Route::get('cartera', [UserController::class, 'infoCartera']);
+});
 
 // Para manejar la suscripción:
 Route::post('/subscribe', [FooterController::class, 'subscribe'])->name('subscribe');

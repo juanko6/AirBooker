@@ -17,7 +17,7 @@ class ReservaClienteController extends Controller
             try {
                 $reservas = Reserva::paginate(8);
         
-                return view('reservasCliente', compact('reservas'));
+                return view('user.reservasCliente', compact('reservas'));
             } catch (\Exception $e) {
                 return response()->json(['error' => $e->getMessage()], 500);
             }

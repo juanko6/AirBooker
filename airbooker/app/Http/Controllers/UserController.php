@@ -36,7 +36,7 @@ class UserController extends Controller
     public function infoCartera(Request $request)
     {
         try {        
-                return view('cartera');
+                return view('user.cartera');
             } catch (\Exception $e) {
                 return response()->json(['error' => $e->getMessage()], 500);
             }
@@ -83,7 +83,7 @@ class UserController extends Controller
     public function show($id)
     {
         //Muestra la vista de perfil con los datos del usuario con el ID suministrado
-        return view('perfil', ['usuario' => User::findorFail($id)]);
+        return view('user.perfil', ['usuario' => User::findorFail($id)]);
     }
 
     /**

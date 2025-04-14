@@ -13,7 +13,7 @@
     </style>
 </head>
 
-@extends('layoutCliente')
+@extends('user.layoutCliente')
 
 
 @section('DashboardContent')

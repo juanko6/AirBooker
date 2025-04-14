@@ -42,14 +42,14 @@
 <script>
 function loadContent(view) {
     $.ajax({
-        url: "/" + view,
+        url: "/user/" + view,
         type: "GET",
         dataType: "html",
         success: function (data) {
             if (!data.includes("<html")) { // ✅ Verifica que no esté cargando todo el layout
                 $("#content").html(data);
             } else {
-                window.location.href = "/" + view; // ✅ Si recarga el layout, redirige a la URL completa
+                window.location.href = "/user/" + view; // ✅ Si recarga el layout, redirige a la URL completa
             }
         },
         error: function () {

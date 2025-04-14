@@ -1,4 +1,4 @@
-@extends('layoutCliente')
+@extends('user.layoutCliente')
 
 
 @section('DashboardContent')
