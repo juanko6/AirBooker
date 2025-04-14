@@ -25,7 +25,6 @@ Auth::routes();
  
 
 
-
 // Ruta para resultados de búsqueda
 Route::get('/buscar-vuelos', [VueloController::class, 'vuelosDisponibles'])->name('buscar.vuelos');
 
