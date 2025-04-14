@@ -148,4 +148,20 @@ class User extends Authenticatable
     {
         return $this->creditos;
     }
+
+    /**
+     * Actualizar el saldo del usuario.
+     */
+    public function actualizarSaldo(float $total): bool
+    {
+        if ($this->creditos - $total < 0) {
+            return false;
+        }
+
+        $this->creditos -= $total;
+        $this->save();
+
+        return true;
+    }
+ 
 }

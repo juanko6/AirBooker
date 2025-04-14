@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Carrito;
 use App\Models\Vuelo;
+use App\Models\Reserva;
+
 use Illuminate\Support\Facades\Auth;
 use App\Models\CarritoItem;
 
@@ -60,7 +62,7 @@ class CarritoController extends Controller
         $user = $this->verificarAutenticacion();
 
         // Obtener o crear el carrito del usuario
-        $carrito = $user->carrito ?? $user->carrito()->create();
+        $carrito = $user->carrito ?? $user->carrito()->crear();
 
         // Verificar si el vuelo ya está en el carrito
         if ($carrito->items()->where('vuelo_id', $vuelo->id)->exists()) {
@@ -111,5 +113,51 @@ class CarritoController extends Controller
         // Redirigir con mensaje de éxito
         return back()->with('success', 'Item eliminado del carrito.');
     }
+
+
+
+    /**
+     * Procesar el compra del carrito.
+     */
+    public function procesarCompra(Request $request)
+    {
+        // Verificar autenticación
+        $user = $this->verificarAutenticacion();
+
+        // Verificar si el usuario es un cliente
+        if ($user->rol !== 'Cliente') {
+            return back()->withErrors(['message' => 'Solo los clientes pueden realizar compras.']);
+        }
+
+        // Obtener el carrito del usuario
+        $carrito = $user->carrito()->with('items.vuelo.oferta')->first();
+
+        // Verificar si el carrito existe y tiene items
+        if (!$carrito || $carrito->items->isEmpty()) {
+            return back()->withErrors(['message' => 'Tu carrito está vacío. Agrega vuelos para continuar.']);
+        }
+
+
+        // Calcular el total a pagar (incluyendo descuentos)
+                // Calcular el total a pagar
+        $total = $carrito->calcularTotal();
+         
+        // Verificar si el usuario tiene suficiente crédito
+        if ($user->actualizarSaldo($total)) {
+            // Realizar la compra 
+            foreach ($carrito->items as $item) {
+                Reserva::crearReserva($user->id, $item->vuelo_id, $item->precio_unitario);
+            }            
+        }else{
+            return back()->withErrors(['message' => 'Saldo insuficiente. Por favor, recarga tu saldo en Perfil -> Cartera.']);
+        }
+            
+        
+        // Vaciar el carrito
+        $carrito->items()->delete();
+
+        // Redirigir a la vista de checkout
+        return redirect()->route('checkout')->with('success', 'Compra realizada con éxito.');
+
+    }
 }
- 
