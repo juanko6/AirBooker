@@ -9,6 +9,17 @@
                 <h1 class="text-center mb-4" style="color: #1C49A9; font-family: 'Rubik Mono One', monospace;">
                     Carrito
                 </h1>
+                <!-- Mensajes de Error -->
+                @if($errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                @endif
                 <div class="card shadow">
                     <div class="card-header bg-primary text-white">
                         <h5 class="mb-0">
@@ -109,12 +120,15 @@
                                             return  $item->precio_unitario * (1 - ($item->vuelo->oferta ? $item->vuelo->oferta->ProcentajeDescuento / 100 : 0));
                                         }), 2) }} €</strong>
                                     </div>
-                                    <button class="btn btn-primary btn-lg" id="btn-checkout">
-                                        <i class="fas fa-credit-card me-2"></i> Proceder al pago
-                                    </button>
+                                    <form action="{{ route('procesar.compra') }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary btn-lg" id="btn-checkout">
+                                            <i class="fas fa-credit-card me-2"></i> Pagar ahora
+                                        </button>
+                                    </form>
                                 @else
                                     <button class="btn btn-primary btn-lg disabled" id="btn-checkout">
-                                        <i class="fas fa-credit-card me-2"></i> Proceder al pago
+                                        <i class="fas fa-credit-card me-2"></i> Pagar ahora
                                     </button>
                                 @endif
                             </div>
