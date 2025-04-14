@@ -39,14 +39,25 @@
                             </li>
 
                             <li class="opciones-menu">
-                                <a class="btn btn-access ms-3 pulse"href="{{ url('/perfil') }}"><i class="fas fa-user me-2"></i> PERFIL</a>
+                                <a class="nav-link"  href="{{ url('/perfil') }}"><i class="fas fa-user me-2"></i> PERFIL</a>
                             </li>
                         @elseif(Auth::user()->rol === 'Administrador')
                             <li class="opciones-menu">
-                                <a class="btn btn-access ms-3 pulse" href="{{ url('/admin') }}"><i class="fas fa-user me-2"></i> DASHBOARD</a>
+                                <a  class="nav-link"  href="{{ url('/admin') }}"><i class="fas fa-user me-2"></i> DASHBOARD</a>
                             </li>
+                            
                         @endif
+                        <li class="opciones-menu">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="btn btn-access ms-3 pulse">
+                                    <i class="fas fa-user me-2"></i> Log out
+                                </button>
+                            </form>
+                        </li>
                     @endauth
+
+                   
                 </ul>
 
                 <!-- Botón Acceder -->
