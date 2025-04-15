@@ -13,6 +13,16 @@
             <img src="{{ asset('images/registrarse.png') }}" alt="Registro" style="width: 300px;">
         </div>
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('register') }}">
             @csrf
             <div class="row g-3">
@@ -20,14 +30,21 @@
                     <input type="text" name="name" class="form-control" placeholder="Nombre" required value="{{ old('name') }}">
                 </div>
                 <div class="col-md-6">
-                    <input type="text" name="lastname" class="form-control" placeholder="Apellidos" required value="{{ old('lastname') }}">
+                    <input type="text" name="apellidos" class="form-control" placeholder="Apellidos" required value="{{ old('apellidos') }}">
                 </div>
 
                 <div class="col-md-6">
                     <input type="email" name="email" class="form-control" placeholder="Email" required value="{{ old('email') }}">
                 </div>
                 <div class="col-md-6">
-                    <input type="text" name="phone" class="form-control" placeholder="Número teléfono" required value="{{ old('phone') }}">
+                    <input type="text" name="telefono" class="form-control" placeholder="Número teléfono" required value="{{ old('telefono') }}">
+                </div>
+
+                <div class="col-md-6">
+                    <input type="text" name="dni" class="form-control" placeholder="DNI" required value="{{ old('dni') }}">
+                </div>
+                <div class="col-md-6">
+                    <input type="text" name="pasaporte" class="form-control" placeholder="Pasaporte" required value="{{ old('pasaporte') }}">
                 </div>
 
                 <div class="col-md-6">
@@ -53,4 +70,5 @@
         </form>
     </div>
 </div>
+
 @endsection
