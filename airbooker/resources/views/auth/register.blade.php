@@ -51,7 +51,6 @@
                 </div>
             </div>
         </form>
->>>>>>> raul
     </div>
 </div>
 @endsection
