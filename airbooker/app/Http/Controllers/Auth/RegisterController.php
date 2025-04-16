@@ -51,11 +51,23 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name'       => ['required', 'string', 'max:255'],
             'apellidos'  => ['required', 'string', 'max:255'],
-            'email'      => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'telefono'   => ['required', 'string', 'max:20'],
-            'dni'        => ['required', 'string', 'max:20', 'unique:users'],
-            'pasaporte'  => ['required', 'string', 'max:50'],
+            'email'      => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users',
+                'regex:/^[^@]+@[^@]+\.[^@]+$/'
+            ],
+            'telefono'   => ['required', 'regex:/^[0-9]{9}$/'],
+            'dni'        => ['required', 'regex:/^[0-9]{8}[A-Za-z]$/', 'unique:users'],
+            'pasaporte'  => ['required', 'regex:/^[A-Za-z]{3}[0-9]{6}$/', 'unique:users'],
             'password'   => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'email.regex'      => 'El email debe contener un "@" y al menos un punto después.',
+            'telefono.regex'   => 'El teléfono debe tener exactamente 9 dígitos.',
+            'dni.regex'        => 'El DNI debe tener 8 números seguidos de una letra.',
+            'pasaporte.regex'  => 'El pasaporte debe tener 3 letras seguidas de 6 números.',
         ]);
     }
 
