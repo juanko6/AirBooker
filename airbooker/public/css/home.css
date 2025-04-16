@@ -86,7 +86,8 @@
 
 /* Estilos para cada tarjeta */
 .styl-card-offers-vuelo .offer-card {
-    background: linear-gradient(to right, #003366 60%, #003366c9 ); /* Efecto horizontal */  color: white;
+    background: linear-gradient(to right, #003366 60%, #003366c9 ); /* Efecto horizontal */ 
+    color: white;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     height: auto; /* Altura dinámica */

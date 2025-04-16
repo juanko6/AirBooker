@@ -16,7 +16,7 @@ body {
     top: 40px; /* Altura del top-bar */
     width: 100%;
     z-index: 999;
-    background: linear-gradient(135deg, #003399 0%, #0055ff 100%);
+    background: linear-gradient(to right, #003366 60%, #003366c9 ); /* Efecto horizontal */ 
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
 }

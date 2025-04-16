@@ -39,19 +39,20 @@
 }
 
 .styl-card-vuelos-disponibles .card-header {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(to right, #003366 60%, #003366c9 ); /* Efecto horizontal */ 
   padding: 1rem;
 }
 
 .styl-card-vuelos-disponibles .btn-primary {
   transition: all var(--transition-time);
+  background: linear-gradient(to right, #003366 60%, #003366c9 ); /* Efecto horizontal */ 
 }
 
 .styl-card-vuelos-disponibles .btn-primary:hover,
 .btn-reserva:hover {
   transform: scale(1.02);
-  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
-  background-color: var(--secondary-color) !important;
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4); 
+  background: linear-gradient(to right, #003366c9 30%, #0033665c 100%); /* Efecto horizontal */ 
 }
 
 /* Estilos para la ruta del vuelo */
@@ -204,7 +205,7 @@
   
   .styl-btn-buscador-vuelos {
     background: rgb(0, 172, 238);
-    background: linear-gradient(0deg, rgba(0, 172, 238, 1) 0%, rgba(2, 126, 251, 1) 100%);
+    background: linear-gradient(to right, #003366 60%, #003366c9 ); /* Efecto horizontal */ 
     border: none;
     line-height: calc(42px * 1.4); /* Aumenta el alto de la línea en un 40% */
   }

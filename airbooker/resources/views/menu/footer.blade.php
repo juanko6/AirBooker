@@ -80,7 +80,9 @@
                                     <form id="subscribe-form">
                                         @csrf
                                         <input type="email" name="email" id="email" placeholder="Email Address" required>
-                                        <button type="submit"><i class="fab fa-telegram-plane"></i></button>
+                                        <button type="submit" style="background: linear-gradient(to right, #003366 60%, #003366c9);">
+                                            <i class="fab fa-telegram-plane"></i>
+                                        </button>
                                     </form>
                                     <div id="subscribe-message" class="mt-3"></div> <!-- Contenedor para el mensaje -->
                                 </div>
