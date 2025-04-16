@@ -6,7 +6,7 @@
     <div class="container mt-5 pt-5">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center mb-4" style="color: #1C49A9; font-family: 'Rubik Mono One', monospace;">
+                <h1 class="text-center mb-4" style="background: linear-gradient(to right, #003366 60%, #003366c9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: 'Rubik Mono One', monospace;">
                     Carrito
                 </h1>
                 <!-- Mensajes de Error -->
@@ -21,7 +21,7 @@
                     </div>
                 @endif
                 <div class="card shadow">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header text-white" style="background: linear-gradient(to right, #003366 60%, #003366c9);">
                         <h5 class="mb-0">
                             <i class="fas fa-shopping-cart me-2"></i> Vuelos seleccionados
                         </h5>
@@ -122,7 +122,7 @@
                                     </div>
                                     <form action="{{ route('procesar.compra') }}" method="POST" style="display: inline;">
                                         @csrf
-                                        <button type="submit" class="btn btn-primary btn-lg" id="btn-checkout">
+                                        <button type="submit" class="btn btn-primary btn-lg" id="btn-checkout" style="background: linear-gradient(to right, #003366 60%, #003366c9);" onmouseover="this.style.background='linear-gradient(to right, #003366c9 30%, #0033665c 100%)'" onmouseout="this.style.background='linear-gradient(to right, #003366 60%, #003366c9)'">
                                             <i class="fas fa-credit-card me-2"></i> Pagar ahora
                                         </button>
                                     </form>
