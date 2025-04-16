@@ -72,3 +72,95 @@
 </div>
 
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('form');
+        const submitButton = form.querySelector('button[type="submit"]');
+
+        // Guarda la posición original para volver a ella
+        let isMoving = false;
+
+        const isValid = () => {
+            let valid = true;
+
+            const name = form.name.value.trim();
+            const apellidos = form.apellidos.value.trim();
+            const email = form.email.value.trim();
+            const telefono = form.telefono.value.trim();
+            const dni = form.dni.value.trim();
+            const pasaporte = form.pasaporte.value.trim();
+            const password = form.password.value;
+            const confirmPassword = form.password_confirmation.value;
+            const terms = form.terms.checked;
+
+            const emailRegex = /^[^@]+@[^@]+\.[^@]+$/;
+            const telefonoRegex = /^[0-9]{9}$/;
+            const dniRegex = /^[0-9]{8}[A-Za-z]$/;
+            const pasaporteRegex = /^[A-Za-z]{3}[0-9]{6}$/;
+
+            // Elimina errores previos
+            form.querySelectorAll('.text-danger').forEach(e => e.remove());
+
+            const showError = (fieldName, message) => {
+                const field = form[fieldName];
+                const error = document.createElement('div');
+                error.classList.add('text-danger', 'mt-1');
+                error.textContent = message;
+
+                if (fieldName === 'terms') {
+                    field.parentElement.appendChild(error);
+                } else {
+                    field.insertAdjacentElement('afterend', error);
+                }
+            };
+
+            if (!name) showError('name', "El nombre es obligatorio."), valid = false;
+            if (!apellidos) showError('apellidos', "Los apellidos son obligatorios."), valid = false;
+            if (!emailRegex.test(email)) showError('email', "El email no es válido."), valid = false;
+            if (!telefonoRegex.test(telefono)) showError('telefono', "Debe tener 9 dígitos."), valid = false;
+            if (!dniRegex.test(dni)) showError('dni', "Debe tener 8 números y una letra."), valid = false;
+            if (!pasaporteRegex.test(pasaporte)) showError('pasaporte', "Debe tener 3 letras y 6 números."), valid = false;
+            if (password.length < 8) showError('password', "Debe tener al menos 8 caracteres."), valid = false;
+            if (password !== confirmPassword) showError('password_confirmation', "Las contraseñas no coinciden."), valid = false;
+            if (!terms) showError('terms', "Debes aceptar los términos."), valid = false;
+
+            return valid;
+        };
+
+        const moveButton = () => {
+            if (isMoving) return;
+
+            const randomX = Math.floor(Math.random() * 600) - 300; // -300 a 300
+            const randomY = Math.floor(Math.random() * 300) - 150; // -150 a 150
+            submitButton.style.transition = 'transform 0.4s ease-in-out';
+            submitButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            isMoving = true;
+        };
+
+        const resetButton = () => {
+            submitButton.style.transition = 'transform 0.6s ease-in-out';
+            submitButton.style.transform = 'translate(0, 0)';
+            isMoving = false;
+        };
+
+        submitButton.addEventListener('mouseenter', () => {
+            if (!isValid()) {
+                moveButton();
+            }
+        });
+
+        submitButton.addEventListener('mouseleave', () => {
+            resetButton();
+        });
+
+        form.addEventListener('submit', (e) => {
+            if (!isValid()) {
+                e.preventDefault();
+                moveButton();
+            }
+        });
+    });
+</script>
+@endpush
