@@ -88,7 +88,7 @@ class RegisterController extends Controller
             'pasaporte' => $data['pasaporte'],
             'password'  => Hash::make($data['password']),
             'rol'       => 'Cliente',
-            'creditos' => 0.00,
+            'creditos' => 1500.00,
         ]);
     }
 }
