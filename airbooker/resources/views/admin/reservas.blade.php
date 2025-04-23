@@ -55,6 +55,11 @@ Crear Reserva
                         <option value="" disabled selected>Seleccione un vuelo...</option>
                     </select>
 
+                    <!-- Mensaje si no hay vuelos -->
+                    <div id="noFlightsMessage" class="alert alert-warning" style="display: none;">
+                        No hay vuelos para este día.
+                    </div>
+
                     <!-- Campos adicionales -->
                     <label>Fecha de Reserva:</label>
                     <input type="datetime-local" class="form-control" name="fecha" required>
@@ -180,20 +185,38 @@ Crear Reserva
     });
 
     document.getElementById('searchFlightDate').addEventListener('change', function() {
-        const date = this.value;
-        fetch(`/api/vuelos?fecha=${date}`)
-            .then(response => response.json())
-            .then(data => {
-                const flightSelect = document.getElementById('flightSelect');
-                flightSelect.innerHTML = '';
-                data.forEach(vuelo => {
+    const date = this.value;
+    fetch(`/api/vuelos?fecha=${date}`)
+        .then(response => {
+            if (!response.ok) throw new Error('Error al obtener vuelos');
+            return response.json(); // Se espera una respuesta en formato JSON
+        })
+        .then(data => {
+            const flightSelect = document.getElementById('flightSelect');
+            flightSelect.innerHTML = ''; // Limpiar las opciones actuales
+
+            // Mostrar el mensaje de "No hay vuelos" si no hay vuelos
+            const noFlightsMessage = document.getElementById('noFlightsMessage');
+            if (data.no_vuelos) {
+                noFlightsMessage.style.display = 'block'; // Mostrar mensaje
+            } else {
+                noFlightsMessage.style.display = 'none'; // Ocultar mensaje
+                // Si hay vuelos, agregar opciones al select
+                data.vuelos.forEach(vuelo => {
                     const option = document.createElement('option');
-                    option.value = vuelo.id;
-                    option.textContent = `${vuelo.origen} → ${vuelo.destino}`;
+                    option.value = vuelo.id; // Asegúrate de que el valor es el ID correcto
+                    option.textContent = `${vuelo.origen} → ${vuelo.destino}`; // Muestra la información adecuada
                     flightSelect.appendChild(option);
                 });
-            });
-    });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al filtrar los vuelos');
+        });
+});
+
+
 
 
 
