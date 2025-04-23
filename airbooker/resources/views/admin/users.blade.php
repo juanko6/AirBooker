@@ -270,15 +270,24 @@ document.addEventListener('DOMContentLoaded', function () {
         const name = form.name.value.trim();
         const email = form.email.value.trim();
         const dni = form.dni.value.trim();
+        const pasaporte = form.pasaporte.value.trim();
         const password = form.password.value;
         const confirmPassword = form.password_confirmation.value;
 
         const errores = [];
 
+        const dniPattern = /^\d{8}[A-Za-z]$/;
+        const pasaportePattern = /^[A-Za-z]{2}\d{6}$/;
+
         // Validaciones
         if (!name) errores.push('El nombre es obligatorio.');
         if (!email || !/^\S+@\S+\.\S+$/.test(email)) errores.push('El correo electrónico no es válido.');
-        if (dni.length > 10) errores.push('El DNI no puede tener más de 10 caracteres.');
+        if (!dniPattern.test(dni)) {
+            errores.push('El DNI debe tener 8 números seguidos de una letra (Ej: 12345678A).');
+            }
+        if (!pasaportePattern.test(pasaporte)) {
+            errores.push('El pasaporte debe tener 2 letras seguidas de 6 dígitos (Ej: AB123456).');
+            }
         if (password.length < 6) errores.push('La contraseña debe tener al menos 6 caracteres.');
         if (password !== confirmPassword) errores.push('Las contraseñas no coinciden.');
 
