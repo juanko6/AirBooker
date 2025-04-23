@@ -42,10 +42,10 @@ Crear Oferta
                 </div>
                 <div class="modal-body">
                     <label for="fechaInicio">Fecha Inicio:</label>
-                    <input type="date" class="form-control" name="fechaInicio" required>
+                    <input type="date" class="form-control" name="fechaInicio" id="fechaInicio" required>
 
                     <label for="fechaFin">Fecha Fin:</label>
-                    <input type="date" class="form-control" name="fechaFin" required>
+                    <input type="date" class="form-control" name="fechaFin" id="fechaFin" required>
 
                     <label for="porcentajeDescuento">Porcentaje Descuento:</label>
                     <input type="number" class="form-control" name="porcentajeDescuento" required step="0.01">
@@ -147,6 +147,44 @@ Crear Oferta
 </div>
 
 <script>
+
+    document.querySelector('#createOfertaModal form').addEventListener('submit', function (e) {
+        const fechaInicio = new Date(document.getElementById('fechaInicio').value);
+        const fechaFin = new Date(document.getElementById('fechaFin').value);
+
+        // Quitar alertas previas si existen
+        document.querySelectorAll('.alert-danger.fecha-error').forEach(el => el.remove());
+
+        if (fechaInicio >= fechaFin) {
+            e.preventDefault(); // Evita el envío del formulario
+
+            const alerta = document.createElement('div');
+            alerta.classList.add('alert', 'alert-danger', 'fecha-error');
+            alerta.innerHTML = '⚠️ La fecha de inicio debe ser anterior a la fecha de fin.';
+            document.querySelector('#createOfertaModal .modal-body').prepend(alerta);
+        }
+    });
+
+
+    document.querySelector('#editOfertaModal form').addEventListener('submit', function (e) {
+    const fechaInicio = new Date(document.getElementById('edit_FechaInicio').value);
+    const fechaFin = new Date(document.getElementById('edit_FechaFin').value);
+
+    document.querySelectorAll('.alert-danger.fecha-error').forEach(el => el.remove());
+
+    if (fechaInicio >= fechaFin) {
+        e.preventDefault();
+        const alerta = document.createElement('div');
+        alerta.classList.add('alert', 'alert-danger', 'fecha-error');
+        alerta.innerHTML = '⚠️ La fecha de inicio debe ser anterior a la fecha de fin.';
+        document.querySelector('#editOfertaModal .modal-body').prepend(alerta);
+    }
+});
+
+
+
+
+
     // Función para abrir el modal de edición y cargar los datos de la oferta en los campos
     function editOferta(id) {
         fetch(`/admin/ofertas/${id}/edit`)  // Llamada al backend para obtener los datos de la oferta
