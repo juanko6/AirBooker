@@ -49,28 +49,32 @@
         </div>
         <div class="modal-body">
             <!-- Formulario para crear un usuario -->
+            <div id="createUserErrors" class="alert alert-danger d-none">
+                <ul id="errorList" class="mb-0"></ul>
+            </div>
+
             <form action="{{ route('users.store') }}" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="name" name="name" required>
-            </div>
+                <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
+                </div>
             <div class="mb-3">
                 <label for="apellidos" class="form-label">Apellidos</label>
                 <input type="text" class="form-control" id="apellidos" name="apellidos" required>
             </div>
             <div class="mb-3">
                 <label for="dni" class="form-label">DNI</label>
-                <input type="text" class="form-control" id="dni" name="dni" required>
-            </div>
+                <input type="text" name="dni" id="dni" class="form-control" maxlength="10" value="{{ old('dni') }}" required>
+                </div>
             <div class="mb-3">
                 <label for="pasaporte" class="form-label">Pasaporte</label>
                 <input type="text" class="form-control" id="pasaporte" name="pasaporte" required>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Correo Electrónico</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
+                <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
+                </div>
             <div class="mb-3">
                 <label for="telefono" class="form-label">Teléfono</label>
                 <input type="text" class="form-control" id="telefono" name="telefono" required>
@@ -83,13 +87,17 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <label for="creditos" class="form-label">Créditos</label>
+                <input type="number" class="form-control" name="creditos" id="creditos" required>
             </div>
             <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" name="password" id="password" class="form-control" required>
+                </div>
+            <div class="mb-3">
                 <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
-                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
-            </div>
+                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
+                </div>
             <button type="submit" class="btn btn-success">Crear Usuario</button>
             </form>
         </div>
@@ -167,6 +175,7 @@
         <th>Rol</th>
         <th>Nombre</th>
         <th>Apellidos</th>
+        <th>Creditos</th>
         <th>Correo</th>
         <th>DNI</th>
         <th>Pasaporte</th>
@@ -183,6 +192,7 @@
         <td>{{ $user->rol }}</td>
         <td>{{ $user->name }}</td>
         <td>{{ $user->apellidos }}</td>
+        <td>{{ $user->creditos }}</td>
         <td>{{ $user->email }}</td>
         <td>{{ $user->dni }}</td>
         <td>{{ $user->pasaporte }}</td>
@@ -205,6 +215,15 @@
 <div class="d-flex justify-content-center mt-4">
     {{ $users->links('pagination::bootstrap-5') }}
 </div>
+
+@if ($errors->any())
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const modal = new bootstrap.Modal(document.getElementById('createUserModal'));
+        modal.show();
+    });
+</script>
+@endif
 
 @endsection
 
@@ -234,5 +253,47 @@
         })
         .catch(error => console.error('Error:', error));
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('#createUserModal form');
+    const errorBox = document.getElementById('createUserErrors');
+    const errorList = document.getElementById('errorList');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevenir envío
+
+        // Limpiar errores anteriores
+        errorList.innerHTML = '';
+        errorBox.classList.add('d-none');
+
+        // Obtener campos
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const dni = form.dni.value.trim();
+        const password = form.password.value;
+        const confirmPassword = form.password_confirmation.value;
+
+        const errores = [];
+
+        // Validaciones
+        if (!name) errores.push('El nombre es obligatorio.');
+        if (!email || !/^\S+@\S+\.\S+$/.test(email)) errores.push('El correo electrónico no es válido.');
+        if (dni.length > 10) errores.push('El DNI no puede tener más de 10 caracteres.');
+        if (password.length < 6) errores.push('La contraseña debe tener al menos 6 caracteres.');
+        if (password !== confirmPassword) errores.push('Las contraseñas no coinciden.');
+
+        if (errores.length > 0) {
+            errores.forEach(error => {
+                const li = document.createElement('li');
+                li.textContent = error;
+                errorList.appendChild(li);
+            });
+            errorBox.classList.remove('d-none');
+        } else {
+            errorBox.classList.add('d-none');
+            form.submit(); // Enviar si todo es válido
+        }
+    });
+});
 
     </script>
