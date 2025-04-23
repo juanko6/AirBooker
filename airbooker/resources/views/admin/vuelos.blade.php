@@ -103,6 +103,7 @@
               <option value="{{ $aerolinea->id }}">{{ $aerolinea->nombre }}</option>
             @endforeach
           </select>
+          
         <div class="mb-3"><label>Fecha</label><input type="date" name="fecha" id="edit_fecha" class="form-control"></div>
         <div class="mb-3"><label>Hora</label><input type="time" name="hora" id="edit_hora" class="form-control"></div>
         <div class="mb-3"><label>Origen</label><input type="text" name="origen" id="edit_origen" class="form-control"></div>
@@ -183,6 +184,7 @@
 
 <script>
 
+
 function openEditModal(vueloId) {
   fetch(`/admin/vuelos/${vueloId}/edit`)
     .then(response => response.json())
@@ -212,6 +214,83 @@ function openEditModal(vueloId) {
     })
     .catch(error => console.error('Error:', error));
 }
+
+document.querySelector('#createVueloModal form').addEventListener('submit', function (e) {
+    const origen = this.querySelector('[name="origen"]').value.trim();
+    const destino = this.querySelector('[name="destino"]').value.trim();
+    const fecha = this.querySelector('[name="fecha"]').value;
+    const hora = this.querySelector('[name="hora"]').value;
+    const precio = this.querySelector('[name="precio"]').value;
+    const aerolinea_id = this.querySelector('[name="aerolinea_id"]').value;
+    const soloLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/;
+    const hoy = new Date().toISOString().split('T')[0];
+
+    let errores = [];
+
+    if (!origen) errores.push('El campo "Origen" es obligatorio.');
+    else if (!soloLetras.test(origen)) errores.push('El campo "Origen" solo debe contener letras.');
+
+    if (!destino) errores.push('El campo "Destino" es obligatorio.');
+    else if (!soloLetras.test(destino)) errores.push('El campo "Destino" solo debe contener letras.');
+
+    if (origen.toLowerCase() === destino.toLowerCase()) errores.push('El origen y el destino no pueden ser iguales.');
+
+    if (!fecha) errores.push('El campo "Fecha" es obligatorio.');
+    else if (fecha < hoy) errores.push('El campo "Fecha" debe ser una fecha posterior o igual a hoy.');
+
+    if (!hora) errores.push('El campo "Hora" es obligatorio.');
+    if (!precio || isNaN(precio) || parseFloat(precio) <= 0) errores.push('El campo "Precio" debe ser un número positivo.');
+    if (!aerolinea_id) errores.push('Debe seleccionar una aerolínea.');
+
+    if (errores.length > 0) {
+        e.preventDefault();
+        let errorContainer = document.createElement('div');
+        errorContainer.classList.add('alert', 'alert-danger');
+        errorContainer.innerHTML = errores.map(e => `<p>${e}</p>`).join('');
+        this.querySelectorAll('.alert-danger').forEach(a => a.remove());
+        this.querySelector('.modal-body').prepend(errorContainer);
+    }
+});
+
+
+document.querySelector('#editVueloForm').addEventListener('submit', function (e) {
+    const origen = document.getElementById('edit_origen').value.trim();
+    const destino = document.getElementById('edit_destino').value.trim();
+    const fecha = document.getElementById('edit_fecha').value;
+    const hora = document.getElementById('edit_hora').value;
+    const precio = document.getElementById('edit_precio').value;
+    const aerolinea_id = document.getElementById('edit_aerolinea_id').value;
+    const soloLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/;
+    const hoy = new Date().toISOString().split('T')[0];
+
+    let errores = [];
+
+    if (!origen) errores.push('El campo "Origen" es obligatorio.');
+    else if (!soloLetras.test(origen)) errores.push('El campo "Origen" solo debe contener letras.');
+
+    if (!destino) errores.push('El campo "Destino" es obligatorio.');
+    else if (!soloLetras.test(destino)) errores.push('El campo "Destino" solo debe contener letras.');
+
+    if (origen.toLowerCase() === destino.toLowerCase()) errores.push('El origen y el destino no pueden ser iguales.');
+
+    if (!fecha) errores.push('El campo "Fecha" es obligatorio.');
+    else if (fecha < hoy) errores.push('El campo "Fecha" debe ser una fecha posterior o igual a hoy.');
+
+    if (!hora) errores.push('El campo "Hora" es obligatorio.');
+    if (!precio || isNaN(precio) || parseFloat(precio) <= 0) errores.push('El campo "Precio" debe ser un número positivo.');
+    if (!aerolinea_id) errores.push('Debe seleccionar una aerolínea.');
+
+    if (errores.length > 0) {
+        e.preventDefault();
+        let errorContainer = document.createElement('div');
+        errorContainer.classList.add('alert', 'alert-danger');
+        errorContainer.innerHTML = errores.map(e => `<p>${e}</p>`).join('');
+        this.querySelectorAll('.alert-danger').forEach(a => a.remove());
+        this.querySelector('.modal-body').prepend(errorContainer);
+    }
+});
+
+
 
 
 </script>

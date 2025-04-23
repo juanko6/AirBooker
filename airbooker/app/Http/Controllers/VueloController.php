@@ -37,8 +37,9 @@ class VueloController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'origen' => 'required|string|max:255',
-            'destino' => 'required|string|max:255',
+            'origen' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/u|max:255',
+            'destino' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/u|max:255',
+
             'fecha' => 'required|date|after_or_equal:today',
             'hora' => 'required|date_format:H:i',
             'precio' => 'required|numeric|min:0',
@@ -62,14 +63,22 @@ class VueloController extends Controller
         return view('admin.vuelos.show', compact('vuelo'));
     }
 
+    public function edit($id)
+    {
+        $vuelo = Vuelo::findOrFail($id);
+        return response()->json($vuelo);
+    }
+
+
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'origen' => 'required|string|max:255',
-            'destino' => 'required|string|max:255',
+            'origen' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/u|max:255',
+            'destino' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/u|max:255',
+
             'fecha' => 'required|date|after_or_equal:today',
             'hora' => 'required|date_format:H:i',
             'precio' => 'required|numeric|min:0',
