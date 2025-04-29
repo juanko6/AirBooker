@@ -167,8 +167,8 @@
         </div>
     </div>
 
-
-        <table id="adminTable" class="table table-striped table-bordered">
+<div class="table-responsive">
+    <table id="adminTable" class="table table-striped table-bordered">
     <thead>
         <tr>
         <th>ID</th>
@@ -200,16 +200,18 @@
         <td>
         <button class="btn btn-sm btn-info" onclick="openEditModal({{ $user->id }})">✏️ Editar</button>
         <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este usuario?')">🗑️ Eliminar</button>
-</form>
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este usuario?')">🗑️ Eliminar</button>
+        </form>
 
         </td>
         </tr>
         @endforeach
     </tbody>
     </table>
+</div>
+
 
 <!-- Paginación -->
 <div class="d-flex justify-content-center mt-4">
