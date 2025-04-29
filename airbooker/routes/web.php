@@ -10,8 +10,7 @@ use App\Http\Controllers\{
     ReservaController,
     VueloController, 
     ReservaClienteController,
-    CarteraController,
-    VuelosDisponiblesController,
+    CarteraController, 
     AerolineaController,
     OfertaController,
     CarritoController,
@@ -23,7 +22,6 @@ use App\Http\Controllers\Auth\LoginController;
 Route::get('/', [HomeController::class, 'index'])->name('home'); 
 Auth::routes();
  
-
 
 
 // Ruta para resultados de búsqueda
@@ -38,6 +36,12 @@ Route::prefix('carrito')->controller(CarritoController::class)->group(function (
 
 
 Route::post('/reservar/{vuelo}', [CarritoController::class, 'reservar'])->name('reservar.vuelo');
+
+
+Route::get('/checkout', function () {return view('checkout');})->name('checkout');
+
+Route::post('/procesar-compra', [CarritoController::class, 'procesarCompra'])->name('procesar.compra');
+
 
 
 // Rutas de contactanos

@@ -48,24 +48,31 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div id="create-errors" class="alert alert-danger d-none">
+                        <ul class="mb-0" id="create-error-list"></ul>
+                    </div>
                     <!-- Formulario para crear una aerolínea -->
-                    <form action="{{ route('aerolineas.store') }}" method="POST">
+                    <form action="{{ route('aerolineas.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                            <input type="text" class="form-control" id="nombre" name="nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="urlLogo" class="form-label">Logo</label>
+                            <input type="file" class="form-control" id="urlLogo" name="urlLogo" accept="image/*">
                         </div>
                         <div class="mb-3">
                             <label for="paisOrigen" class="form-label">País de Origen</label>
-                            <input type="text" class="form-control" id="paisOrigen" name="paisOrigen" required>
+                            <input type="text" class="form-control" id="paisOrigen" name="paisOrigen">
                         </div>
                         <div class="mb-3">
                             <label for="contacto" class="form-label">Contacto</label>
-                            <input type="text" class="form-control" id="contacto" name="contacto" required>
+                            <input type="text" class="form-control" id="contacto" name="contacto">
                         </div>
                         <div class="mb-3">
                             <label for="sitio_web" class="form-label">Sitio Web</label>
-                            <input type="text" class="form-control" id="sitio_web" name="sitio_web" required>
+                            <input type="text" class="form-control" id="sitio_web" name="sitio_web">
                         </div>
                         <button type="submit" class="btn btn-success">Crear Aerolínea</button>
                     </form>
@@ -84,7 +91,11 @@
                 </div>
                 <div class="modal-body">
                     <!-- Formulario de edición -->
-                    <form id="editAirlineForm" action="{{ route('aerolineas.update', ['aerolinea' => 1]) }}" method="POST">
+                    <div id="edit-errors" class="alert alert-danger d-none">
+                        <ul class="mb-0" id="edit-error-list"></ul>
+                    </div>
+
+                    <form id="editAirlineForm" action="{{ route('aerolineas.update', ['aerolinea' => 1]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -93,17 +104,25 @@
                             <label for="edit_nombre" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="edit_nombre" name="nombre" required>
                         </div>
+                        <div class="mb-3 text-center">
+                            <label class="form-label">Logo actual</label><br>
+                            <img id="preview_logo" src="" alt="Logo actual" style="height: 40px; border-radius: 8px;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_urlLogo" class="form-label">Logo</label>
+                            <input type="file" class="form-control" id="edit_urlLogo" name="urlLogo" accept="image/*">
+                        </div>
                         <div class="mb-3">
                             <label for="edit_paisOrigen" class="form-label">País de Origen</label>
-                            <input type="text" class="form-control" id="edit_paisOrigen" name="paisOrigen" required>
+                            <input type="text" class="form-control" id="edit_paisOrigen" name="paisOrigen">
                         </div>
                         <div class="mb-3">
                             <label for="edit_contacto" class="form-label">Contacto</label>
-                            <input type="text" class="form-control" id="edit_contacto" name="contacto" required>
+                            <input type="text" class="form-control" id="edit_contacto" name="contacto">
                         </div>
                         <div class="mb-3">
                             <label for="edit_sitio_web" class="form-label">Sitio Web</label>
-                            <input type="text" class="form-control" id="edit_sitio_web" name="sitio_web" required>
+                            <input type="text" class="form-control" id="edit_sitio_web" name="sitio_web">
                         </div>
                         <button type="submit" class="btn btn-success">Actualizar Aerolínea</button>
                     </form>
@@ -121,6 +140,7 @@
                 <th>País Origen</th>
                 <th>Contacto</th>
                 <th>Sitio Web</th>
+                <th>Logo</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -132,6 +152,13 @@
                     <td>{{ $aerolinea->paisOrigen }}</td>
                     <td>{{ $aerolinea->contacto }}</td>
                     <td>{{ $aerolinea->sitio_web }}</td>
+                    <td>
+                    @if($aerolinea->urlLogo)
+                        <img src="{{ $aerolinea->urlLogo }}" alt="Logo" style="height: 50px;">
+                        @else
+                        <span>Sin logo</span>
+                    @endif
+                    </td>
                     <td>
                         <button class="btn btn-sm btn-info" onclick="openEditModal({{ $aerolinea->id }})">✏️ Editar</button>
                         <form action="{{ route('aerolineas.destroy', $aerolinea->id) }}" method="POST" style="display:inline;">
@@ -150,28 +177,96 @@
         {{ $aerolineas->links('pagination::bootstrap-5') }}
     </div>
 
-@endsection
+
 
 <script>
     // Función para abrir el modal de edición y cargar los datos de la aerolínea en los campos
     function openEditModal(aerolineaId) {
-        fetch(`/admin/aerolineas/${aerolineaId}/edit`)
-            .then(response => response.json())
-            .then(data => {
-                // Rellenar el formulario con los datos de la aerolínea
-                document.getElementById('aerolinea_id').value = data.id;
-                document.getElementById('edit_nombre').value = data.nombre;
-                document.getElementById('edit_paisOrigen').value = data.paisOrigen;
-                document.getElementById('edit_contacto').value = data.contacto;
-                document.getElementById('edit_sitio_web').value = data.sitio_web;
+    fetch(`/admin/aerolineas/${aerolineaId}/edit`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('aerolinea_id').value = data.id;
+            document.getElementById('edit_nombre').value = data.nombre;
+            document.getElementById('edit_paisOrigen').value = data.paisOrigen;
+            document.getElementById('edit_contacto').value = data.contacto;
+            document.getElementById('edit_sitio_web').value = data.sitio_web;
 
-                // Cambiar la ruta del formulario con el ID de la aerolínea
-                document.getElementById('editAirlineForm').action = `/admin/aerolineas/${data.id}`;
-                
-                // Mostrar el modal de edición
-                var myModal = new bootstrap.Modal(document.getElementById('editAirlineModal'));
-                myModal.show();
-            })
-            .catch(error => console.error('Error:', error));
+            // Actualizar el logo en la vista
+            document.getElementById('preview_logo').src = data.urlLogo ?? '/images/default-logo.png';
+
+            document.getElementById('editAirlineForm').action = `/admin/aerolineas/${data.id}`;
+
+            const myModal = new bootstrap.Modal(document.getElementById('editAirlineModal'));
+            myModal.show();
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+document.querySelector('#createAirlineModal form').addEventListener('submit', function(e) {
+    const form = this;
+    const errorContainer = document.getElementById('create-errors');
+    const errorList = document.getElementById('create-error-list');
+    errorList.innerHTML = '';
+    errorContainer.classList.add('d-none');
+
+    let errors = [];
+
+    // Validaciones básicas
+    if (!form.nombre.value.trim()) errors.push("El nombre es obligatorio.");
+    if (!form.paisOrigen.value.trim()) errors.push("El país de origen es obligatorio.");
+    if (!form.contacto.value.trim()) errors.push("El contacto es obligatorio.");
+    if (!form.sitio_web.value.trim()) errors.push("El sitio web es obligatorio.");
+
+    // Validación opcional del logo (tipo de archivo)
+    const file = form.urlLogo.files[0];
+    if (file && !file.type.match('image.*')) {
+        errors.push("El archivo del logo debe ser una imagen.");
     }
+
+    if (errors.length > 0) {
+        e.preventDefault();
+        errors.forEach(err => {
+            const li = document.createElement('li');
+            li.textContent = err;
+            errorList.appendChild(li);
+        });
+        errorContainer.classList.remove('d-none');
+    }
+});
+
+document.querySelector('#editAirlineForm').addEventListener('submit', function(e) {
+    const form = this;
+    const errorContainer = document.getElementById('edit-errors');
+    const errorList = document.getElementById('edit-error-list');
+    errorList.innerHTML = '';
+    errorContainer.classList.add('d-none');
+
+    let errors = [];
+
+    if (!form.nombre.value.trim()) errors.push("El nombre es obligatorio.");
+    if (!form.paisOrigen.value.trim()) errors.push("El país de origen es obligatorio.");
+    if (!form.contacto.value.trim()) errors.push("El contacto es obligatorio.");
+    if (!form.sitio_web.value.trim()) errors.push("El sitio web es obligatorio.");
+
+    const file = form.urlLogo.files[0];
+    if (file && !file.type.match('image.*')) {
+        errors.push("El archivo del logo debe ser una imagen.");
+    }
+
+    if (errors.length > 0) {
+        e.preventDefault();
+        errors.forEach(err => {
+            const li = document.createElement('li');
+            li.textContent = err;
+            errorList.appendChild(li);
+        });
+        errorContainer.classList.remove('d-none');
+    }
+});
+
+
+
 </script>
+
+
+@endsection

@@ -1,6 +1,67 @@
 body {
     font-family: Arial, sans-serif;
+    
 }
 .sidebar {
     width: 200px;
 }
+
+.btn-sidebar {
+    position: absolute;
+    top: 100%;          /* justo debajo del navbar negro */
+    right: 1rem;
+    margin-top: 0.5rem;
+    z-index: 1040;
+    background-color: #212529;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn-sidebar:hover {
+    background-color: #343a40;
+}
+
+
+.navbar.bg-dark {
+    position: relative;
+    width: 100%;
+    margin: 0;
+}
+
+#sidebarToggleBtn {
+    position: absolute;
+    top: 100%; /* posiciona justo debajo del navbar negro */
+    right: 1rem;
+
+    margin-top: 0.5rem; /* un poco de espacio adicional */
+}
+
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 1.5rem;
+        }
+        .btn {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        th, td {
+            font-size: 0.8rem;
+        }
+        #perfilNavbar {
+            background-color: #212529; /* mismo color que navbar oscuro */
+            padding: 1rem;
+            border-top: 1px solid #333;
+            
+          }
+        .navbar.navbar-dark.bg-dark {
+            margin-top: 46px; /* espacio para que se vea el navbar azul */
+          }
+
+    }
+

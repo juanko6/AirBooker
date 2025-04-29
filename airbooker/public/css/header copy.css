@@ -1,0 +1,149 @@
+/* Estilos del Header */
+body {
+    padding-top: 70px; /* Ajusta este valor según la altura de tu navbar */
+}
+
+.header-container .navbar {
+    background: linear-gradient(135deg, #003399 0%, #0055ff 100%);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.header-container .navbar.glass {
+    background: #003399a1 !important;
+    backdrop-filter: blur(10px);
+}
+
+.header-container .navbar.glass .nav-link,
+.header-container .navbar.glass .btn-access {
+    color: white !important;
+}
+
+.header-container .ms-3 {
+    margin-left: 0rem !important;
+}
+
+.header-container .navbar-brand img {
+    max-height: 50px;
+    transition: transform 0.3s ease;
+}
+
+.header-container .navbar-brand img:hover {
+    transform: scale(1.1);
+}
+
+.header-container .nav-link {
+    color: white !important;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.header-container .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #ffd700;
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+.header-container .nav-link:hover::after {
+    width: 100%;
+}
+
+.header-container .btn-access {
+    background-color: #FFC107;
+    color: #003399;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.8); }
+    100% { transform: scale(1); }
+}
+
+.header-container .btn-access:hover {
+    animation: heartbeat 0.8s infinite;
+    background-color: #d4af37;
+}
+
+.header-container .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='gold' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.header-container .navbar-toggler {
+    border: 2px solid gold;
+    border-radius: 3px;
+    padding: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    /* Estilos para el menú desplegable */
+    .header-container .navbar-collapse {
+        position: fixed;
+        top: 0;
+        left: -250px; /* Menú oculto inicialmente */
+        width: 250px;
+        height: 100vh; /* Altura completa de la pantalla */
+        background: linear-gradient(135deg, #003399 0%, #0055ff 100%);
+        transition: left 0.3s ease;
+        z-index: 1001; /* Asegura que esté por encima de otros elementos */
+        overflow-y: auto; /* Permite desplazamiento si el contenido es largo */
+    }
+
+    /* Clase activada cuando el menú está visible */
+    .header-container .navbar-collapse.show {
+        left: 0;
+    }
+
+    /* Evita que el contenido principal sea desplazado mientras el menú está abierto */
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    /* Estilos adicionales para los elementos del menú */
+    .header-container .opciones-menu {
+        padding-left: 15px;
+        padding-top: 5px;
+    }
+
+    .header-container .btn-access {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        border-radius: 0% !important;
+    }
+
+    .header-container .navbar-toggler:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+
+
+/* Definir la animación de palpitar */
+@keyframes pulse {
+    0% {
+        transform: scale(0.9); /* Tamaño original */
+        opacity: 1; /* Opacidad original */
+    }
+    50% {
+        transform: scale(1); /* Aumenta ligeramente el tamaño */
+        opacity: 0.9; /* Ligeramente menos opaco */
+    }
+    100% {
+        transform: scale(0.9); /* Regresa al tamaño original */
+        opacity: 1; /* Regresa a la opacidad original */
+    }
+}
+
+/* Aplicar la animación al botón */
+.pulse {
+    animation: pulse 1.5s infinite ease-in-out; /* Duración de 1.5 segundos, infinito, con una transición suave */
+}

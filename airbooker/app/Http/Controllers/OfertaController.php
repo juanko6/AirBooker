@@ -36,19 +36,23 @@ class OfertaController extends Controller
      */
     public function store(Request $request)
     {
-        // Validación de los datos
         $validated = $request->validate([
             'fechaInicio' => 'required|date',
             'fechaFin' => 'required|date',
             'porcentajeDescuento' => 'required|numeric|min:0|max:100',
             'estado' => 'required|in:Activa,Vencida'
         ]);
-
-        // Convertir las fechas al formato adecuado (si es necesario)
+    
         $fechaInicio = Carbon::parse($request->fechaInicio);
         $fechaFin = Carbon::parse($request->fechaFin);
-
-        // Crear la nueva oferta
+    
+        // Validación lógica de fechas
+        if ($fechaInicio >= $fechaFin) {
+            return back()->withErrors([
+                'fechaFin' => 'La fecha de fin debe ser posterior a la fecha de inicio.'
+            ])->withInput();
+        }
+    
         try {
             Oferta::create([
                 'FechaInicio' => $fechaInicio,
@@ -58,11 +62,10 @@ class OfertaController extends Controller
             ]);
             return redirect()->route('ofertas.index')->with('success', 'Oferta creada exitosamente');
         } catch (\Exception $e) {
-            // Capturar y mostrar el error
             return back()->withErrors(['error' => 'Hubo un problema al guardar la oferta: ' . $e->getMessage()]);
         }
-        
     }
+    
 
     /**
      * Display the specified resource.
@@ -93,25 +96,33 @@ class OfertaController extends Controller
      */
     public function update(Request $request, Oferta $oferta)
     {
-        // Validar los datos entrantes
         $validatedData = $request->validate([
             'FechaInicio' => 'required|date',
             'FechaFin' => 'required|date',
-            'ProcentajeDescuento' => 'required|numeric',
+            'ProcentajeDescuento' => 'required|numeric|min:0|max:100',
             'estado' => 'required|in:Activa,Vencida',
         ]);
     
-        // Actualizar la oferta
+        $fechaInicio = Carbon::parse($request->FechaInicio);
+        $fechaFin = Carbon::parse($request->FechaFin);
+    
+        // Validación lógica
+        if ($fechaInicio >= $fechaFin) {
+            return back()->withErrors([
+                'FechaFin' => 'La fecha de fin debe ser posterior a la fecha de inicio.'
+            ])->withInput();
+        }
+    
         $oferta->update([
-            'FechaInicio' => $request->FechaInicio,
-            'FechaFin' => $request->FechaFin,
+            'FechaInicio' => $fechaInicio,
+            'FechaFin' => $fechaFin,
             'ProcentajeDescuento' => $request->ProcentajeDescuento,
             'estado' => $request->estado,
         ]);
     
-        // Retornar una respuesta exitosa
         return back()->with('success', 'Oferta actualizada exitosamente');
     }
+    
     
 
     /**

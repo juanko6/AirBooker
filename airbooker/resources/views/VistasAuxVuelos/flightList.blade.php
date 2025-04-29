@@ -68,7 +68,7 @@
                         <!-- Cabecera con efecto degradado -->
                         <div class="card-header bg-gradient-primary text-white border-0">
                             <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0" style="border-bottom: 2px solid gold;">{{ $vuelo->aerolinea->nombre }}</h5>  <img src="{{ asset($vuelo->aerolinea->urlLogo) }}" alt="Logo" class="img-fluid" style="height: 55px; width: auto; object-fit: contain;">  </div>
+                            <h5 class="mb-0" style="border-bottom: 2px solid gold;">{{ $vuelo->aerolinea->nombre }}</h5>  <img src="{{ asset($vuelo->aerolinea->urlLogo) }}" alt="Logo" class="img-fluid" style="height: 55px; width: 55px; object-fit: contain;">  </div>
                             
                             <div class="class-badge text-center py-1 px-3 heartbeat" style=" ; background: linear-gradient(90deg, #FFC107, #FFC107); color: #0077F7; font-weight: bold; display: inline-block;">
                                 {{ strtoupper($vuelo->clase) }}

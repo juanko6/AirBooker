@@ -72,6 +72,7 @@ class UserController extends Controller
         $user->telefono = $request->input('telefono');
         $user->rol = $request->input('rol');
         $user->password = Hash::make($request->input('password')); // Encriptación de la contraseña
+        $user->creditos = $request->input('creditos');
         $user->remember_token = Str::random(10); // Token para recordar al usuario
         $user->save();
 

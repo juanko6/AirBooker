@@ -49,28 +49,32 @@
         </div>
         <div class="modal-body">
             <!-- Formulario para crear un usuario -->
+            <div id="createUserErrors" class="alert alert-danger d-none">
+                <ul id="errorList" class="mb-0"></ul>
+            </div>
+
             <form action="{{ route('users.store') }}" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="name" name="name" required>
-            </div>
+                <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
+                </div>
             <div class="mb-3">
                 <label for="apellidos" class="form-label">Apellidos</label>
                 <input type="text" class="form-control" id="apellidos" name="apellidos" required>
             </div>
             <div class="mb-3">
                 <label for="dni" class="form-label">DNI</label>
-                <input type="text" class="form-control" id="dni" name="dni" required>
-            </div>
+                <input type="text" name="dni" id="dni" class="form-control" maxlength="10" value="{{ old('dni') }}" required>
+                </div>
             <div class="mb-3">
                 <label for="pasaporte" class="form-label">Pasaporte</label>
                 <input type="text" class="form-control" id="pasaporte" name="pasaporte" required>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Correo Electrónico</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
+                <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
+                </div>
             <div class="mb-3">
                 <label for="telefono" class="form-label">Teléfono</label>
                 <input type="text" class="form-control" id="telefono" name="telefono" required>
@@ -83,13 +87,17 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <label for="creditos" class="form-label">Créditos</label>
+                <input type="number" class="form-control" name="creditos" id="creditos" required>
             </div>
             <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" name="password" id="password" class="form-control" required>
+                </div>
+            <div class="mb-3">
                 <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
-                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
-            </div>
+                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
+                </div>
             <button type="submit" class="btn btn-success">Crear Usuario</button>
             </form>
         </div>
@@ -144,8 +152,9 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña</label>
+                            <label for="password" class="form-label">Contraseña (opcional)</label>
                             <input type="password" class="form-control" id="edit_password" name="password">
+                            <small class="text-muted">Dejar en blanco para mantener la contraseña actual</small>
                         </div>
                         <div class="mb-3">
                             <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
@@ -158,14 +167,15 @@
         </div>
     </div>
 
-
-        <table id="adminTable" class="table table-striped table-bordered">
+<div class="table-responsive">
+    <table id="adminTable" class="table table-striped table-bordered">
     <thead>
         <tr>
         <th>ID</th>
         <th>Rol</th>
         <th>Nombre</th>
         <th>Apellidos</th>
+        <th>Creditos</th>
         <th>Correo</th>
         <th>DNI</th>
         <th>Pasaporte</th>
@@ -182,6 +192,7 @@
         <td>{{ $user->rol }}</td>
         <td>{{ $user->name }}</td>
         <td>{{ $user->apellidos }}</td>
+        <td>{{ $user->creditos }}</td>
         <td>{{ $user->email }}</td>
         <td>{{ $user->dni }}</td>
         <td>{{ $user->pasaporte }}</td>
@@ -189,21 +200,32 @@
         <td>
         <button class="btn btn-sm btn-info" onclick="openEditModal({{ $user->id }})">✏️ Editar</button>
         <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este usuario?')">🗑️ Eliminar</button>
-</form>
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de eliminar este usuario?')">🗑️ Eliminar</button>
+        </form>
 
         </td>
         </tr>
         @endforeach
     </tbody>
     </table>
+</div>
+
 
 <!-- Paginación -->
 <div class="d-flex justify-content-center mt-4">
     {{ $users->links('pagination::bootstrap-5') }}
 </div>
+
+@if ($errors->any())
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const modal = new bootstrap.Modal(document.getElementById('createUserModal'));
+        modal.show();
+    });
+</script>
+@endif
 
 @endsection
 
@@ -233,5 +255,56 @@
         })
         .catch(error => console.error('Error:', error));
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('#createUserModal form');
+    const errorBox = document.getElementById('createUserErrors');
+    const errorList = document.getElementById('errorList');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevenir envío
+
+        // Limpiar errores anteriores
+        errorList.innerHTML = '';
+        errorBox.classList.add('d-none');
+
+        // Obtener campos
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const dni = form.dni.value.trim();
+        const pasaporte = form.pasaporte.value.trim();
+        const password = form.password.value;
+        const confirmPassword = form.password_confirmation.value;
+
+        const errores = [];
+
+        const dniPattern = /^\d{8}[A-Za-z]$/;
+        const pasaportePattern = /^[A-Za-z]{2}\d{6}$/;
+
+        // Validaciones
+        if (!name) errores.push('El nombre es obligatorio.');
+        if (!email || !/^\S+@\S+\.\S+$/.test(email)) errores.push('El correo electrónico no es válido.');
+        if (!dniPattern.test(dni)) {
+            errores.push('El DNI debe tener 8 números seguidos de una letra (Ej: 12345678A).');
+            }
+        if (!pasaportePattern.test(pasaporte)) {
+            errores.push('El pasaporte debe tener 2 letras seguidas de 6 dígitos (Ej: AB123456).');
+            }
+        if (password.length < 6) errores.push('La contraseña debe tener al menos 6 caracteres.');
+        if (password !== confirmPassword) errores.push('Las contraseñas no coinciden.');
+
+        if (errores.length > 0) {
+            errores.forEach(error => {
+                const li = document.createElement('li');
+                li.textContent = error;
+                errorList.appendChild(li);
+            });
+            errorBox.classList.remove('d-none');
+        } else {
+            errorBox.classList.add('d-none');
+            form.submit(); // Enviar si todo es válido
+        }
+    });
+});
 
     </script>

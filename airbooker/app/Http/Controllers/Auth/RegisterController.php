@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -49,9 +49,25 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name'       => ['required', 'string', 'max:255'],
+            'apellidos'  => ['required', 'string', 'max:255'],
+            'email'      => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users',
+                'regex:/^[^@]+@[^@]+\.[^@]+$/'
+            ],
+            'telefono'   => ['required', 'regex:/^[0-9]{9}$/'],
+            'dni'        => ['required', 'regex:/^[0-9]{8}[A-Za-z]$/', 'unique:users'],
+            'pasaporte'  => ['required', 'regex:/^[A-Za-z]{3}[0-9]{6}$/', 'unique:users'],
+            'password'   => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'email.regex'      => 'El email debe contener un "@" y al menos un punto después.',
+            'telefono.regex'   => 'El teléfono debe tener exactamente 9 dígitos.',
+            'dni.regex'        => 'El DNI debe tener 8 números seguidos de una letra.',
+            'pasaporte.regex'  => 'El pasaporte debe tener 3 letras seguidas de 6 números.',
         ]);
     }
 
@@ -64,9 +80,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name'      => $data['name'],
+            'apellidos' => $data['apellidos'],
+            'email'     => $data['email'],
+            'telefono'  => $data['telefono'],
+            'dni'       => $data['dni'],
+            'pasaporte' => $data['pasaporte'],
+            'password'  => Hash::make($data['password']),
+            'rol'       => 'Cliente',
+            'creditos' => 1500.00,
         ]);
     }
 }
