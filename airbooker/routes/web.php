@@ -49,6 +49,7 @@ Route::prefix('auth')->group(function () {
     Route::post('signup', [SignUpController::class, 'signup']);
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login.get');
     Route::post('login', [LoginController::class, 'login'])->name('login.post');
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout.post');
 });
 
 // Rutas del panel de administración
