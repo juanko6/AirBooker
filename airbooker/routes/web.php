@@ -83,7 +83,7 @@ Route::get('/api/vuelos', [VueloController::class, 'filtrar']);
 
 
 Route::prefix('user')->group(function() {
-    Route::get('perfil/{id}', [UserController::class, 'show']);
+    Route::get('perfil', [UserController::class, 'show']);
     Route::get('reservas', [ReservaClienteController::class, 'index']);
     Route::get('cartera', [UserController::class, 'infoCartera']);
 });

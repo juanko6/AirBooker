@@ -39,7 +39,7 @@
                             </li>
 
                             <li class="opciones-menu">
-                                <a class="btn btn-access ms-3 pulse"href="{{ url('/perfil') }}"><i class="fas fa-user me-2"></i> PERFIL</a>
+                                <a class="btn btn-access ms-3 pulse"href="{{ url('/user/perfil') }}"><i class="fas fa-user me-2"></i> PERFIL</a>
                             </li>
                         @elseif(Auth::user()->rol === 'Administrador')
                             <li class="opciones-menu">
