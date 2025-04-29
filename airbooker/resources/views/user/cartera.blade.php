@@ -1,4 +1,4 @@
-@extends('layoutCliente')
+@extends('user.layoutCliente')
 
 
 @section('DashboardContent')
@@ -14,9 +14,15 @@
         </p>
         <div class="text-center" style="height:70%;padding:20px;">
             <h1>💵 </h1>
-            <p style="font-weight:bold;">
-                Tu cartera está vacía
-            </p>
+            @if($usuario->creditos > 0)
+                <p style="font-weight:bold;">
+                    Tu saldo actual asciende a: {{$usuario->creditos}} $
+                </p>
+            @else
+                <p style="font-weight:bold;">
+                    Tu cartera está vacía
+                </p>
+            @endif
             <p>
                 <a href="{{ url('/') }}">Reserva un vuelo</a>
             </p>

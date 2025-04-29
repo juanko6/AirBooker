@@ -48,7 +48,7 @@
                             
                         @endif
                         <li class="opciones-menu">
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form method="POST" action="{{ route('logout.post') }}">
                                 @csrf
                                 <button type="submit" class="btn btn-access ms-3 pulse">
                                     <i class="fas fa-user me-2"></i> Log out

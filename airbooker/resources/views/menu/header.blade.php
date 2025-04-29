@@ -61,7 +61,7 @@
                                 </a>
                             </li>
                             <li class="opciones-menu">
-                                <a class="nav-link" href="{{ url('/perfil') }}"><i class="fas fa-user me-2"></i> PERFIL</a>
+                                <a class="nav-link" href="{{ url('/user/perfil') }}"><i class="fas fa-user me-2"></i> PERFIL</a>
                             </li>
                         @elseif(Auth::user()->rol === 'Administrador')
                             <li class="opciones-menu">
@@ -69,7 +69,7 @@
                             </li>
                         @endif
                         <li class="opciones-menu">
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form method="POST" action="{{ route('logout.post') }}">
                                 @csrf
                                 <button type="submit" class="btn btn-access ms-3 pulse">
                                     <i class="fas fa-sign-out-alt me-2"></i> Log out

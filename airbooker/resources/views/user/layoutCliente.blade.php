@@ -9,23 +9,34 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
+        {{--
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                {{--Aqui se ha puesto el id 12 como prueba, mas adelante usará el id devuelto por autentificación--}}
-                <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('perfil/12'); return false;">👤 Perfil</a></li>
+                
+                <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('perfil'); return false;">👤 Perfil</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">🔔 Notificaciones</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">⚙️ Configuración</a></li>
             </ul>
         </div>
+        --}}
     </nav>
 
     <div class="d-flex flex-grow-1">
         <!-- Barra lateral fija -->
         <nav class="sidebar bg-light p-3 vh-100">
             <ul class="nav flex-column">
+                <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('perfil'); return false;">📝 Mi Perfil</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('reservas'); return false;">📅 Mis Reservas</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" onclick="loadContent('cartera'); return false;">💵 Mi Cartera</a></li>
                 <li class="nav-item"><a href="{{ url('/') }}" class="nav-link" >🔎 Buscar Vuelos ✈️</a></li>
+                <li class="nav-item">
+                    <form id="LogOut" action="{{ route('logout.post') }}" method="POST">
+                        @csrf
+                        @method('POST')
+                        <button type="submit" class="nav-link" style="width:max-content;">🔒 Cerrar Sesión</button>
+                    </form>
+                </li>
+
                 
             </ul>
         </nav>
@@ -42,14 +53,14 @@
 <script>
 function loadContent(view) {
     $.ajax({
-        url: "/" + view,
+        url: "/user/" + view,
         type: "GET",
         dataType: "html",
         success: function (data) {
             if (!data.includes("<html")) { // ✅ Verifica que no esté cargando todo el layout
                 $("#content").html(data);
             } else {
-                window.location.href = "/" + view; // ✅ Si recarga el layout, redirige a la URL completa
+                window.location.href = "/user/" + view; // ✅ Si recarga el layout, redirige a la URL completa
             }
         },
         error: function () {
