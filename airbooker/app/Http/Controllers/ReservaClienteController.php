@@ -18,6 +18,7 @@ class ReservaClienteController extends Controller
         {
             try {
                 $user = $this->verificarAutenticacion(); 
+                //El IDE muestra un error aqui pero la sintaxis es correcta y valida, utiliza el metodo reservas() del modelo User
                 $reservas = $user->reservas()->paginate(8);
         
                 return view('user.reservasCliente', compact('reservas'));
