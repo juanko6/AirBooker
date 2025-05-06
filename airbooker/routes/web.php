@@ -46,6 +46,7 @@ Route::post('/procesar-compra', [CarritoController::class, 'procesarCompra'])->n
 
 // Rutas de contactanos
 Route::get('/contactanos', [ContactanosController::class, 'showContactanos'])->name('contactanos');
+Route::post('/contactanos', [ContactanosController::class, 'enviarFormulario'])->name('contactanos.enviar');
 
 // Rutas de autenticación
 Route::prefix('auth')->group(function () {
