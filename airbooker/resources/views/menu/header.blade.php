@@ -13,7 +13,7 @@
                 @auth
                         @if(Auth::user()->rol === 'Cliente')
                             <li class="opciones-menu d-flex align-items-center">
-                                <a class="nav-link d-flex align-items-center" href="{{ url('/cartera') }}">
+                                <a class="nav-link d-flex align-items-center" href="{{ url('/user/cartera') }}">
                                     <i class="fas fa-coins me-2" style="color: #FFC107; font-size: 1.2rem;"></i>
                                     <span class="fw-bold text-warning">{{Auth::user()->getCreditos()}}</span>
                                 </a>
