@@ -6,7 +6,7 @@ cd ~/Escritorio/DSS/AirBooker/airbooker || { echo "No se pudo acceder al directo
 # Paso 2: Iniciar el servidor de Laravel en segundo plano
 echo "Iniciando servidor de Laravel..."
 php artisan serve > /dev/null 2>&1 &
-sleep 3  # Esperar a que el servidor arranque completamente [[4]]
+sleep 3  # Esperar a que el servidor arranque completamente
 
 # Paso 3: Iniciar ngrok en segundo plano
 echo "Iniciando ngrok..."
@@ -32,8 +32,11 @@ php artisan config:cache
 php artisan route:cache
 php artisan view:clear
 
-# Paso 7: Abrir la URL en el navegador
+# Paso 7: Abrir la URL en el navegador con el encabezado correcto
 echo "Abriendo $NGROK_URL en el navegador..."
+curl -H "User-Agent: ngrok-skip-browser-warning" "$NGROK_URL"
 xdg-open "$NGROK_URL" || open "$NGROK_URL"
 
 echo "Configuración completada. Servidor listo en $NGROK_URL"
+
+Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0

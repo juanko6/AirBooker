@@ -70,22 +70,69 @@
                     <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
                         <div class="footer-widget">
                             <div class="footer-widget-heading">
-                                <h3>¿Quierews recibir más ofertas?</h3>
+                                <h3>¿Quieres recibir más ofertas?</h3>
                             </div>
                             <div class="footer-text mb-25">
                                 <p></p>
                             </div>
                             <div class="subscribe-form">
-                                <form action="#">
-                                    <input type="text" placeholder="Email Address">
-                                    <button><i class="fab fa-telegram-plane"></i></button>
-                                </form>
+                                <div class="subscribe-form">
+                                    <form id="subscribe-form">
+                                        @csrf
+                                        <input type="email" name="email" id="email" placeholder="Email Address" required>
+                                        <button type="submit" style="background: linear-gradient(to right, #003366 60%, #003366c9);">
+                                            <i class="fab fa-telegram-plane"></i>
+                                        </button>
+                                    </form>
+                                    <div id="subscribe-message" class="mt-3"></div> <!-- Contenedor para el mensaje -->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <script>
+            // Escuchar el evento de envío del formulario
+            document.getElementById('subscribe-form').addEventListener('submit', function (e) {
+                e.preventDefault(); // Evitar el envío tradicional del formulario
+
+                // Obtener el valor del email
+                const email = document.getElementById('email').value;
+
+                // Enviar la solicitud AJAX
+                fetch('{{ route("subscribe") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}', // Incluir el token CSRF
+                    },
+                    body: JSON.stringify({ email: email }),
+                })
+                .then(response => response.json()) // Parsear la respuesta como JSON
+                .then(data => {
+                    if (data.success) {
+                        // Mostrar el mensaje de éxito
+                        document.getElementById('subscribe-message').innerHTML = `
+                            <div class="alert alert-success">${data.message}</div>
+                        `;
+                    } else {
+                        // Mostrar un mensaje de error si es necesario
+                        document.getElementById('subscribe-message').innerHTML = `
+                            <div class="alert alert-danger">Ocurrió un error. Por favor, intenta nuevamente.</div>
+                        `;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('subscribe-message').innerHTML = `
+                        <div class="alert alert-danger">Ocurrió un error inesperado. Por favor, intenta más tarde.</div>
+                    `;
+                });
+            });
+        </script>
+
         <div class="copyright-area">
             <div class="container">
                 <div class="row">

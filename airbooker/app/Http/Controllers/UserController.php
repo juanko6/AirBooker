@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -29,7 +30,18 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        //  Muestra la vista de creación de usuario
+        
+    }
+
+    public function infoCartera(Request $request)
+    {
+        try {     
+                $user = $this->verificarAutenticacion();   
+                return view('user.cartera', ['usuario' => $user]);
+            } catch (\Exception $e) {
+                return response()->json(['error' => $e->getMessage()], 500);
+            }
     }
 
     /**
@@ -60,6 +72,7 @@ class UserController extends Controller
         $user->telefono = $request->input('telefono');
         $user->rol = $request->input('rol');
         $user->password = Hash::make($request->input('password')); // Encriptación de la contraseña
+        $user->creditos = $request->input('creditos');
         $user->remember_token = Str::random(10); // Token para recordar al usuario
         $user->save();
 
@@ -70,10 +83,11 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show()
     {
-        //Muestra la vista de perfil con los datos del usuario con el ID suministrado
-        return view('perfil', ['usuario' => User::findorFail($id)]);
+        //Muestra la vista de perfil con los datos del usuario dado por autentificación
+        $user = $this->verificarAutenticacion();
+        return view('user.perfil', ['usuario' => $user]);
     }
 
     /**
@@ -153,6 +167,21 @@ class UserController extends Controller
                         ->orWhere('apellidos', 'like', "%$query%")
                         ->get();
         return response()->json($usuarios);
+    }
+
+    /**
+     * Verifica si el usuario está autenticado y redirige si no lo está.
+     */
+    private function verificarAutenticacion()
+    {
+        $user = Auth::user();
+
+        if (!$user) {
+            redirect()->route('login')->withErrors(['message' => 'Debes iniciar sesión para realizar esta acción.'])->send();
+            exit;
+        }
+
+        return $user;
     }
 }
 

@@ -23,6 +23,9 @@ class Reserva extends Model
         'precio' => 'decimal:2',
     ];
 
+    //Crear una reserva
+    
+
     /**
      * Obtener el vuelo asociado a la reserva.
      */
@@ -39,6 +42,14 @@ class Reserva extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Obtener todas las reservas con estado pendiente.
+     */
+    public static function obtenerReservasPendientes()
+    {
+        return self::where('estado', 'pendiente')->get();
+    }
+    
     /**
      * Verificar si la reserva está pendiente.
      */
@@ -62,4 +73,16 @@ class Reserva extends Model
     {
         return $this->estado === 'cancelada';
     }
+
+    public static function crearReserva($userId, $vueloId, $precio)
+    {
+        return self::create([
+            'user_id' => $userId,
+            'vuelo_id' => $vueloId,
+            'precio' => $precio,
+            'fecha' => now(),
+            'estado' => 'confirmada',
+        ]);
+    }
+    
 }

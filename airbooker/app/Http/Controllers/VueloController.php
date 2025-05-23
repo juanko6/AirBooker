@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Vuelo;
 use App\Models\Aerolinea;
+use App\Models\Oferta;
 
 class VueloController extends Controller
 {
@@ -13,9 +14,12 @@ class VueloController extends Controller
      */
     public function index()
     {
-        $vuelos = Vuelo::with('aerolinea', 'oferta')->paginate(10);
         $aerolineas = Aerolinea::all();
-        return view('admin.vuelos', compact('vuelos', 'aerolineas'));
+        $ofertas = Oferta::all();
+        $vuelos = Vuelo::with('aerolinea', 'oferta')->paginate(10);
+        
+        
+        return view('admin.vuelos', compact('vuelos', 'aerolineas', 'ofertas'));
     }
 
     /**
@@ -33,8 +37,9 @@ class VueloController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'origen' => 'required|string|max:255',
-            'destino' => 'required|string|max:255',
+            'origen' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/u|max:255',
+            'destino' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/u|max:255',
+
             'fecha' => 'required|date|after_or_equal:today',
             'hora' => 'required|date_format:H:i',
             'precio' => 'required|numeric|min:0',
@@ -58,14 +63,22 @@ class VueloController extends Controller
         return view('admin.vuelos.show', compact('vuelo'));
     }
 
+    public function edit($id)
+    {
+        $vuelo = Vuelo::findOrFail($id);
+        return response()->json($vuelo);
+    }
+
+
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'origen' => 'required|string|max:255',
-            'destino' => 'required|string|max:255',
+            'origen' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/u|max:255',
+            'destino' => 'required|regex:/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/u|max:255',
+
             'fecha' => 'required|date|after_or_equal:today',
             'hora' => 'required|date_format:H:i',
             'precio' => 'required|numeric|min:0',
@@ -130,4 +143,22 @@ class VueloController extends Controller
 
          return view('vuelosDisponibles', compact('vuelos', 'filtros', 'aerolineas'));
     }
+
+    public function filtrar(Request $request)
+        {
+            $validated = $request->validate([
+                'fecha' => 'required|date',
+                // Otros filtros si los necesitas
+            ]);
+
+            $vuelos = Vuelo::whereDate('fecha', $request->fecha)->get(); // Consulta de vuelos por fecha
+
+            $noVuelos = $vuelos->isEmpty();
+            
+            return response()->json([
+                'vuelos' => $vuelos,
+                'no_vuelos' => $noVuelos // Agregar el estado de si no hay vuelos
+            ]); 
+        }
+
 }

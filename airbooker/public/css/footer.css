@@ -9,7 +9,7 @@
 }
 
 .footer-container .footer-section {
-    background: #0055ff;
+    background: linear-gradient(to right, #003366 60%, #003366c9 ); /* Efecto horizontal */ 
     position: relative;
 }
 

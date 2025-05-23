@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Vuelo;
 use App\Models\Reserva;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 
 class ReservaController extends Controller
@@ -56,6 +57,9 @@ class ReservaController extends Controller
     public function edit($id)
     {
         $reserva = Reserva::with('user', 'vuelo')->findOrFail($id);
+
+        $reserva->fecha = \Carbon\Carbon::parse($reserva->fecha)->format('Y-m-d\TH:i');
+
         $usuarios = User::all();
         $vuelos = Vuelo::all();
         return response()->json(['reserva' => $reserva, 'usuarios' => $usuarios, 'vuelos' => $vuelos]);
